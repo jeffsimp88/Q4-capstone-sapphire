@@ -25,8 +25,11 @@ SECRET_KEY = '#5hbc6y2yeek7zyoje8wcptepw-$c@@u8mk^p7upu3u(k-wk(g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+STATICFILES_DIRS = [
+    BASE_DIR/'static'
+]
 
 # Application definition
 
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'reddit_clone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
