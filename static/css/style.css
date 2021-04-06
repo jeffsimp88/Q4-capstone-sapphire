@@ -1,0 +1,9 @@
+header{
+    border: 2px solid whitesmoke;
+}
+
+body{
+    background-color: rgb(59, 58, 58);
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
