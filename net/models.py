@@ -9,7 +9,7 @@ class Net(models.Model):
     moderators = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="moderators")
-    creation_date = models.DateTimeField(timezone.now)
+    creation_date = models.DateTimeField(default=timezone.now)
     private = models.BooleanField(default=False)
 
     def __str__(self):
