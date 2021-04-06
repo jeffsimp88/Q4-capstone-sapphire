@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils import timezone
-from net_user_app.models import NetUser
+from django.conf import settings
 
 class Net(models.Model):
     title = models.CharField(max_length=50, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     rules = models.TextField(null=True, blank=True)
-    # moderators = models.ManyToManyField(
-    #     NetUser,
-    #     related_name="moderators")
+    moderators = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="moderators")
     creation_date = models.DateTimeField(timezone.now)
     private = models.BooleanField(default=False)
 
