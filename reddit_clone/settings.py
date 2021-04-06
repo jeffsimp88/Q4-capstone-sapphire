@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'net',
     'posts',
+    'mptt',
 ]
 
 MIDDLEWARE = [
