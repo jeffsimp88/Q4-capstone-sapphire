@@ -12,27 +12,27 @@ from mptt.models import MPTTModel, TreeForeignKey
 # Downvotes,
 # Total Votes(method),
 
-class Post(models.Model):
-    POST_CHOICES = [
-        ("N", "Net"),
-        ("P", "Post"),
-        ("C", "Comment"),
-    ]
-    post_type = models.CharField(max_length=1, choices=POST_CHOICES)
-    timestamp = models.DateTimeField(default=timezone.now)
-    content = models.TextField(max_length=1000, null=False, blank=False)
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="author",
-        on_delete=models.CASCADE)
+POST_CHOICES = [
+    ("Net", "Net"),
+    ("Post", "Post"),
+    ("Comment", "Comment"),
+]
+
+
+class Post(MPTTModel):
+    post_type = models.CharField(max_length=15, choices=POST_CHOICES)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="author", on_delete=models.CASCADE)
+    header = models.CharField(max_length=50)
+    content = models.TextField(max_length=1000, null=True, blank=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
-    parent_post = TreeForeignKey(
+    parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         related_name='children')
+    timestamp = models.DateTimeField(default=timezone.now)
 
 
     @property
@@ -40,4 +40,7 @@ class Post(models.Model):
         self.upvotes - self.downvotes
     
     def __str__(self):
-        return self.post_type
+        return f'{self.header} | {self.author}'
+
+    class MPTTMeta:
+        order_insertion_by = ['header']
