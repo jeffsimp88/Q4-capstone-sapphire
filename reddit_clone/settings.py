@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'net',
     'posts',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CORS_ALL_ALL_ORIGINS = True
 
 
 # Static files (CSS, JavaScript, Images)
