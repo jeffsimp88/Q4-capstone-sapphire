@@ -19,5 +19,6 @@ from net import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', vie)
+    path('', views.index_view, name='home'),
+    
 ]
