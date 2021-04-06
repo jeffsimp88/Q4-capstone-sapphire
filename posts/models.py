@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from mptt.models import MPTTModel, TreeForeignKey
 # Create your models here.
 
 # DateTime,
@@ -20,12 +21,17 @@ class Post(models.Model):
     timestamp = models.DateTimeField(timezone.now)
     content = models.TextField(max_length=1000, null=False, blank=False)
     author = models.ForeignKey(
-        "CustomUser",
+        NetUser,
         related_name="author",
         on_delete=models.CASCADE)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
-    parent = models.ForeignKey("Post", related_name="parent", on_delete=models.CASCADE)
+    parent_post = TreeForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='children')
 
 
     @property
