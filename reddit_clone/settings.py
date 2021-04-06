@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'net',
     'posts',
+<<<<<<< HEAD
+    'mptt',
+=======
     'authentication',
+>>>>>>> 0bb94592eebf0cecc83d58378df639d80904a96d
 ]
 
 MIDDLEWARE = [
