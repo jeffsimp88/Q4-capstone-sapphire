@@ -19,6 +19,8 @@ from net import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_view, name='home'),
-    
+    path('', views.index_view, name='index'),
+
 ]
+
+handler404 = 'net.views.error_404_view'
