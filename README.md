@@ -7,6 +7,6 @@
 * **David Sreesangkom** 
 
 ## Project: ##
-Reddit Clone
+SubNet (Reddit Clone)
 
 [GitHub Repo](https://github.com/jeffsimp88/Q4-capstone-sapphire): https://github.com/jeffsimp88/Q4-capstone-sapphire

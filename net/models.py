@@ -12,5 +12,5 @@ class Net(models.Model):
     creation_date = models.DateTimeField(timezone.now)
     private = models.BooleanField(default=False)
 
-    __str__(self):
+    def __str__(self):
         return self.title

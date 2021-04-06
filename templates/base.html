@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<body>
+    <header>
+        <h1>Subnet</h1>
+
+    </header>
+    <main>
+
+        <h2>{{heading}}</h2>
+        {% block content%}
+
+        {% endblock %}
+
+
+
+
+    </main>
+
+</body>
