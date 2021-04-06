@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'net',
-    'net_user_app'
+    'net_user_app',
+    'posts',
+    'mptt',
+    'authentication',
 ]
 
 MIDDLEWARE = [
