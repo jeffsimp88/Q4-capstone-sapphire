@@ -2,6 +2,18 @@
 {% block content %}
 <h2>homepage screen</h2>
 <h2>{{header}}</h2>
+<h3>Links To Each Net</h3>
+{% for items in nets %}
+<div class='netlink'>
+    <a href='nets/{{ items.title }}/' style="color:red">{{ items.title }}</a>
+    <br></br>
+</div>
+{% endfor %}
+
+<button type='submit'>
+    <a href='/newnet/'>Create New Net</a>
+
+</button>
 
 {% load mptt_tags %}
 <ul>
@@ -14,18 +26,6 @@
     </li>
     {% endrecursetree %}
 </ul>
-<h3>Links To Each Net</h3>
-{% for items in nets %}
-<div class='netlink' >
-<a href='nets/{{ items.title }}/' style="color:red">{{ items.title }}</a>
-<br></br>
-</div>
-{% endfor %}
-
-<button type='submit'>
-    <a href='/newnet/'>Create New Net</a>
-
-</button>
 
 
 
