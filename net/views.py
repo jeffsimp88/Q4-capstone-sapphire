@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from net.forms import Create_Net
+from net.forms import CreateNet
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
@@ -16,20 +16,24 @@ def check_subscribe(request, net_title):
     return is_subscribed
 
 
-def net_main_view(request):
+def create_net_view(request):
     if request.method == 'POST':
-        post = Create_Net(request.POST)
+        post = CreateNet(request.POST)
         if post.is_valid():
             data = post.cleaned_data
-            Net.objects.create(
+            new_net = Net.objects.create(
                 title=data['title'],
-                description=data['description']
+                description=data['description'],
+                rules=data['rules'],
+                private=data['private'],
+
                 )
+            new_net.moderators.add(request.user)
             return redirect("/")
-    form = Create_Net()
+    form = CreateNet()
 
     context = {'form': form}
-    return render(request, 'newnet.html', context)
+    return render(request, 'forms.html', context)
 
 
 
