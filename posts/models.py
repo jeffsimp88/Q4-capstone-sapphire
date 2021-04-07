@@ -20,7 +20,7 @@ POST_CHOICES = [
 
 
 class Post(MPTTModel):
-    post_type = models.CharField(max_length=15, choices=POST_CHOICES)
+    post_type = models.CharField(max_length=15, default="Net", choices=POST_CHOICES)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="author", on_delete=models.CASCADE)
     header = models.CharField(max_length=50)
     content = models.TextField(max_length=1000, null=True, blank=True)
