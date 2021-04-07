@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
+from net.models import Net
 # Create your models here.
 
 # DateTime,
@@ -20,8 +21,9 @@ POST_CHOICES = [
 
 
 class Post(MPTTModel):
-    post_type = models.CharField(max_length=15, choices=POST_CHOICES)
+    post_type = models.CharField(max_length=15, default="Net", choices=POST_CHOICES)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="author", on_delete=models.CASCADE)
+    subnet = models.ForeignKey(Net, related_name="subnet", on_delete=models.CASCADE)
     header = models.CharField(max_length=50)
     content = models.TextField(max_length=1000, null=True, blank=True)
     upvotes = models.IntegerField(default=0)
