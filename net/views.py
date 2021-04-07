@@ -30,5 +30,6 @@ def index_view(request):
 
 def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
-    context = {'net': selected_net}
+    posts = Post.objects.filter(subnet=selected_net)
+    context = {'net': selected_net, 'posts': posts}
     return render(request, 'individual_nets.html', context)
