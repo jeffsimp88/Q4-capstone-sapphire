@@ -56,8 +56,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def error_404_view(request, exception):
     return render(request,'404.html')
-
-def index_view(request):
-    return render(request, 'index.html', {'posts': posts})
