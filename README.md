@@ -8,6 +8,14 @@
 
 ## Project: ##
 SubNet (Reddit Clone)
+It is so cool
+
+## Before runserver Command ##
+* Make sure to 'poetry install' first
+* You make need to delete db.sqlite3 and any app migration files (e.g. 0001_initial.py)
+    * **DO NOT DELETE** 'migrations/' folder or '\_\_init\_\_.py' files
+* Run commands 'python manage.py makemigrations' and 'python manage.py migrate'
+* Run command 'python manage.py runserver', if any errors contact QA Tester
 
 ## Commands ##
 Run these commands to create bulk objects in the database

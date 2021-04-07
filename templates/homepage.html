@@ -1,34 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>homepage screen</h2>
 <h2>{{header}}</h2>
-<h3>Links To Each Net</h3>
-{% for items in nets %}
-<div class='netlink'>
-    <a href='nets/{{ items.title }}/' style="color:red">{{ items.title }}</a>
-    <br></br>
-</div>
-{% endfor %}
-
 <button type='submit'>
     <a href='/newnet/'>Create New Net</a>
-
 </button>
-
-{% load mptt_tags %}
-<ul>
-    {% recursetree posts %}
-    <li>
-        {% if node.post_type == "Post" %}
-        <p><strong>{{node.header}}</strong> </p>
-        <p>{{node.content}}</p>
-        <a id="logoutText" href="/makecomment/{{node.id}}">Comment</a>
-        {% endif %}
-    </li>
-    {% endrecursetree %}
-</ul>
-
-
-
+<h3>Links To Each Net</h3>
+<div class="netLinkList">
+    {% for items in nets %}
+    <a class='netlink' href='nets/{{ items.title }}/'>n/{{ items.title }}</a>
+    {% endfor %}
+</div>
 
 {% endblock %}
