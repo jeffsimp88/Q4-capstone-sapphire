@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for items in request.user.subs.all %}
-    {{items}}
-    {% if items == net %}
-    <h3>Subscribed!</h3>
-    {% endif %}
-    {% endfor %}
 <h2>Welcome to n/{{ net.title }}</h2>
-<button type="submit" id="subscribe_button" class='button'>
-    <a href='/subscribe/{{ net.title}}/{{ net.id }}/'>Subscribe</a></button>
-<p>{{ net.description }}</p>
-{% for post in posts %}
 
+
+{% if is_subscribed %}
+<p>You are currently subscribed</p>
+<a id="logoutText" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
+{% else %}
+<a id="logoutText" href='/subscribe/{{ net.title}}/'>Subscribe</a>
+{% endif %}
+
+<p>{{ net.description }}</p>
+
+{% for post in posts %}
 {% if post.post_type == "Post" %}
 <div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
     <p>{{post}}</p>
@@ -20,6 +21,8 @@
 </div>
 {% endif %}
 {% endfor %}
+
+
 <a href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
 <br>
 <a id="logoutText" href="/">back to homepage</a>
