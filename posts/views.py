@@ -42,6 +42,7 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
+            return HttpResponseRedirect(f"/posts/{post.id}/")
     form = CommentForm()
     context = {'form': form}
     return render(request, "forms.html", context)
