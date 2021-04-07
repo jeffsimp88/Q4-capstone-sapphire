@@ -8,6 +8,7 @@
 
 ## Project: ##
 SubNet (Reddit Clone)
+It is so cool
 
 ## Before runserver Command ##
 * Make sure to 'poetry install' first
