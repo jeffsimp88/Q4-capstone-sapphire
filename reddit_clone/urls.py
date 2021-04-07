@@ -15,12 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from net import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
-    path('', views.index_view, name='index'),
+    path('', include('net.urls')),
 ]
-handler404 = 'net.views.error_404_view'
+handler404 = 'authentication.views.error_404_view'
