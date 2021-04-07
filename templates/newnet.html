@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create Net</h1>
+<button type="submit">
+    <a href="/">Home</a>
+</button> 
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create New Net">
+</form>
+{% endblock %}

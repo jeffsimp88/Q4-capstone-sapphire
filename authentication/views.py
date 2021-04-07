@@ -1,25 +1,26 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from authentication.forms import LoginForm, SignupForm
+from net_user_app.models import NetUser
 from django.contrib.auth.decorators import login_required
 
 
 def signup_view(request):
-    # if request.method == 'POST':
-    #     form = SignupForm(request.POST)
-    #     if form.is_valid():
-    #         data = form.cleaned_data
-    #         new_user = CustomUser.objects.create_user(
-    #             username=data['username'],
-    #             email = data['email'],
-    #             password=data['password']
-    #         )
-    #         user = authenticate(
-    #             request, username=data['username'], password=data['password']
-    #         )
-    #         if user:
-    #             login(request, user)
-    #             return HttpResponseRedirect(request.GET.get('next', '/'))
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            new_user = NetUser.objects.create_user(
+                username=data['username'],
+                email = data['email'],
+                password=data['password']
+            )
+            user = authenticate(
+                request, username=data['username'], password=data['password']
+            )
+            if user:
+                login(request, user)
+                return HttpResponseRedirect(request.GET.get('next', '/'))
             
     form = SignupForm()
     context ={
@@ -54,3 +55,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def error_404_view(request, exception):
+    return render(request,'404.html')

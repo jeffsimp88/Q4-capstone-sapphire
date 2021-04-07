@@ -1,19 +1,34 @@
 from django.shortcuts import render, redirect
 from net.forms import Create_Net
+from net.models import Net
+from posts.models import Post
 
 def net_main_view(request):
-    if request.method = 'POST':
+    if request.method == 'POST':
         post = Create_Net(request.POST)
         if post.is_valid():
-            clean = post.cleaned_data
-            if clean['post_type'] = "Net":
-                post.objects.create(
-                    author=request.user
-                    header=clean['title']
-                    content=clean['content']
+            data = post.cleaned_data
+            Net.objects.create(
+                title=data['title'],
+                description=data['description']
                 )
             return redirect("/")
-    form = Create_Net
-    return render(request, 'newNet.html', {form:'form'})
+    form = Create_Net()
+
+    context = {'form': form}
+    return render(request, 'newnet.html', context)
 
 
+
+def index_view(request):
+    context = {'header': "Welcome to Subnet"}
+    posts = Post.objects.all()
+    nets = Net.objects.all()
+    context.update({"posts": posts,
+                    "nets": nets})
+    return render(request, 'homepage.html', context)
+
+def individual_net_view(request, net_title):
+    selected_net = Net.objects.filter(title=net_title).first()
+    context = {'net': selected_net}
+    return render(request, 'individual_nets.html', context)
