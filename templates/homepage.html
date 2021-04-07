@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>homepage screen</h2>
+<h2>{{header}}</h2>
+
+{% load mptt_tags %}
+<ul>
+    {% recursetree posts %}
+    <li>
+        {% if node.post_type == "Post" %}
+        <p><strong>{{node.header}}</strong> </p>
+        <p>{{node.content}}</p>
+        {% endif %}
+    </li>
+    {% endrecursetree %}
+</ul>
+
+
 {% endblock %}
