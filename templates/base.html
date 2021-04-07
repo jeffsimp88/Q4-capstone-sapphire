@@ -6,9 +6,8 @@
         <h1>Subnet</h1>
         <a id="logoutText" href="/">Home</a>
         {% if request.user.is_authenticated %}
-
+        <a href="/users/{{request.user}}" id="logoutText">Profile</a>
         <a id="logoutText" href="/logout">Logout</a>
-
         {% else %}
 
         <a id="logoutText" href="/login">Login</a>
