@@ -15,3 +15,25 @@ body{
 #logoutText:hover{
     color: rgb(121, 228, 255);
 }
+
+.netLinkList{
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+.netlink{
+    margin: 3px;
+    text-decoration: none;
+    background-color: gray;
+    color: white;
+    padding: 3px;
+}
+
+.netlink:hover{
+    background: white;
+    color: gray;
+}
