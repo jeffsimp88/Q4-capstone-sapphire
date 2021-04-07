@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+{% for items in request.user.subs.all %}
+    {{items}}
+    {% if items == net %}
+    <h3>Subscribed!</h3>
+    {% endif %}
+    {% endfor %}
 <h2>Welcome to n/{{ net.title }}</h2>
+<button type="submit" id="subscribe_button" class='button'>
+    <a href='/subscribe/{{ net.title}}/{{ net.id }}/'>Subscribe</a></button>
 <p>{{ net.description }}</p>
 {% for post in posts %}
 
