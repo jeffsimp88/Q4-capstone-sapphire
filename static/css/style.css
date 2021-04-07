@@ -7,3 +7,11 @@ body{
     color: whitesmoke;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+#logoutText{
+    color: rgb(255, 255, 121);
+}
+
+#logoutText:hover{
+    color: rgb(121, 228, 255);
+}
