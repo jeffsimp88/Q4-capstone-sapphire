@@ -3,9 +3,18 @@
 
 
 <h2>Welcome to n/{{ net.title }}</h2>
-<br></br>
 <p>{{ net.description }}</p>
+{% for post in posts %}
 
+{% if post.post_type == "Post" %}
+<div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
+    <p>{{post}}</p>
+    <a id="logoutText" href="/posts/{{post.id}}/">Post Details</a>
+</div>
+{% endif %}
+{% endfor %}
+<a href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+<br>
 <a id="logoutText" href="/">back to homepage</a>
 
 {% endblock %}

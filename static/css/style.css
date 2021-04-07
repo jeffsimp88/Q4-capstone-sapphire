@@ -15,3 +15,62 @@ body{
 #logoutText:hover{
     color: rgb(121, 228, 255);
 }
+
+.netLinkList{
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+.netlink{
+    margin: 3px;
+    text-decoration: none;
+    background-color: gray;
+    color: white;
+    padding: 3px;
+}
+
+.netlink:hover{
+    background: white;
+    color: gray;
+}
+
+.postBox{
+    background-color: rgb(29, 29, 29);
+    border-radius: 2px;
+    margin: 10px;
+}
+
+.postBoxHeader{
+    padding:0px 5px 0px 5px;
+    border-bottom: 1px solid white;
+}
+
+.postBoxBody{
+    font-size: 15px;
+    padding:0px 10px 0px 10px;
+}
+
+.postBoxFooter{
+    font-size: 11px;
+    padding:0px 5px 0px 5px;
+    border-top: 1px solid white;
+    margin: 1px;
+}
+
+.postBoxCommentsBox{
+    padding:10px 5px 10px 5px;
+    background-color: rgb(51, 51, 51);
+}
+.postBoxComments{
+    padding: 3px;
+}
+.Comment1{
+    background-color: rgb(51, 51, 51);
+}
+.Comment2{
+    background-color: rgb(26, 26, 26);
+}
