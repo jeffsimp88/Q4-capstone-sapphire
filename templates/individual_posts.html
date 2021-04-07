@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{header}}</h2>
+
+<h2>{{post.header}}</h2>
+<p>posted by user: {{post.author}} in subnet: {{post.subnet}}</p>
+<p>{{post.content}}</p>
+
+<a id="logoutText" href="/makecomment/{{post.id}}">Comment</a>
+{% if comments %}
+<p>Comments:</p>
+<ul>
+    {% for comment in comments %}
+    <li>{{comment.header}}</li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+
+<a id="logoutText" href="/nets/{{post.subnet.title}}/">Back to n/{{post.subnet.title}}</a>
+{% endblock %}
