@@ -13,8 +13,9 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         post = Post.objects.all()
         for x in range(100):
+            random_index = random.randrange(0, (len(post)))
             author = NetUser.objects.get(id=random.randint(1, NetUser.objects.all().count()))
-            parent = post[random.randint(1, (len(post)+1))]
+            parent = post[random_index]
             subnet = parent.subnet
             header = text.title()
             Post.objects.create(
