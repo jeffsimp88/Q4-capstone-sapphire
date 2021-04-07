@@ -11,15 +11,6 @@
         <p><strong>{{node.header}}</strong> </p>
         <p>{{node.content}}</p>
         {% endif %}
-
-
-        {% if not node.is_leaf_node %}
-
-        <p class="children">
-            {{ children}} | Please work
-        </p>
-        {% endif %}
-
     </li>
     {% endrecursetree %}
 </ul>
