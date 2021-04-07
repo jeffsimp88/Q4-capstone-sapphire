@@ -2,21 +2,45 @@
 {% block content %}
 <h2>{{header}}</h2>
 
-<h2>{{post.header}}</h2>
-<p>posted by user: {{post.author}} in subnet: {{post.subnet}}</p>
-<p>{{post.content}}</p>
+<div class="postBox">
+    <div class="postBoxHeader">
+        <p style="font-size: 11px;"> <strong>posted by user: </strong> {{post.author}} <strong>in subnet: </strong>
+            {{post.subnet}}</p>
+        <h3>{{post.header}}</h3>
+    </div>
+    <div class="postBoxBody">
+        <p>{{post.content}}</p>
+    </div>
+    <div class="postBoxFooter">
+        <p><strong>date posted: </strong>{{post.timestamp}}</p>
+    </div>
+    <div class="postBoxCommentsBox">
+        <a id="logoutText" href="/makecomment/{{post.id}}">Comment</a>
+        {% if comments %}
+        <p>Comments:</p>
+        <ul>
+            {% for comment in comments %}
 
-<a id="logoutText" href="/makecomment/{{post.id}}">Comment</a>
-{% if comments %}
-<p>Comments:</p>
-<ul>
-    {% for comment in comments %}
-    <li>{{comment.header}}</li>
-    {% endfor %}
-</ul>
+            {% if forloop.counter|divisibleby:2 %}
+            <div class="postBoxComments Comment1">
+                <p style="font-size: 11px;"> <strong>posted by user: </strong> {{comment.author}}</p>
+                <p>{{comment.header}}</p>
+                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
+            </div>
+            {% else %}
+            <div class="postBoxComments Comment2">
+                <p style="font-size: 11px;"> <strong>posted by user: </strong> {{comment.author}}</p>
+                <p>{{comment.header}}</p>
+                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
+            </div>
+            {% endif %}
 
-{% endif %}
+            {% endfor %}
+        </ul>
 
+        {% endif %}
+    </div>
+</div>
 
 <a id="logoutText" href="/nets/{{post.subnet.title}}/">Back to n/{{post.subnet.title}}</a>
 {% endblock %}
