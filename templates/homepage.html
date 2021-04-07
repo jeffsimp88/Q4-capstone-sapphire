@@ -22,6 +22,7 @@
         {% if node.post_type == "Post" %}
         <p><strong>{{node.header}}</strong> </p>
         <p>{{node.content}}</p>
+        <a id="logoutText" href="/makecomment/{{node.id}}">Comment</a>
         {% endif %}
     </li>
     {% endrecursetree %}

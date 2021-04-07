@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('', include('net.urls')),
+    path('', include('posts.urls')),    
 ]
 handler404 = 'authentication.views.error_404_view'
