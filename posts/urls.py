@@ -3,5 +3,5 @@ from posts import views
 
 
 urlpatterns = [
-    path('makepost/', views.post_form_view, name='make post'),
+    path('makecomment/<int:post_id>/', views.post_comment_view, name='make comment'),
 ]
