@@ -9,6 +9,21 @@
     {% for items in nets %}
     <a class='netlink' href='nets/{{ items.title }}/'>n/{{ items.title }}</a>
     {% endfor %}
+    
 </div>
+<h3>Net Feed</h3>
+{% for nets in random %}
+    <div class="netlink" style='width:150px;'>
+    <strong>
+        <a href='nets/{{nets.title}}/'>r/{{nets}}</a></strong>
+        <br></br>
+    </div>
+    
+    <div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
+
+    {{ nets.subnet.last }}
+    <br></br>
+    </div>
+    {% endfor %}
 
 {% endblock %}
