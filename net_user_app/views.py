@@ -16,12 +16,14 @@ def profile_view(request, username):
     page_user = NetUser.objects.get(username=username)
     followers = page_user.followers.all().order_by("username")
     posts = Post.objects.filter(author=page_user).order_by('timestamp')
+    subs = page_user.subs.all().order_by('title')
     total_votes = get_total_user_votes(posts)
     is_followed = check_follow(request, username)
     context.update({
         "user": page_user,
         'followers': followers,
-        'posts': posts, 
+        'posts': posts,
+        'subs': subs, 
         'total_votes': total_votes,
         'is_followed': is_followed,
         })
