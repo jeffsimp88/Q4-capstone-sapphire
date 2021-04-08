@@ -1,0 +1,13 @@
+header{
+    background-color: var(--blue);
+    color: var(--tan);
+    border: 2px solid var(--blue);
+    padding: 0px 10px 0px 10px;
+}
+
+body{
+    background-color: var(--tan);
+    color: var(--blue);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
