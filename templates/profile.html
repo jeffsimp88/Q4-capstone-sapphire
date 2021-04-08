@@ -2,6 +2,7 @@
 {% block content %}
 <h1>Welcome, {{user.username}}!</h1>
 
+<p>total votes: {{total_votes}}</p>
 {% if user != request.user %}
 
 {% if is_followed %}
@@ -16,6 +17,28 @@
 <p>{{user.bio}}</p>
 {% endif %}
 <p>{{user.email}}</p>
+
+
+{% if followers %}
+<h5>Follower:</h5>
+{% for follower in followers %}
+<li><a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a></li>
+{% endfor %}
+{% endif %}
+
+
+{% if posts %}
+<h5>{{user.username}}'s posts:</h5>
+{% for post in posts %}
+
+{% if post.post_type == "Post" %}
+<li>Post: <a href="/posts/{{post.id}}/" id="linkButton">{{post.header}}</a></li>
+{% else %}
+<li>Comment: <a href="/posts/{{post.parent.id}}/" id="linkButton">{{post.header}}</a></li>
+{% endif %}
+
+{% endfor %}
+{% endif %}
 
 
 
