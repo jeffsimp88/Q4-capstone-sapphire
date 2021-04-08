@@ -1,0 +1,52 @@
+.profilePage{
+    display: flex;
+    flex-direction: row;
+    height: 95%;
+    padding: 5px;
+}
+.profileBody{
+    color: var(--tan);
+    background-color: var(--blue);
+    width: 35%;
+    height: 80%;
+    padding: 10px;
+    margin: 10px;
+}
+
+.profilePostList{
+    background-color: var(--gray);
+    margin: 10px;
+    height: fit-content;
+    padding: 10px;
+}
+
+.profilePostBox{
+    margin: 5px;
+    background-color: var(--blue);
+    color: white;
+    width: 450px;
+}
+.profilePostHeader{
+    margin-left: 5px;
+}
+
+.profilePostHeader>p{
+    font-size: small;
+}
+
+.profilePostBody{
+    padding: 5px;
+}
+
+.profilePostBody>a{
+    text-decoration: none;
+}
+
+.profilePostFooter{
+    background-color: var(--lightblue);
+}
+.profilePostFooter>p{
+    font-size: small;
+    padding: 3px;
+    color: var(--blue);
+}
