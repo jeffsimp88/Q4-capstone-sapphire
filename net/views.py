@@ -8,11 +8,11 @@ import random
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
     current_user = request.user
-    subscribes= current_user.subs
+    subscribes = current_user.subs
     if subscribes.filter(title=net_title).exists():
-        is_subscribed=True
+        is_subscribed =True
     else:
-        is_subscribed=False
+        is_subscribed =False
     return is_subscribed
 
 
@@ -59,6 +59,7 @@ def individual_net_view(request, net_title):
         'subs': user_subs,
         }
     return render(request, 'individual_nets.html', context)
+
 
 def subscribe_net(request, net_title):
     current_user = request.user
