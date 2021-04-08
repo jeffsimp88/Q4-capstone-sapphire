@@ -64,7 +64,6 @@ def subscribe_net(request, net_title):
     check_sub = current_user.subs
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
-        print("You are now unsubscribed")
         check_sub.remove(current_net)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
