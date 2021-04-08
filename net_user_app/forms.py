@@ -12,6 +12,7 @@ class NetUserForm(UserCreationForm):
             'score',
             'subs',
             'followers',
+            'site_theme',
         )
         
 
@@ -24,5 +25,6 @@ class NetUserChangeForm(UserChangeForm):
             'bio',
             'score',
             'subs',
-            'followers',
+            'followers', 
+            'site_theme',
         )
