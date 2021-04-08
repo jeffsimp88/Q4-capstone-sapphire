@@ -1,11 +1,30 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from net_user_app.models import NetUser
+from posts.models import Post
+
+def get_total_user_votes(posts):
+    posts = posts
+    total_upvotes = 0
+    total_downvotes = 0
+    for post in posts:
+        total_upvotes = total_downvotes + post.upvotes
+        total_downvotes = total_downvotes + post.downvotes
+    return (total_upvotes - total_downvotes)
 
 def profile_view(request, username):
     context = {}
-    is_followed = check_follow(request, username)
     page_user = NetUser.objects.get(username=username)
-    context.update({"user": page_user, 'is_followed': is_followed})
+    followers = page_user.followers.all().order_by("username")
+    posts = Post.objects.filter(author=page_user).order_by('timestamp')
+    total_votes = get_total_user_votes(posts)
+    is_followed = check_follow(request, username)
+    context.update({
+        "user": page_user,
+        'followers': followers,
+        'posts': posts, 
+        'total_votes': total_votes,
+        'is_followed': is_followed,
+        })
     return render(request, 'profile.html', context)
 
 def change_theme(request):
