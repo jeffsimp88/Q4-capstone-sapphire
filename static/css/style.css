@@ -18,11 +18,11 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-#logoutText{
+#linkButton{
     color: var(--yellow);
 }
 
-#logoutText:hover{
+#linkButton:hover{
     color: var(--lightblue);
 }
 
