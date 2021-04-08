@@ -3,7 +3,7 @@ from net.forms import CreateNet
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
-
+import random
 
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
@@ -41,8 +41,10 @@ def index_view(request):
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all()
+    random_nets = random_net_helper()
     context.update({"posts": posts,
-                    "nets": nets})
+                    "nets": nets,
+                    "random": random_nets})
     return render(request, 'homepage.html', context)
 
 def individual_net_view(request, net_title):
@@ -71,4 +73,21 @@ def subscribe_net(request, net_title):
         check_sub.add(current_net)
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
+
+
+def random_net_helper():
+    nets = Net.objects.all()
+    random_nets = []
+    random_index_list = []
+    for num in range(50): 
+        if len(random_index_list) < 10:  
+            random_num = random.randrange(1, len(nets))
+            if random_num not in random_index_list:
+                random_index_list.append(random_num)
+    for each in random_index_list:
+        random_nets.append(nets[each])
+    return random_nets
+
+
+
 
