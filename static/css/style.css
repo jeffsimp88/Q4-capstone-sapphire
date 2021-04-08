@@ -31,6 +31,7 @@ body{
     background-color: gray;
     color: white;
     padding: 3px;
+    text-align: center;
 }
 
 .netlink:hover{
@@ -74,3 +75,4 @@ body{
 .Comment2{
     background-color: rgb(26, 26, 26);
 }
+
