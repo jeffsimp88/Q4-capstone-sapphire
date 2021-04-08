@@ -46,3 +46,22 @@ def post_comment_view(request, post_id):
     form = CommentForm()
     context = {'form': form}
     return render(request, "forms.html", context)
+
+def upvotes_view(request, post_id):
+    post = Post.objects.filter(id=post_id).first()
+    post.upvotes +=1
+    post.save()
+    if post.post_type == "Comment":
+        return redirect(f'/posts/{post.parent.id}/')
+    else:
+        return redirect(f'/posts/{post.id}/')
+
+
+def downvotes_view(request, post_id):
+    post = Post.objects.filter(id=post_id).first()
+    post.downvotes +=1
+    post.save()
+    if post.post_type == "Comment":
+        return redirect(f'/posts/{post.parent.id}/')
+    else:
+        return redirect(f'/posts/{post.id}/')
