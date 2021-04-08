@@ -6,9 +6,9 @@
 
 {% if is_subscribed %}
 <p>You are currently subscribed</p>
-<a id="logoutText" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
+<a id="linkButton" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
 {% else %}
-<a id="logoutText" href='/subscribe/{{ net.title}}/'>Subscribe</a>
+<a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
 {% endif %}
 
 <p>{{ net.description }}</p>
@@ -17,7 +17,7 @@
 {% if post.post_type == "Post" %}
 <div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
     <p>{{post}}</p>
-    <a id="logoutText" href="/posts/{{post.id}}/">Post Details</a>
+    <a id="linkButton" href="/posts/{{post.id}}/">Post Details</a>
 </div>
 {% endif %}
 {% endfor %}
@@ -25,6 +25,6 @@
 
 <a href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
 <br>
-<a id="logoutText" href="/">back to homepage</a>
+<a id="linkButton" href="/">back to homepage</a>
 
 {% endblock %}
