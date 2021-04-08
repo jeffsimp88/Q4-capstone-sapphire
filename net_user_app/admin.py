@@ -29,7 +29,9 @@ class NetUserAdmin(UserAdmin):
             'score',
             'subs',
             'followers',
-            'password',
+            'password',            
+            'site_theme',
+            
                 
             )}),('Permissions', {'fields': ('is_staff', 'is_active')})
     )
@@ -44,10 +46,11 @@ class NetUserAdmin(UserAdmin):
             'score',
             'subs',
             'followers',
+            'site_theme',
             'password1',
             'password2',
             'is_staff', 
             'is_active',
-            )}))
+            ),},),)
 
 admin.site.register(NetUser, NetUserAdmin)

@@ -25,8 +25,7 @@ class NetAdmin(admin.ModelAdmin):
         (None, {
             'classes':('wide'), 
             'fields': ('title', 'description', 'rules', 'moderators', 'creation_date', 'private'),
-        }),
-    )
+        },),)
     ordering = (
         'title',
         'creation_date',

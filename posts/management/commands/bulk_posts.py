@@ -18,11 +18,15 @@ class Command(BaseCommand):
             subnet = subnets[random_index]
             header = text.title()
             content = text.text(quantity=4)
+            upvotes = random.randrange(0, 50)
+            downvotes = random.randrange(0, 50)                
             Post.objects.create(
                 post_type = 'Post',
                 author = author,
                 subnet = subnet,
                 header = header,
                 content = content,
+                upvotes= upvotes,
+                downvotes= downvotes,
             )
         print("Post are created.")
