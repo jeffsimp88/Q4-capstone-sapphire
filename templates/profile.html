@@ -26,6 +26,13 @@
 {% endfor %}
 {% endif %}
 
+{% if subs %}
+<h5>Nets subscribed:</h5>
+{% for sub in subs %}
+<li><a href="/nets/{{sub.title}}/" id="linkButton">n/{{sub}}</a></li>
+{% endfor %}
+{% endif %}
+
 
 {% if posts %}
 <h5>{{user.username}}'s posts:</h5>
