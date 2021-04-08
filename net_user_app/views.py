@@ -4,12 +4,10 @@ from posts.models import Post
 
 def get_total_user_votes(posts):
     posts = posts
-    total_upvotes = 0
-    total_downvotes = 0
+    total_votes = 0
     for post in posts:
-        total_upvotes = total_downvotes + post.upvotes
-        total_downvotes = total_downvotes + post.downvotes
-    return (total_upvotes - total_downvotes)
+        total_votes = total_votes + post.total_score
+    return total_votes
 
 def profile_view(request, username):
     context = {}
