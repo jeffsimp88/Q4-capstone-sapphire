@@ -6,18 +6,6 @@
     --blue: rgb(243, 243, 214);
 }
 
-header{
-    background-color: var(--blue);
-    color: var(--tan);
-    border: 2px solid var(--blue);
-}
-
-body{
-    background-color: var(--tan);
-    color: var(--blue);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
 #linkButton{
     color: var(--yellow);
 }

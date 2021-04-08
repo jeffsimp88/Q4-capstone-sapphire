@@ -1,12 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Welcome, {{user.username}}!</h1>
+{% load static %}
 
-{% if user.bio %}
-<p>{{user.bio}}</p>
-{% endif %}
-<p>{{user.email}}</p>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<div class="profilePage">
+    <div class="profileBody">
+        <h3>user: {{user.username}}</h3>
+
+        <p>total votes: {{total_votes}}</p>
+        {% if user != request.user %}
+        {% if is_followed %}
+        <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
+        {% else %}
+        <a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
+        {% endif %}
+        {% endif %}
 
 
+        {% if user.bio %}
+        <p>bio: {{user.bio}}</p>
+        {% endif %}
 
+        <p>email: {{user.email}}</p>
+
+        {% if followers %}
+        <h5>Users Following:</h5>
+        {% for follower in followers %}
+        <li><a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a></li>
+        {% endfor %}
+        {% endif %}
+
+        {% if subs %}
+        <h5>Nets Subscribed:</h5>
+        {% for sub in subs %}
+        <li><a href="/nets/{{sub.title}}/" id="linkButton">n/{{sub}}</a></li>
+        {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div class="profilePostList">
+        {% if posts %}
+        <h3>{{user.username}}'s posts:</h3>
+        {% for post in posts %}
+        <div class="profilePostBox">
+            {% if post.post_type == "Post" %}
+            <div class="profilePostHeader">
+                <p class="profilePost">Posted in
+                    <a href="/nets/{{post.subnet.title}}/" id="linkButton">n/{{post.subnet.title}}</a>
+                    :
+            </div>
+            <div class="profilePostBody"><a href="/posts/{{post.id}}/" id="linkButton">{{post.header}}</a></div>
+            </p>
+            {% else %}
+            <div class="profilePostHeader">
+                <p class="profileComment">Commented on
+                    <a href="/posts/{{post.parent.id}}/" id="linkButton">post</a>
+                    :
+            </div>
+            <div class="profilePostBody"><a href="/posts/{{post.parent.id}}/" id="linkButton">{{post.header}}</a></div>
+            </p>
+            {% endif %}
+            <div class="profilePostFooter">
+                <p>total votes: {{post.total_score}} date posted: {{post.timestamp}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
