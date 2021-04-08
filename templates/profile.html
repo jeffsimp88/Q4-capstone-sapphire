@@ -2,6 +2,16 @@
 {% block content %}
 <h1>Welcome, {{user.username}}!</h1>
 
+{% if user != request.user %}
+
+{% if is_followed %}
+<a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
+{% else %}
+<a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
+{% endif %}
+{% endif %}
+
+
 {% if user.bio %}
 <p>{{user.bio}}</p>
 {% endif %}
