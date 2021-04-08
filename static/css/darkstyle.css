@@ -51,7 +51,7 @@ body{
 
 .postBox{
     background-color: var(--blue);
-    color: whitesmoke;
+    color: var(--tan);
     border-radius: 2px;
     margin: 10px;
 }
