@@ -18,11 +18,15 @@ class Command(BaseCommand):
             parent = post[random_index]
             subnet = parent.subnet
             header = text.title()
+            upvotes = random.randrange(0, 50)
+            downvotes = random.randrange(0, 50)
             Post.objects.create(
                 post_type = 'Comment',
                 author = author,
                 subnet = subnet,
                 header = header,
                 parent= parent,
+                upvotes= upvotes,
+                downvotes= downvotes,
             )
-        print("Post are created.")
+        print("Comments are created.")
