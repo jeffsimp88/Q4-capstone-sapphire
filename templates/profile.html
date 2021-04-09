@@ -7,6 +7,12 @@
     <div class="profileBody">
         <h3>user: {{user.username}}</h3>
 
+
+        {% if user.profile_image %}
+        <img style="height: 100px;" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+        {% endif %}
+
+
         <p>total votes: {{total_votes}}</p>
         {% if user != request.user %}
         {% if is_followed %}
@@ -37,6 +43,7 @@
         {% endfor %}
         {% endif %}
 
+        <a href="/updateuser/{{user.id}}/" id="linkButton">update profile</a>
     </div>
 
     <div class="profilePostList">
