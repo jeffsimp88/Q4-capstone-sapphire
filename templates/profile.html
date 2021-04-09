@@ -49,6 +49,11 @@
         {% if user == request.user %}
         <br>
         <a href="/updateuser/{{user.id}}/" id="linkButton">update profile</a>
+        {% if messages %}
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+        {% endif %}
         {% endif %}
 
     </div>

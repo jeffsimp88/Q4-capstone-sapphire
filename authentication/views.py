@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from authentication.forms import LoginForm, SignupForm
 from net_user_app.models import NetUser
@@ -10,6 +11,9 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+            if NetUser.objects.filter(username=data['username']).exists():
+                messages.warning(request, f"Sorry, username {data['username']} already exists.")
+                return redirect('/signup/')
             new_user = NetUser.objects.create_user(
                 username=data['username'],
                 email = data['email'],
