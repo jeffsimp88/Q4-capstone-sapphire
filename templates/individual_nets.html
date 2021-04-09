@@ -11,6 +11,8 @@
 <a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
 {% endif %}
 
+<a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+<a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
 <p>{{ net.description }}</p>
 
 {% for post in posts %}
@@ -23,7 +25,6 @@
 {% endfor %}
 
 
-<a href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
 <br>
 <a id="linkButton" href="/">back to homepage</a>
 

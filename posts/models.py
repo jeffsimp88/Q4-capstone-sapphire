@@ -26,6 +26,7 @@ class Post(MPTTModel):
     subnet = models.ForeignKey(Net, related_name="subnet", on_delete=models.CASCADE)
     header = models.CharField(max_length=50)
     content = models.TextField(max_length=1000, null=True, blank=True)
+    image = models.ImageField(upload_to="post_images/", null=True, blank=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     parent = TreeForeignKey(

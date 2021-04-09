@@ -14,6 +14,13 @@
   color: var(--lightblue);
 }
 
+#net-search{
+  display: flex
+}
+
+.notfound{
+  margin-left:20px
+}
 .netLinkList {
   background-color: var(--blue);
   border: 1px solid var(--blue);
