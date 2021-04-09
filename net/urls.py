@@ -7,3 +7,5 @@ urlpatterns = [
     path('newnet/', views.create_net_view, name='Make Net'),
     path('subscribe/<str:net_title>/', views.subscribe_net, name="Subscribe"),
 ]
+
+handler404 = 'net.views.error_404_view'

@@ -21,6 +21,5 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('net_user_app.urls')),
     path('', include('net.urls')),
-    path('', include('posts.urls')),    
+    path('', include('posts.urls')),
 ]
-handler404 = 'authentication.views.error_404_view'
