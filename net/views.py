@@ -17,8 +17,7 @@ def index_view(request):
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all()
-    posts_req = posts_requested()
-    recent_posts = recent_posts_helper(posts_req)
+    recent_posts = recent_posts_helper()
     search_form = SearchForm()
     context.update({"posts": posts,
                     "nets": nets,
@@ -67,6 +66,8 @@ def create_net_view(request):
     return render(request, 'forms.html', context)
 
 
+
+
 def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
     is_subscribed = check_subscribe(request, selected_net)
@@ -98,7 +99,7 @@ def subscribe_net(request, net_title):
 
 def recent_posts_helper():
     posts = Post.objects.all()
-    recent_posts = list(posts.order_by('-timestamp')[0:int(posts_req)])
+    recent_posts = list(posts.order_by('-timestamp')[0:10])
     return recent_posts
 
 
