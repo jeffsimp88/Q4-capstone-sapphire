@@ -51,7 +51,7 @@ def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
     is_subscribed = check_subscribe(request, selected_net)
     user_subs = request.user.subs.all()
-    posts = Post.objects.filter(subnet=selected_net)
+    posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     context = {
         'net': selected_net,
         'is_subscribed': is_subscribed,
