@@ -57,5 +57,3 @@ def logout_view(request):
     return HttpResponseRedirect('/')
 
 
-def error_404_view(request, exception):
-    return render(request,'404.html')

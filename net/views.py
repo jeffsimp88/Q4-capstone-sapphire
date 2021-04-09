@@ -89,6 +89,7 @@ def random_net_helper():
         random_nets.append(nets[each])
     return random_nets
 
-
+def error_404_view(request, exception):
+    return render(request,'404.html')
 
 
