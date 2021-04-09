@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>{{header}}</h2>
+
+<div id="net-search">
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ search_form }}
+    <input type="submit" value="Submit!">
+</form>
+{% if not_found %}
+<div class="notfound">Net not found, Please Try Again!</div>
+{% endif %}
+</div>
 <button type='submit'>
     <a href='/newnet/'>Create New Net</a>
 </button>
@@ -12,18 +23,22 @@
     
 </div>
 <h3>Net Feed</h3>
-{% for nets in random %}
+{% for posts in recent_posts %}
     <div class="netlink" style='width:150px;'>
     <strong>
-        <a href='nets/{{nets.title}}/'>r/{{nets}}</a></strong>
+        <a href='nets/{{ posts.subnet }}/'>r/{{posts.subnet}}</a></strong>
         <br></br>
     </div>
     
     <div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
 
-    {{ nets.subnet.last }}
+    {{ posts }}
     <br></br>
+    
     </div>
     {% endfor %}
+    <button>
+        <a href='/more/'>Previous 10 Posts</a>
+    </button>
 
 {% endblock %}
