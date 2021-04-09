@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from net_user_app.models import NetUser
+from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
+import os
 
 def get_total_user_votes(posts):
     posts = posts
@@ -26,6 +28,25 @@ def profile_view(request, username):
         'is_followed': is_followed,
         })
     return render(request, 'profile.html', context)
+
+def update_user(request, user_id):
+    current_user = NetUser.objects.get(id=user_id)
+    if current_user.profile_image:
+        image_path = current_user.profile_image.path
+    else:
+        image_path = "dummy string"
+    if request.method == "POST":
+        form = NetUserUpdateForm(request.POST, request.FILES, instance=current_user)
+        if form.is_valid():
+            if os.path.exists(image_path):
+                os.remove(image_path)
+            form.save()
+            return redirect(f'/users/{current_user.username}/')
+    else:
+        form = NetUserUpdateForm(initial={'username':current_user.username ,'bio':current_user.bio ,'email':current_user.email , 'profile_image': current_user.profile_image})
+        
+    context = {'form': form}
+    return render(request, 'forms.html', context)
 
 def change_theme(request):
     current_user = request.user
