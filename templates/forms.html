@@ -6,11 +6,19 @@
     {% elif signing_in %}
     <h3> Already a current user? <a href="/login">Login!</a></h3>
     {% endif %}
-
+    {% if messages %}
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+    {% endif %}
     <form enctype="multipart/form-data" action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit!">
+
     </form>
+
+
+
 </div>
 {% endblock %}
