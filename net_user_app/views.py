@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.contrib import messages
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
@@ -31,16 +32,19 @@ def profile_view(request, username):
 
 def update_user(request, user_id):
     current_user = NetUser.objects.get(id=user_id)
-    if current_user.profile_image:
+    current_image = current_user.profile_image
+    if current_image:
         image_path = current_user.profile_image.path
     else:
         image_path = "dummy string"
     if request.method == "POST":
         form = NetUserUpdateForm(request.POST, request.FILES, instance=current_user)
         if form.is_valid():
-            if os.path.exists(image_path):
-                os.remove(image_path)
+            if current_image != form.cleaned_data['profile_image']:
+                if os.path.exists(image_path):
+                    os.remove(image_path)
             form.save()
+            messages.success(request, "User info updated successfully.")
             return redirect(f'/users/{current_user.username}/')
     else:
         form = NetUserUpdateForm(initial={'username':current_user.username ,'bio':current_user.bio ,'email':current_user.email , 'profile_image': current_user.profile_image})
