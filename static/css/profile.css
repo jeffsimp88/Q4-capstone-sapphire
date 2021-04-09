@@ -8,7 +8,7 @@
     color: var(--tan);
     background-color: var(--blue);
     width: 35%;
-    height: 80%;
+    height: fit-content;
     padding: 10px;
     margin: 10px;
 }
