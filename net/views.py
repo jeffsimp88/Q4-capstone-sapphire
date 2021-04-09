@@ -6,45 +6,6 @@ from posts.models import Post
 import random
 
 
-
-def check_subscribe(request, net_title):
-    net_info = Net.objects.get(title=net_title)
-    current_user = request.user
-    subscribes = current_user.subs
-    if subscribes.filter(title=net_title).exists():
-        is_subscribed =True
-    else:
-        is_subscribed =False
-    return is_subscribed
-
-def search_net(request):
-    search = SearchForm(request.POST)
-    if search.is_valid():
-        data = (search.cleaned_data)
-        for items in Net.objects.all():
-            if items.title == data["search_info"]:       
-                return (f"/nets/{data['search_info']}/")         
-
-def create_net_view(request):
-    if request.method == 'POST':
-        post = CreateNet(request.POST)
-        if post.is_valid():
-            data = post.cleaned_data
-            new_net = Net.objects.create(
-                title=data['title'],
-                description=data['description'],
-                rules=data['rules'],
-                private=data['private'],
-                )
-            new_net.moderators.add(request.user)
-            return redirect("/")
-    form = CreateNet()
-
-    context = {'form': form}
-    return render(request, 'forms.html', context)
-
-
-
 def index_view(request):
     not_found = False
     if request.method == 'POST':
@@ -65,6 +26,46 @@ def index_view(request):
                     "search_form": search_form,
                     "not_found": not_found})
     return render(request, 'homepage.html', context)
+
+
+def check_subscribe(request, net_title):
+    net_info = Net.objects.get(title=net_title)
+    current_user = request.user
+    subscribes = current_user.subs
+    if subscribes.filter(title=net_title).exists():
+        is_subscribed =True
+    else:
+        is_subscribed =False
+    return is_subscribed
+
+
+def search_net(request):
+    search = SearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for items in Net.objects.all():
+            if items.title == data["search_info"]:       
+                return (f"/nets/{data['search_info']}/")         
+
+
+def create_net_view(request):
+    if request.method == 'POST':
+        post = CreateNet(request.POST)
+        if post.is_valid():
+            data = post.cleaned_data
+            new_net = Net.objects.create(
+                title=data['title'],
+                description=data['description'],
+                rules=data['rules'],
+                private=data['private'],
+                )
+            new_net.moderators.add(request.user)
+            return redirect("/")
+    form = CreateNet()
+
+    context = {'form': form}
+    return render(request, 'forms.html', context)
+
 
 def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
@@ -94,12 +95,8 @@ def subscribe_net(request, net_title):
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
-def posts_requested(requested_posts=10):
-    # requested_posts += 10
-    return requested_posts
 
-
-def recent_posts_helper(posts_req):
+def recent_posts_helper():
     posts = Post.objects.all()
     recent_posts = list(posts.order_by('-timestamp')[0:int(posts_req)])
     return recent_posts
