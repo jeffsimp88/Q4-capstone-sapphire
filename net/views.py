@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from net.forms import CreateNet
+from net.forms import CreateNet, SearchForm
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
 import random
+
+
 
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
@@ -15,6 +17,13 @@ def check_subscribe(request, net_title):
         is_subscribed =False
     return is_subscribed
 
+def search_net(request):
+    search = SearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for items in Net.objects.all():
+            if items.title == data["search_info"]:       
+                return (f"/nets/{data['search_info']}/")         
 
 def create_net_view(request):
     if request.method == 'POST':
@@ -26,7 +35,6 @@ def create_net_view(request):
                 description=data['description'],
                 rules=data['rules'],
                 private=data['private'],
-
                 )
             new_net.moderators.add(request.user)
             return redirect("/")
@@ -38,13 +46,24 @@ def create_net_view(request):
 
 
 def index_view(request):
+    not_found = False
+    if request.method == 'POST':
+        return_url = search_net(request)
+        if return_url:
+            return redirect(return_url)
+        else:
+            not_found = True
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all()
-    random_nets = random_net_helper()
+    posts_req = posts_requested()
+    recent_posts = recent_posts_helper(posts_req)
+    search_form = SearchForm()
     context.update({"posts": posts,
                     "nets": nets,
-                    "random": random_nets})
+                    "recent_posts": recent_posts,
+                    "search_form": search_form,
+                    "not_found": not_found})
     return render(request, 'homepage.html', context)
 
 def individual_net_view(request, net_title):
@@ -75,19 +94,16 @@ def subscribe_net(request, net_title):
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
+def posts_requested(requested_posts=10):
+    # requested_posts += 10
+    return requested_posts
 
-def random_net_helper():
-    nets = Net.objects.all()
-    random_nets = []
-    random_index_list = []
-    for num in range(50): 
-        if len(random_index_list) < 10:  
-            random_num = random.randrange(1, len(nets))
-            if random_num not in random_index_list:
-                random_index_list.append(random_num)
-    for each in random_index_list:
-        random_nets.append(nets[each])
-    return random_nets
+
+def recent_posts_helper(posts_req):
+    posts = Post.objects.all()
+    recent_posts = list(posts.order_by('-timestamp')[0:int(posts_req)])
+    return recent_posts
+
 
 def error_404_view(request, exception):
     return render(request,'404.html')
