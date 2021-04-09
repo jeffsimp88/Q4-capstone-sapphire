@@ -9,11 +9,24 @@ class NetUserForm(UserCreationForm):
             'username',
             'email',
             'bio',
+            'profile_image',
             'score',
             'subs',
             'followers',
             'site_theme',
         )
+
+
+class NetUserUpdateForm(forms.ModelForm):
+    """Form for updating user's profile"""
+    class Meta:
+        model = NetUser
+        fields =[
+            'username',
+            'email',
+            'bio',
+            'profile_image',
+        ]
         
 
 class NetUserChangeForm(UserChangeForm):
@@ -23,8 +36,27 @@ class NetUserChangeForm(UserChangeForm):
             'username',
             'email',
             'bio',
+            'profile_image',
             'score',
             'subs',
             'followers', 
             'site_theme',
         )
+
+
+
+
+
+
+
+
+
+    # username = forms.CharField(max_length=30)
+    # email = forms.EmailField(max_length=100)
+    # bio = forms.CharField(widget=forms.Textarea, max_length=250)
+    # profile_image = forms.ImageField(required=False)
+# class NetUserUpdateForm(forms.Form):
+#     username = forms.CharField(max_length=30)
+#     email = forms.EmailField(max_length=100)
+#     bio = forms.CharField(widget=forms.Textarea, max_length=250)
+#     profile_image = forms.ImageField(required=False)
