@@ -10,6 +10,8 @@
 
         {% if user.profile_image %}
         <img style="height: 100px;" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+        {% else %}
+        <img style="height: 100px;" src="{%static 'images/default_profile_img.png' %}" alt="Default Image">
         {% endif %}
 
 
