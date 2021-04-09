@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from net.forms import CreateNet, SearchForm
 from net.models import Net
 from net_user_app.models import NetUser
@@ -16,7 +17,7 @@ def index_view(request):
             not_found = True
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
-    nets = Net.objects.all()
+    nets = Net.objects.all().order_by('title')
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
     context.update({"posts": posts,
@@ -52,6 +53,9 @@ def create_net_view(request):
         post = CreateNet(request.POST)
         if post.is_valid():
             data = post.cleaned_data
+            if Net.objects.filter(title=data['title']).exists():
+                messages.warning(request, f"Sorry, net {data['title']} already exists.")
+                return redirect('/newnet/')
             new_net = Net.objects.create(
                 title=data['title'],
                 description=data['description'],
