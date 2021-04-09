@@ -24,7 +24,16 @@
         <h3>{{post.header}}</h3>
     </div>
     <div class="postBoxBody">
+
+        {% if post.content %}
         <p>{{post.content}}</p>
+        {% endif %}
+
+        {% if post.image %}
+        <img style="width: 300px;" src="{{post.image.url}}" alt="{{post.image}}">
+        {% endif %}
+
+
     </div>
     <div class="postBoxFooter">
         <p><strong>date posted: </strong>{{post.timestamp}}</p>
