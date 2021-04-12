@@ -14,6 +14,7 @@ header{
     margin: 0px;
 }
 
+
 body{
     background-color: var(--background);
     color: var(--blue);
@@ -36,87 +37,58 @@ body{
     color: var(--blue);
 }
 
-.homeNetFeed{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
 #linkButton {
-    color: var(--yellow);
-  }
-  
-  #linkButton:hover {
-    color: var(--lightblue);
-  }
-  
-  #net-search{
-    display: flex
-  }
-  
-  .notfound{
-    margin-left:20px
-  }
-  .netLinkList {
-    background-color: var(--blue);
-    border: 1px solid var(--blue);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 75%;
-  }
-  
-  .netlink {
-    margin: 3px;
-    text-decoration: none;
-    background-color: var(--gray);
-    color: white;
-    padding: 3px;
-    text-align: center;
-  }
-  
-  .netlink:hover {
-    background: white;
-    color: var(--gray);
-  }
-  
-  .postBox {
-    background-color: var(--blue);
-    color: whitesmoke;
-    border-radius: 2px;
-    margin: 10px;
-  }
-  
-  .postBoxHeader {
-    padding: 0px 5px 0px 5px;
-    border-bottom: 1px solid white;
-  }
-  
-  .postBoxBody {
-    font-size: 15px;
-    padding: 0px 10px 0px 10px;
-  }
-  
-  .postBoxFooter {
-    font-size: 11px;
-    padding: 0px 5px 0px 5px;
-    border-top: 1px solid white;
-    margin: 1px;
-  }
-  
-  .postBoxCommentsBox {
-    padding: 10px 5px 10px 5px;
-    background-color: var(--blue);
-  }
-  .postBoxComments {
-    padding: 3px;
-  }
-  .Comment1 {
-    background-color: var(--blue);
-  }
-  .Comment2 {
-    background-color: var(--lightblue);
-  }
-  
+color: var(--yellow);
+}
+
+#linkButton:hover {
+color: var(--lightblue);
+}
+
+#net-search{
+display: flex
+}
+
+.notfound{
+margin-left:20px
+}
+
+
+.postBox {
+background-color: var(--blue);
+color: whitesmoke;
+border-radius: 2px;
+margin: 10px;
+}
+
+.postBoxHeader {
+padding: 0px 5px 0px 5px;
+border-bottom: 1px solid white;
+}
+
+.postBoxBody {
+font-size: 15px;
+padding: 0px 10px 0px 10px;
+}
+
+.postBoxFooter {
+font-size: 11px;
+padding: 0px 5px 0px 5px;
+border-top: 1px solid white;
+margin: 1px;
+}
+
+.postBoxCommentsBox {
+padding: 10px 5px 10px 5px;
+background-color: var(--blue);
+}
+.postBoxComments {
+padding: 3px;
+}
+.Comment1 {
+background-color: var(--blue);
+}
+.Comment2 {
+background-color: var(--lightblue);
+}
