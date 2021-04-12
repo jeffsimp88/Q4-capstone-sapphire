@@ -5,17 +5,19 @@
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 
 <div class="HomePage">
-    <div class="HomeFilter">
-        <p>filter by:</p>
-    </div>
+
     <div class="HomePageBody">
         <div class="HomeLinkList">
             <a id="linkButton" href='/newnet/'>Create New Net</a>
+
+            {% if request.user.is_authenticated %}
             <h3 id="h3">Subscribed Nets</h3>
             {% for net in sub_nets %}
             <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
             {% endfor %}
             <hr width="100%">
+            {% endif %}
+
             <h3 id="h3">All Nets</h3>
             {% for net in nets %}
             <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
@@ -24,6 +26,13 @@
         </div>
 
         <div class="HomePageFeed">
+            <div class="HomeFilter">
+                <p>filter by: </p>
+                <br>
+                <a id="linkButton" href="/"> Subscribes </a>
+                <a id="linkButton" href="/"> Followers </a>
+                <a id="linkButton" href="/"> Popular </a>
+            </div>
             {% for post in recent_posts %}
             <div class="HomePageNetTitle">
                 <strong>
@@ -36,7 +45,7 @@
                                 {{post.total_score}}
                                 <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
                             </div>
-                            <p style="font-size: 11px;">
+                            <p style="font-size: 13px;">
                                 &nbsp; |
                                 <strong>posted by user: </strong>
                                 <a href="/users/{{post.author.username}}/" id="linkButton">
