@@ -123,8 +123,8 @@ def search_user(request):
     if search.is_valid():
         data = (search.cleaned_data)
         for users in NetUser.objects.all():
-            if users.username == data['user_info']:
-                return(f"/users/{data['user_info']}/")
+            if users.username.casefold() == data['user_info'].casefold():
+                return(f"/users/{users.username}/")
 
 
 
