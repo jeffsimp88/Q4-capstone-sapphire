@@ -104,7 +104,7 @@ def subscribe_net(request, net_title):
 
 
 def recent_posts_helper():
-    posts = Post.objects.all()
+    posts = Post.objects.filter(post_type='Post')
     recent_posts = list(posts.order_by('-timestamp')[0:10])
     return recent_posts
 
