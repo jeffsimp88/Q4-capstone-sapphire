@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
+from net.views import search_net, search_user
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
-from net.forms import SearchForm
-from net.views import search_net
+from net.forms import SearchForm, UserSearchForm
+
 import os
 
 def get_total_user_votes(posts):
@@ -14,14 +15,24 @@ def get_total_user_votes(posts):
         total_votes = total_votes + post.total_score
     return total_votes
 
+
+
+
 def profile_view(request, username):
     context = {}
     if request.method == 'POST':
         return_url = search_net(request)
+        searched_user_url = search_user(request)
         if return_url:
             return redirect(return_url)
         else:
-            not_found = True
+            print("working")
+            net_not_found = True
+        if searched_user_url:
+            return redirect(searched_user_url)
+        else:
+            user_not_found = True
+        
     page_user = NetUser.objects.get(username=username)
     followers = page_user.followers.all().order_by("username")
     posts = Post.objects.filter(author=page_user).order_by('-timestamp')
@@ -29,6 +40,7 @@ def profile_view(request, username):
     total_votes = get_total_user_votes(posts)
     is_followed = check_follow(request, username)
     search_form = SearchForm()
+    user_form = UserSearchForm()
     context.update({
         "user": page_user,
         'followers': followers,
@@ -37,6 +49,7 @@ def profile_view(request, username):
         'total_votes': total_votes,
         'is_followed': is_followed,
         'search_form': search_form,
+        'user_form': user_form,
         })
     return render(request, 'profile.html', context)
 
@@ -73,6 +86,7 @@ def change_theme(request):
         current_user.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def check_follow(request, username):
     user_info = NetUser.objects.get(username=username)
     current_user = request.user
@@ -97,5 +111,7 @@ def follow_user(request, username):
         check_follower.add(other_user)
         is_followed = True
         return redirect(f'/users/{username}/')
+
+
 
 

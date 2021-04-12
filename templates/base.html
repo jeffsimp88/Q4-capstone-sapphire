@@ -59,6 +59,13 @@
                 <a id="NavButton" href="/signup">Signup</a>
 
 
+
+        <div id="user-search">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ user_form }}
+                <input type="submit" value="Submit!">
+            </form>
                 {% endif %}
             </div>
         </div>
