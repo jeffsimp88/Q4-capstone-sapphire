@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from net.forms import CreateNet, SearchForm
+from net.forms import CreateNet, SearchForm, UserSearchForm
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
@@ -20,10 +20,12 @@ def index_view(request):
     nets = Net.objects.all().order_by('title')
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
+    search_user = UserSearchForm()
     context.update({"posts": posts,
                     "nets": nets,
                     "recent_posts": recent_posts,
                     "search_form": search_form,
+                    "search_user": search_user,
                     "not_found": not_found})
     return render(request, 'homepage.html', context)
 

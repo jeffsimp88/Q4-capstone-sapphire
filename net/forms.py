@@ -11,5 +11,7 @@ class CreateNet(forms.Form):
 class SearchForm(forms.Form):
     search_info = forms.CharField(max_length=50, label="Net Search")
     
+class UserSearchForm(forms.Form):
+    user_info = forms.CharField(max_length=50, label="User Search")
     
 

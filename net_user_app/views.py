@@ -3,7 +3,7 @@ from django.contrib import messages
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
-from net.forms import SearchForm
+from net.forms import SearchForm, UserSearchForm
 from net.views import search_net
 import os
 
@@ -29,6 +29,7 @@ def profile_view(request, username):
     total_votes = get_total_user_votes(posts)
     is_followed = check_follow(request, username)
     search_form = SearchForm()
+    search_user = UserSearchForm()
     context.update({
         "user": page_user,
         'followers': followers,
@@ -37,6 +38,7 @@ def profile_view(request, username):
         'total_votes': total_votes,
         'is_followed': is_followed,
         'search_form': search_form,
+        'search_user': search_user,
         })
     return render(request, 'profile.html', context)
 
@@ -98,4 +100,10 @@ def follow_user(request, username):
         is_followed = True
         return redirect(f'/users/{username}/')
 
-
+def search_user(request):
+    search = UserSearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for users in NetUser.objects.all():
+            if users.username == data['user_info']:
+                return(f"/users/{data['user_info']}/")
