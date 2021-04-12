@@ -31,6 +31,14 @@
 .HomeLinkList>h3{
       color: var(--yellow);
   }
+
+.HomeFilter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+}
   
 .HomePageFeed{
     display: flex;
