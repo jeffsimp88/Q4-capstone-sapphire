@@ -14,19 +14,20 @@ def index_view(request):
         if return_url:
             return redirect(return_url)
         else:
-            # not_found = True
             messages.error(request, "Net not found. Please Try Again!")
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all().order_by('title')
+    sub_nets = filter_sub(request)
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
-    context.update({"posts": posts,
-                    "nets": nets,
-                    "recent_posts": recent_posts,
-                    "search_form": search_form,
-                    # "not_found": not_found,
-                    })
+    context.update({
+        "posts": posts,
+        "sub_nets": sub_nets,
+        "nets": nets,
+        "recent_posts": recent_posts,
+        "search_form": search_form,
+        })
     return render(request, 'homepage.html', context)
 
 
@@ -111,5 +112,14 @@ def recent_posts_helper():
 
 def error_404_view(request, exception):
     return render(request,'404.html')
+
+def filter_sub(request):
+    net_list = Net.objects.all()
+    sub_list = request.user.subs.all()
+    new_list = []
+    for sub in sub_list:
+        if sub in sub_list:
+            new_list.append(sub)
+    return new_list
 
 
