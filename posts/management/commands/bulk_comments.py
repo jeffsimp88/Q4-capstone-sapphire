@@ -11,7 +11,7 @@ class Command(BaseCommand):
     help = 'Create bulk amout of users.'
 
     def handle(self, *args, **kwargs):
-        post = Post.objects.all()
+        post = Post.objects.filter(post_type='Post')
         for x in range(100):
             random_index = random.randrange(0, (len(post)))
             author = NetUser.objects.get(id=random.randint(1, NetUser.objects.all().count()))

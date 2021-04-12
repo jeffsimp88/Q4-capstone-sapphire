@@ -3,6 +3,8 @@ from django.contrib import messages
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
+from net.forms import SearchForm
+from net.views import search_net
 import os
 
 def get_total_user_votes(posts):
@@ -14,12 +16,19 @@ def get_total_user_votes(posts):
 
 def profile_view(request, username):
     context = {}
+    if request.method == 'POST':
+        return_url = search_net(request)
+        if return_url:
+            return redirect(return_url)
+        else:
+            not_found = True
     page_user = NetUser.objects.get(username=username)
     followers = page_user.followers.all().order_by("username")
     posts = Post.objects.filter(author=page_user).order_by('-timestamp')
     subs = page_user.subs.all().order_by('title')
     total_votes = get_total_user_votes(posts)
     is_followed = check_follow(request, username)
+    search_form = SearchForm()
     context.update({
         "user": page_user,
         'followers': followers,
@@ -27,6 +36,7 @@ def profile_view(request, username):
         'subs': subs, 
         'total_votes': total_votes,
         'is_followed': is_followed,
+        'search_form': search_form,
         })
     return render(request, 'profile.html', context)
 
