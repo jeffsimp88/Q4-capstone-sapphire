@@ -66,9 +66,20 @@
     background-color: var(--header-blue);
 }
 
+
+
 .NavBarSearch{
     flex-direction: column;
+    color: white;
 
+}
+
+.NavBarForm>input{
+background-color: var(--header-lightblue);
+outline: none;
+}
+.NavBarForm>input::placeholder{
+    color: white;
 }
 
 #searchSubmitButton{
