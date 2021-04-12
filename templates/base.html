@@ -10,35 +10,55 @@
 
 <body>
     <header>
-        <h1>Subnet</h1>
-        <a id="linkButton" href="/">Home</a>
-        {% if request.user.is_authenticated %}
-        <a href="/users/{{request.user}}" id="linkButton">Profile</a>
-        <a id="linkButton" href="/logout">Logout</a>
-        {% if request.user.site_theme == "Light" %}
-        <a id="linkButton" href="/changetheme/">Change to dark theme</a>
-        {% else %}
-        <a id="linkButton" href="/changetheme/">Change to light theme</a>
-        {% endif %}
-        {% else %}
 
-        <a id="linkButton" href="/login">Login</a>
-        or
-        <a id="linkButton" href="/signup">Signup</a>
+        <div class="NavBar">
+            <div class="NavBarTitle">
+                <div class="ImgBox">
+                    <img class="NavBarImg" src="{% static 'images/sub_yellow.png' %}" alt="SubNet Icon">
+                </div>
+                <h1>Subnet</h1>
+            </div>
+
+            <div class="NavBarPageLinksList">
+                <a id="NavButton" href="/">Home</a>
+
+                {% if request.user.is_authenticated %}
+                <a href="/users/{{request.user}}" id="NavButton">Profile</a>
+                <a id="NavButton" href="/logout">Logout</a>
 
 
-        {% endif %}
+                {% else %}
 
-        <div id="net-search">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ search_form }}
-                <input type="submit" value="Submit!">
-            </form>
-            {% if not_found %}
-            <div class="notfound">Net not found, Please Try Again!</div>
-            {% endif %}
+                <a id="NavButton" href="/login">Login</a>
+                or
+                <a id="NavButton" href="/signup">Signup</a>
+
+
+                {% endif %}
+            </div>
+            <div class="NavBarSearch">
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <p>{{message}}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ search_form }}
+                    <input id="searchSubmitButton" type="submit" value="Submit!">
+                </form>
+                <!-- {% if not_found %}
+                    <div class="notfound">Net not found, Please Try Again!</div>
+                    {% endif %} -->
+            </div>
         </div>
+        {% if request.user.site_theme == "Light" %}
+        <a id="ThemeButton" href="/changetheme/">Dark Mode</a>
+        {% else %}
+        <a id="ThemeButton" href="/changetheme/">Light Mode</a>
+        {% endif %}
     </header>
     <main>
 
