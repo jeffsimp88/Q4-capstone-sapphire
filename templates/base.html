@@ -29,7 +29,16 @@
 
         {% endif %}
 
-
+        <div id="net-search">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ search_form }}
+                <input type="submit" value="Submit!">
+            </form>
+            {% if not_found %}
+            <div class="notfound">Net not found, Please Try Again!</div>
+            {% endif %}
+        </div>
     </header>
     <main>
 
