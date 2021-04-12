@@ -43,9 +43,13 @@
                     {{ search_form }}
                     <input id="searchSubmitButton" type="submit" value="Submit!">
                 </form>
-                <!-- {% if not_found %}
-                    <div class="notfound">Net not found, Please Try Again!</div>
-                    {% endif %} -->
+                <div id="user-search">
+                    <form class="NavBarForm" action="" method="POST">
+                        {% csrf_token %}
+                        {{ user_form }}
+                        <input id="searchSubmitButton" type="submit" value="Submit!">
+                    </form>
+                </div>
             </div>
             <div class="NavBarPageLinksList">
                 <a id="NavButton" href="/">Home</a>
@@ -57,24 +61,19 @@
                 <a id="NavButton" href="/login">Login</a>
                 or
                 <a id="NavButton" href="/signup">Signup</a>
-
-
-
-        <div id="user-search">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ user_form }}
-                <input type="submit" value="Submit!">
-            </form>
                 {% endif %}
-            </div>
-        </div>
 
-        {% if request.user.site_theme == "Light" %}
-        <a id="ThemeButton" href="/changetheme/">Dark Mode</a>
-        {% else %}
-        <a id="ThemeButton" href="/changetheme/">Light Mode</a>
-        {% endif %}
+            </div>
+
+            {% if request.user.is_authenticated %}
+
+            {% if request.user.site_theme == "Light" %}
+            <a id="ThemeButton" href="/changetheme/">Dark Mode</a>
+            {% else %}
+            <a id="ThemeButton" href="/changetheme/">Light Mode</a>
+            {% endif %}
+            {% endif %}
+
     </header>
     <main>
 
