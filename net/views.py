@@ -14,7 +14,8 @@ def index_view(request):
         if return_url:
             return redirect(return_url)
         else:
-            not_found = True
+            # not_found = True
+            messages.error(request, "Net not found. Please Try Again!")
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all().order_by('title')
@@ -24,7 +25,8 @@ def index_view(request):
                     "nets": nets,
                     "recent_posts": recent_posts,
                     "search_form": search_form,
-                    "not_found": not_found})
+                    # "not_found": not_found,
+                    })
     return render(request, 'homepage.html', context)
 
 
