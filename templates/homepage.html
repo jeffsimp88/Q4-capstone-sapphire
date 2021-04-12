@@ -67,6 +67,17 @@
 
             {% endfor %}
         </div>
+
+        {% if request.user.is_authenticated %}
+        <div class="HomePageFollowers">
+            <h3>Users Following:</h3>
+            {% for follower in followers %}
+            <a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a>
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}
