@@ -1,43 +1,92 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{header}}</h2>
+{% load static %}
 
-<!-- <div id="net-search">
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ search_form }}
-        <input type="submit" value="Submit!">
-    </form>
-    {% if not_found %}
-    <div class="notfound">Net not found, Please Try Again!</div>
-    {% endif %}
-</div> -->
-<button type='submit'>
-    <a href='/newnet/'>Create New Net</a>
-</button>
-<h3>Links To Each Net</h3>
-<div class="netLinkList">
-    {% for items in nets %}
-    <a class='netlink' href='nets/{{ items.title }}/'>n/{{ items.title }}</a>
-    {% endfor %}
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 
-</div>
+<div class="HomePage">
 
-<div class="homeNetFeed">
-    <h3>Net Feed</h3>
-    {% for posts in recent_posts %}
-    <div class="netlink" style='width:150px;'>
-        <strong>
-            <a href='nets/{{ posts.subnet }}/'>r/{{posts.subnet}}</a></strong>
-        <br></br>
-        <div style="border: 1px solid white; margin: 5px; width: 400px;" class="postBox">
+    <div class="HomePageBody">
+        <div class="HomeLinkList">
+            <a id="linkButton" href='/newnet/'>Create New Net</a>
 
-            {{ posts }}
-            <br></br>
+            {% if request.user.is_authenticated %}
+            <h3 id="h3">Subscribed Nets</h3>
+            {% for net in sub_nets %}
+            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+            {% endfor %}
+            <hr width="100%">
+            {% endif %}
+
+            <h3 id="h3">All Nets</h3>
+            {% for net in nets %}
+            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+            {% endfor %}
 
         </div>
-    </div>
 
-    {% endfor %}
+        <div class="HomePageFeed">
+            <div class="HomeFilter">
+                <p>filter by: </p>
+                <br>
+                <a id="linkButton" href="/"> Subscribes </a>
+                <a id="linkButton" href="/"> Followers </a>
+                <a id="linkButton" href="/"> Popular </a>
+            </div>
+            {% for post in recent_posts %}
+            <div class="HomePageNetTitle">
+                <strong>
+                    <a class="Home Net" href='nets/{{ post.subnet }}/'>n/{{post.subnet}}</a></strong>
+                <br></br>
+                <div class="Home Post">
+                    <div class="Home PostHeader">
+                        <div class="PostHeaderDetails">
+                            <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
+                                {{post.total_score}}
+                                <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
+                            </div>
+                            <p style="font-size: 13px;">
+                                &nbsp; |
+                                <strong>posted by user: </strong>
+                                <a href="/users/{{post.author.username}}/" id="linkButton">
+                                    {{post.author}}
+                                </a>
+                            </p>
+                        </div>
+                        <h3>{{post.header}}</h3>
+                    </div>
+                    <div class="Home PostBody">
+
+                        {% if post.content %}
+                        <p>{{post.content}}</p>
+                        {% endif %}
+
+                        {% if post.image %}
+                        <img style="width: 300px; align-items: center;" src="{{post.image.url}}" alt="{{post.image}}">
+                        {% endif %}
+
+
+                    </div>
+                    <div class="Home PostFooter">
+                        <p>{{post.get_comments.count}} <strong> comments</strong></p>
+                        <p><strong>date posted: </strong>{{post.timestamp}}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <div class="HomePageFollowers">
+            <h3>Users Following:</h3>
+            {% for follower in followers %}
+            <a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a>
+            {% endfor %}
+        </div>
+
+        {% endif %}
+
+    </div>
 </div>
 {% endblock %}

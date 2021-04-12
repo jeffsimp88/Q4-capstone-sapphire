@@ -73,17 +73,11 @@ def upvotes_view(request, post_id):
     post = Post.objects.filter(id=post_id).first()
     post.upvotes +=1
     post.save()
-    if post.post_type == "Comment":
-        return redirect(f'/posts/{post.parent.id}/')
-    else:
-        return redirect(f'/posts/{post.id}/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def downvotes_view(request, post_id):
     post = Post.objects.filter(id=post_id).first()
     post.downvotes +=1
     post.save()
-    if post.post_type == "Comment":
-        return redirect(f'/posts/{post.parent.id}/')
-    else:
-        return redirect(f'/posts/{post.id}/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
