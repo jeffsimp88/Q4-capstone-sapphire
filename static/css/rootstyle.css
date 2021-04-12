@@ -3,6 +3,8 @@ header{
     color: var(--tan);
     border: 2px solid var(--blue);
     padding: 0px 10px 0px 10px;
+    position: sticky;
+    top: 0;
 }
 
 body{
@@ -10,4 +12,11 @@ body{
     color: var(--blue);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
+}
+
+.homeNetFeed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
