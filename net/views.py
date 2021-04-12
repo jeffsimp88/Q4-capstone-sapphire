@@ -9,8 +9,17 @@ from posts.models import Post
 
 
 def index_view(request):
+
     net_not_found = False
     user_not_found = False
+    context = {}
+    if request.user.is_authenticated:
+        followers = request.user.followers.all().order_by("username")
+        sub_nets = request.user.subs.all().order_by('title')
+    else:
+        followers = []
+        sub_nets = []
+
     if request.method == 'POST':
         return_url = search_net(request)
         searched_user_url = search_user(request)
@@ -22,20 +31,22 @@ def index_view(request):
             net_not_found = True
         elif not searched_user_url and return_url == None:
             user_not_found = True
-          
-    context = {'header': "Welcome to Subnet"}
-    posts = Post.objects.all()
+        else:
+            messages.error(request, "Net not found. Please Try Again!")
     nets = Net.objects.all().order_by('title')
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
     user_search = UserSearchForm()
-    context.update({"posts": posts,
-                    "nets": nets,
-                    "recent_posts": recent_posts,
-                    "search_form": search_form,
-                    "user_form": user_search,
-                    "net_not_found": net_not_found,
-                    "user_not_found": user_not_found})
+    context.update({
+        "sub_nets": sub_nets,
+        'followers': followers,
+        "nets": nets,
+        "recent_posts": recent_posts,
+        "search_form": search_form,
+        "user_form": user_search,
+        "net_not_found": net_not_found,
+        "user_not_found": user_not_found,
+        })
     return render(request, 'homepage.html', context)
 
 
@@ -118,7 +129,7 @@ def subscribe_net(request, net_title):
 
 
 def recent_posts_helper():
-    posts = Post.objects.all()
+    posts = Post.objects.filter(post_type='Post')
     recent_posts = list(posts.order_by('-timestamp')[0:10])
     return recent_posts
 
