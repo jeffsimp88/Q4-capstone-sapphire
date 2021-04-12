@@ -28,11 +28,11 @@ def index_view(request):
         if searched_user_url: 
             return redirect(searched_user_url)
         elif not return_url and searched_user_url == None:
+            messages.error(request, "Not found. Please Try Again!")
             net_not_found = True
         elif not searched_user_url and return_url == None:
+            messages.error(request, "User not Found. Please Try Again!")
             user_not_found = True
-        else:
-            messages.error(request, "Net not found. Please Try Again!")
     nets = Net.objects.all().order_by('title')
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
