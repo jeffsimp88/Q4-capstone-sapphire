@@ -4,14 +4,6 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-<button type='submit'>
-    <a href='/newnet/'>Create New Net</a>
-</button>
-<h3>Links To Each Net</h3>
-<div class="netLinkList">
-    {% for items in nets %}
-    <a class='netlink' href='nets/{{ items.title }}/'>n/{{ items.title }}</a>
-    {% endfor %}
 
 
 <div class="HomePage">
