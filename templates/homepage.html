@@ -27,17 +27,15 @@
                 <div class="Home Post">
                     <div class="Home PostHeader">
                         <div class="PostHeaderDetails">
+                            <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
+                                {{post.total_score}}
+                                <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
+                            </div>
                             <p style="font-size: 11px;">
+                                &nbsp; |
                                 <strong>posted by user: </strong>
                                 <a href="/users/{{post.author.username}}/" id="linkButton">
                                     {{post.author}}
-                                </a> &nbsp;
-                                <a href="/upvote/{{post.id}}/" id="linkButton">
-                                    &#8679 upvote
-                                </a>
-                                votes: {{post.total_score}}
-                                <a id="linkButton" href="/downvote/{{post.id}}">
-                                    downvote &#8681
                                 </a>
                             </p>
                         </div>
