@@ -1,7 +1,6 @@
 .profilePage{
     display: flex;
     flex-direction: row;
-    height: 95%;
     padding: 5px;
 }
 .profileBody{
