@@ -9,6 +9,10 @@ import random
 
 def index_view(request):
     not_found = False
+    if request.user.is_authenticated:
+        followers = request.user.followers.all().order_by("username")
+    else:
+        followers = []
     if request.method == 'POST':
         return_url = search_net(request)
         if return_url:
@@ -24,6 +28,7 @@ def index_view(request):
     context.update({
         "posts": posts,
         "sub_nets": sub_nets,
+        'followers': followers,
         "nets": nets,
         "recent_posts": recent_posts,
         "search_form": search_form,
