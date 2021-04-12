@@ -35,8 +35,18 @@
                 {{ search_form }}
                 <input type="submit" value="Submit!">
             </form>
-            {% if not_found %}
-            <div class="notfound">Net not found, Please Try Again!</div>
+                    {% if net_not_found %}
+                    <div class="notfound">Net not found, Please Try Again!</div>
+                    {% endif %}
+        </div>
+        <div id="user-search">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ user_form }}
+                <input type="submit" value="Submit!">
+            </form>
+            {% if user_not_found %}
+            <div class="notfound">User not found, Please Try Again!</div>
             {% endif %}
         </div>
     </header>

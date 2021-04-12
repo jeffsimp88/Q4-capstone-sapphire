@@ -4,17 +4,22 @@ from net.forms import CreateNet, SearchForm, UserSearchForm
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
-import random
+
+
 
 
 def index_view(request):
     not_found = False
     if request.method == 'POST':
         return_url = search_net(request)
+        # searched_user_url = search_user()
         if return_url:
             return redirect(return_url)
+        # elif searched_user_url:
+        #     return redirect(searched_user_url)
         else:
             not_found = True
+        
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all().order_by('title')
@@ -111,5 +116,17 @@ def recent_posts_helper():
 
 def error_404_view(request, exception):
     return render(request,'404.html')
+
+
+def search_user(request):
+    search = UserSearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for users in NetUser.objects.all():
+            if users.username == data['user_info']:
+                return(f"/users/{data['user_info']}/")
+
+
+
 
 
