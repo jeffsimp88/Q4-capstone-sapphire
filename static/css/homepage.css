@@ -116,3 +116,19 @@
     background: white;
     color: var(--gray);
 }
+
+.HomePageFollowers{
+    background-color: var(--blue);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+.HomePageFollowers>h3{
+    color: var(--yellow);
+}
+.HomePageFollowers>a{
+    margin: 3px;
+    text-decoration: none;
+}
