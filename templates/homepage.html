@@ -11,9 +11,14 @@
     <div class="HomePageBody">
         <div class="HomeLinkList">
             <a id="linkButton" href='/newnet/'>Create New Net</a>
-            <h3 id="h3">Nets</h3>
-            {% for items in nets %}
-            <a class='netlink' href='nets/{{ items.title }}/'>n/{{ items.title }}</a>
+            <h3 id="h3">Subscribed Nets</h3>
+            {% for net in sub_nets %}
+            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+            {% endfor %}
+            <hr width="100%">
+            <h3 id="h3">All Nets</h3>
+            {% for net in nets %}
+            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
             {% endfor %}
 
         </div>
