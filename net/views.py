@@ -51,8 +51,8 @@ def search_net(request):
     if search.is_valid():
         data = (search.cleaned_data)
         for items in Net.objects.all():
-            if items.title == data["search_info"]:       
-                return (f"/nets/{data['search_info']}/")         
+            if items.title.casefold() == data["search_info"].casefold():       
+                return (f"/nets/{items.title}/")         
 
 
 def create_net_view(request):
