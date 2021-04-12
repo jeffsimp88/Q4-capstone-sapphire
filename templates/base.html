@@ -6,6 +6,13 @@
 <link rel="stylesheet" href="{% static 'css/darkstyle.css' %}">
 {% endif %}
 
+
+{% if not request.user.is_authenticated %}
+<link rel="stylesheet" href="{% static 'css/lightstyle.css' %}">
+
+{% endif %}
+
+
 <link rel="stylesheet" href="{% static 'css/rootstyle.css' %}">
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
