@@ -20,8 +20,6 @@ def get_total_user_votes(posts):
 
 def profile_view(request, username):
     context = {}
-    net_not_found = False
-    user_not_found = False
     if request.method == 'POST':
         return_url = search_net(request)
         searched_user_url = search_user(request)

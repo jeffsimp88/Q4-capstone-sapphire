@@ -9,29 +9,33 @@ from posts.models import Post
 
 
 def index_view(request):
-    not_found = False
+    net_not_found = False
+    user_not_found = False
     if request.method == 'POST':
         return_url = search_net(request)
-        # searched_user_url = search_user()
+        searched_user_url = search_user(request)
         if return_url:
             return redirect(return_url)
-        # elif searched_user_url:
-        #     return redirect(searched_user_url)
-        else:
-            not_found = True
-        
+        if searched_user_url: 
+            return redirect(searched_user_url)
+        elif not return_url and searched_user_url == None:
+            net_not_found = True
+        elif not searched_user_url and return_url == None:
+            user_not_found = True
+          
     context = {'header': "Welcome to Subnet"}
     posts = Post.objects.all()
     nets = Net.objects.all().order_by('title')
     recent_posts = recent_posts_helper()
     search_form = SearchForm()
-    search_user = UserSearchForm()
+    user_search = UserSearchForm()
     context.update({"posts": posts,
                     "nets": nets,
                     "recent_posts": recent_posts,
                     "search_form": search_form,
-                    "search_user": search_user,
-                    "not_found": not_found})
+                    "user_form": user_search,
+                    "net_not_found": net_not_found,
+                    "user_not_found": user_not_found})
     return render(request, 'homepage.html', context)
 
 
@@ -83,12 +87,17 @@ def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
     is_subscribed = check_subscribe(request, selected_net)
     user_subs = request.user.subs.all()
+    search_form = SearchForm()
+    user_form = UserSearchForm()
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     context = {
         'net': selected_net,
         'is_subscribed': is_subscribed,
         'posts': posts,
         'subs': user_subs,
+        'search_form': search_form,
+        'user_form': user_form
+        ,
         }
     return render(request, 'individual_nets.html', context)
 
