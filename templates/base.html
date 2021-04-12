@@ -13,6 +13,7 @@
     <header>
 
         <div class="NavBar">
+
             <div class="NavBarTitle">
                 <div class="ImgBox">
                     <img class="NavBarImg" src="{% static 'images/sub_yellow.png' %}" alt="SubNet Icon">
@@ -22,7 +23,23 @@
                 </a>
 
             </div>
-
+            <div class="NavBarSearch">
+                {% if messages %}
+                {% for message in messages %}
+                {% if message.tags == 'error' %}
+                <p>{{message}}</p>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                <form class="NavBarForm" action="" method="POST">
+                    {% csrf_token %}
+                    {{ search_form }}
+                    <input id="searchSubmitButton" type="submit" value="Submit!">
+                </form>
+                <!-- {% if not_found %}
+                    <div class="notfound">Net not found, Please Try Again!</div>
+                    {% endif %} -->
+            </div>
             <div class="NavBarPageLinksList">
                 <a id="NavButton" href="/">Home</a>
 
@@ -37,24 +54,8 @@
 
                 {% endif %}
             </div>
-            <div class="NavBarSearch">
-                {% if messages %}
-                {% for message in messages %}
-                {% if message.tags == 'error' %}
-                <p>{{message}}</p>
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{ search_form }}
-                    <input id="searchSubmitButton" type="submit" value="Submit!">
-                </form>
-                <!-- {% if not_found %}
-                    <div class="notfound">Net not found, Please Try Again!</div>
-                    {% endif %} -->
-            </div>
         </div>
+
         {% if request.user.site_theme == "Light" %}
         <a id="ThemeButton" href="/changetheme/">Dark Mode</a>
         {% else %}
