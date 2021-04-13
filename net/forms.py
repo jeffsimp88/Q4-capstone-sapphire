@@ -1,5 +1,6 @@
 from django import forms
 from net.models import Net
+from net_user_app.models import NetUser
 
 IS_PRIVATE = ((False, 'Public'), (True, 'Private'))
 class CreateNet(forms.Form):
@@ -13,5 +14,18 @@ class SearchForm(forms.Form):
     
 class UserSearchForm(forms.Form):
     user_info = forms.CharField(max_length=50, label="", widget=forms.TextInput(attrs={'placeholder': 'Search for User'}))
-    
 
+class CustomMMCF(forms.ModelMultipleChoiceField):
+    def label_from_instance(self, member):
+        return f"{member.username}"
+
+class ChangeModerators(forms.ModelForm):
+    class Meta:
+        model = Net
+        fields = [
+            'moderators'
+        ]
+    # moderators = CustomMMCF(
+    #     queryset=NetUser.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple
+    # )
