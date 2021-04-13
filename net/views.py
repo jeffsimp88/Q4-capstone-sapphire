@@ -6,19 +6,21 @@ from net_user_app.models import NetUser
 from posts.models import Post
 
 
-
-
 def index_view(request):
-
     net_not_found = False
     user_not_found = False
     context = {}
     if request.user.is_authenticated:
         followers = request.user.followers.all().order_by("username")
         sub_nets = request.user.subs.all().order_by('title')
+        posts = []
+        for sub in sub_nets:
+            posts += Post.objects.filter(subnet=sub).order_by('-timestamp')
+        posts.sort(key=lambda x:x.timestamp, reverse=True)
     else:
         followers = []
         sub_nets = []
+        posts = recent_posts_helper()
 
     if request.method == 'POST':
         return_url = search_net(request)
@@ -34,14 +36,13 @@ def index_view(request):
             messages.error(request, "User not Found. Please Try Again!")
             user_not_found = True
     nets = Net.objects.all().order_by('title')
-    recent_posts = recent_posts_helper()
     search_form = SearchForm()
     user_search = UserSearchForm()
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
         "nets": nets,
-        "recent_posts": recent_posts,
+        "posts": posts,
         "search_form": search_form,
         "user_form": user_search,
         "net_not_found": net_not_found,
@@ -96,8 +97,10 @@ def create_net_view(request):
 
 def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
-    is_subscribed = check_subscribe(request, selected_net)
-    user_subs = request.user.subs.all()
+    if request.user.is_authenticated:
+        is_subscribed = check_subscribe(request, selected_net)
+    else:
+        is_subscribed=""
     search_form = SearchForm()
     user_form = UserSearchForm()
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
@@ -105,7 +108,6 @@ def individual_net_view(request, net_title):
         'net': selected_net,
         'is_subscribed': is_subscribed,
         'posts': posts,
-        'subs': user_subs,
         'search_form': search_form,
         'user_form': user_form
         ,
