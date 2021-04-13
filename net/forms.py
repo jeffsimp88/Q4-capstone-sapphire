@@ -19,13 +19,8 @@ class CustomMMCF(forms.ModelMultipleChoiceField):
     def label_from_instance(self, member):
         return f"{member.username}"
 
-class ChangeModerators(forms.ModelForm):
-    class Meta:
-        model = Net
-        fields = [
-            'moderators'
-        ]
-    # moderators = CustomMMCF(
-    #     queryset=NetUser.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple
-    # )
+class ChangeModerators(forms.Form):
+    moderators = CustomMMCF(
+        queryset=NetUser.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
