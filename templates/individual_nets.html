@@ -7,7 +7,7 @@
     <div class="NetDetailsBox">
         <h2>Welcome to n/{{ net.title }}</h2>
 
-
+        <p>Subscribers: {{subscribers.count}}</p>
         {% if request.user.is_authenticated %}
         {% if is_subscribed %}
         <p>You are currently subscribed</p>
@@ -18,10 +18,8 @@
         {% endif %}
 
 
-
-        <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
         <br>
-        <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
+
 
 
         {% if net.description %}
@@ -49,12 +47,15 @@
 
 
         {% if request.user in moderators %}
-        <a href="/editmoderators/{{net.title}}/">Add a moderator</a>
+        <a href="/editmoderators/{{net.title}}/">Edit Moderators</a>
         {% endif %}
 
     </div>
 
     <div class="NetPostListBox">
+        <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+        <br>
+        <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
         {% for post in posts %}
         {% if post.post_type == "Post" %}
         <div class="NetpostBox">
