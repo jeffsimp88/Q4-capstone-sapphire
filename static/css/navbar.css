@@ -52,9 +52,9 @@
     font-family: var(--barlow-font);
     font-weight: 600;
     font-size: 24px;
-    color: var(--header-blue);
-    background-color: var(--header-yellow);
-    border: 1px solid var(--header-yellow);
+    color: white;
+    background-color: var(--gray);
+    border: 1px solid var(--gray);
     text-decoration: none;
     transition-duration: .2s;
     padding: 3px;
@@ -62,8 +62,8 @@
 }
 
 #NavButton:hover{
-    color: var(--header-yellow);
-    background-color: var(--header-blue);
+    color: var(--gray);
+    background-color: white;
 }
 
 
