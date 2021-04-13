@@ -13,7 +13,7 @@
 
 <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
 <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
-<p>{{ net.description }}</p>
+<p>{{ net.description | urlize}}</p>
 
 {% for post in posts %}
 {% if post.post_type == "Post" %}
