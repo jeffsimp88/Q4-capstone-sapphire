@@ -4,12 +4,16 @@
 <h2>Welcome to n/{{ net.title }}</h2>
 
 
+{% if request.user.is_authenticated %}
 {% if is_subscribed %}
 <p>You are currently subscribed</p>
 <a id="linkButton" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
 {% else %}
 <a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
 {% endif %}
+{% endif %}
+
+
 
 <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
 <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>

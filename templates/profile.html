@@ -16,6 +16,8 @@
 
 
         <p>total votes: {{total_votes}}</p>
+
+        {% if request.user.is_authenticated %}
         {% if user != request.user %}
         {% if is_followed %}
         <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
@@ -23,6 +25,8 @@
         <a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
         {% endif %}
         {% endif %}
+        {% endif %}
+
 
 
         {% if user.bio %}
