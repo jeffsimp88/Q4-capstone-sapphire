@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from net.forms import CreateNet, SearchForm, UserSearchForm
+from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
@@ -104,8 +104,10 @@ def individual_net_view(request, net_title):
     search_form = SearchForm()
     user_form = UserSearchForm()
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
+    moderators = selected_net.moderators.all().order_by('username')
     context = {
         'net': selected_net,
+        'moderators': moderators,
         'is_subscribed': is_subscribed,
         'posts': posts,
         'search_form': search_form,
@@ -129,6 +131,22 @@ def subscribe_net(request, net_title):
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
+def change_moderators(request, net_title):
+    current_net = Net.objects.get(title=net_title)
+    current_moderators = current_net.moderators.all().order_by('username')
+    users = NetUser.objects.all()
+    current_subscribers = []
+    for user in users:
+        if user.subs.filter(title=current_net.title).exists():
+            current_subscribers.append(user) 
+    if request.method == 'POST':
+        form = ChangeModerators(request.POST, instance=current_net)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/nets/{net_title}/')
+    form = ChangeModerators(initial={'moderators': current_moderators})
+    context = {'form': form}
+    return render(request, "forms.html", context)
 
 def recent_posts_helper():
     posts = Post.objects.filter(post_type='Post')
