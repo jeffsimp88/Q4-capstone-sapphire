@@ -41,6 +41,10 @@ class Post(MPTTModel):
     @property
     def total_score(self):
         return (self.upvotes - self.downvotes)
+
+    @property
+    def get_comments(self):
+        return self.get_children()
     
     def __str__(self):
         return f'{self.header} | {self.author}'

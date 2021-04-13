@@ -1,14 +1,13 @@
 .profilePage{
     display: flex;
     flex-direction: row;
-    height: 95%;
     padding: 5px;
 }
 .profileBody{
     color: var(--tan);
     background-color: var(--blue);
     width: 35%;
-    height: 80%;
+    height: fit-content;
     padding: 10px;
     margin: 10px;
 }

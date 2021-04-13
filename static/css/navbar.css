@@ -1,0 +1,96 @@
+:root{
+    --header-blue: rgb(23, 46, 100);
+    --header-yellow: rgb(235, 219, 10);
+    --header-lightblue: rgb(125, 140, 200);
+}
+
+.NavBar{
+    background-color: var(--header-blue);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.NavBarTitle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: var(--fredoka-font);
+    margin: 5px 0px 5px 0px;
+}
+
+#NavBarH1{
+    text-decoration: none;
+}
+#NavBarH1>h1{
+    font-size: 53px;
+    margin: 0px 0px 0px 10px;
+    color: var(--header-yellow);
+    }
+
+.ImgBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--header-lightblue);
+    padding: 11px;
+    border-radius: 50%;
+
+}
+.NavBarImg{
+    height: 50px;
+}
+
+.NavBarPageLinksList{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#NavButton{
+    font-family: var(--barlow-font);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--header-blue);
+    background-color: var(--header-yellow);
+    border: 1px solid var(--header-yellow);
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 5px 5px 0px 5px;
+}
+
+#NavButton:hover{
+    color: var(--header-yellow);
+    background-color: var(--header-blue);
+}
+
+
+
+.NavBarSearch{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+}
+
+.NavBarForm>input{
+background-color: var(--header-lightblue);
+outline: none;
+}
+.NavBarForm>input::placeholder{
+    color: white;
+}
+
+#searchSubmitButton{
+    border: 1px solid var(--header-yellow);
+    color: var(--header-yellow);
+    background-color: var(--header-blue);
+    transition-duration: .2s;
+}
+
+#searchSubmitButton:hover{
+    color:var(--header-blue);
+    background-color:  var(--header-yellow);
+}
