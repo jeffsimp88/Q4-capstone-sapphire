@@ -10,7 +10,7 @@ class NetUser(AbstractUser):
     profile_image = models.ImageField(upload_to='images/', null=True, blank=True)
     score = models.IntegerField(default= 0)
     subs = models.ManyToManyField(Net, related_name="subs", blank=True)
-    followers = models.ManyToManyField('NetUser')
+    followers = models.ManyToManyField('NetUser', related_name='Users_Followers', blank=True )
     site_theme = models.CharField(choices=LIGHT_DARK, max_length=10, default='Light', null=True, blank=True)
     
 
