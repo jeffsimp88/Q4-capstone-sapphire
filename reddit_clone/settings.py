@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'posts',
     'mptt',
     'authentication',
+    'direct_messages',
 ]
 
 MIDDLEWARE = [
