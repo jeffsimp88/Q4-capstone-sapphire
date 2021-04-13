@@ -10,6 +10,7 @@
     margin: 10px;
     background-color: var(--gray);
     width: 50%;
+    padding: 5px;
 }
 
 .NetPostListBox{
