@@ -1,31 +1,104 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/netpage.css' %}">
 
-<h2>Welcome to n/{{ net.title }}</h2>
+<div class="NetPage">
+    <div class="NetDetailsBox">
+        <h2>Welcome to n/{{ net.title }}</h2>
+
+        <p>Subscribers: {{subscribers.count}}</p>
+        {% if request.user.is_authenticated %}
+        {% if is_subscribed %}
+        <p>You are currently subscribed</p>
+        <a id="linkButton" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
+        {% else %}
+        <a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
+        {% endif %}
+        {% endif %}
 
 
-{% if is_subscribed %}
-<p>You are currently subscribed</p>
-<a id="linkButton" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
-{% else %}
-<a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
-{% endif %}
+        <br>
 
-<a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
-<a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
-<p>{{ net.description | urlize}}</p>
 
-{% for post in posts %}
-{% if post.post_type == "Post" %}
-<div style="margin: 5px; width: 400px;" class="postBox">
-    <p>{{post}}</p>
-    <a id="linkButton" href="/posts/{{post.id}}/">Post Details</a>
+
+        {% if net.description %}
+        <div class="NetDescription">
+            <h3>n/{{net.title}}'s Description</h3>
+            <p>{{ net.description | urlize}}</p>
+        </div>
+        {% endif %}
+
+        {% if net.rules %}
+        <div class="NetRules">
+            <h3>n/{{net.title}}'s Rules</h3>
+            <p>{{net.rules | urlize}}</p>
+        </div>
+        {% endif %}
+
+        {% if moderators %}
+        <div class="NetModeratorsList">
+            <h3>n/{{net.title}}'s Moderators</h3>
+            {% for mod in moderators %}
+            <li><a id="linkButton" href="/users/{{mod.username}}/">{{mod}}</a></li>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        {% if request.user in moderators %}
+        <a href="/editmoderators/{{net.title}}/">Edit Moderators</a>
+        {% endif %}
+
+    </div>
+
+    <div class="NetPostListBox">
+        <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+        <br>
+        <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
+        {% for post in posts %}
+        {% if post.post_type == "Post" %}
+        <div class="NetpostBox">
+            <div class="Net PostHeader">
+                <div class="PostHeaderDetails">
+                    <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
+                        {{post.total_score}}
+                        <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
+                    </div>
+                    <p style="font-size: 13px;">
+                        &nbsp; |
+                        <strong>posted by user: </strong>
+                        <a href="/users/{{post.author.username}}/" id="linkButton">
+                            {{post.author}}
+                        </a>
+                    </p>
+                </div>
+                <a class="Net PostLink" href="/posts/{{post.id}}/">
+                    <h3>{{post.header}}</h3>
+                </a>
+            </div>
+            <div class="Net PostBody">
+
+                {% if post.content %}
+                <p>{{post.content}}</p>
+                {% endif %}
+
+                {% if post.image %}
+                <img style="width: 300px; align-items: center;" src="{{post.image.url}}" alt="{{post.image}}">
+                {% endif %}
+
+
+            </div>
+            <div class="Net PostFooter">
+                <a class="Net CommentLink" href="/posts/{{post.id}}/">
+                    <p>{{post.get_comments.count}} <strong> comments</strong></p>
+                </a>
+
+                <p><strong>date posted: </strong>{{post.timestamp}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
-{% endif %}
-{% endfor %}
-
-
-<br>
-<a id="linkButton" href="/">back to homepage</a>
-
 {% endblock %}

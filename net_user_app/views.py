@@ -32,13 +32,16 @@ def profile_view(request, username):
             return redirect(searched_user_url)
         else:
             user_not_found = True
-        
+    
     page_user = NetUser.objects.get(username=username)
     followers = page_user.followers.all().order_by("username")
     posts = Post.objects.filter(author=page_user).order_by('-timestamp')
     subs = page_user.subs.all().order_by('title')
     total_votes = get_total_user_votes(posts)
-    is_followed = check_follow(request, username)
+    if request.user.is_authenticated:
+        is_followed = check_follow(request, username)
+    else:
+        is_followed = ""
     search_form = SearchForm()
     user_form = UserSearchForm()
     context.update({
