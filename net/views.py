@@ -105,9 +105,11 @@ def individual_net_view(request, net_title):
     user_form = UserSearchForm()
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     moderators = selected_net.moderators.all().order_by('username')
+    subscribers = NetUser.objects.filter(subs__title=selected_net.title)
     context = {
         'net': selected_net,
         'moderators': moderators,
+        'subscribers': subscribers,
         'is_subscribed': is_subscribed,
         'posts': posts,
         'search_form': search_form,
@@ -135,16 +137,14 @@ def change_moderators(request, net_title):
     current_net = Net.objects.get(title=net_title)
     current_moderators = current_net.moderators.all().order_by('username')
     users = NetUser.objects.all()
-    current_subscribers = []
-    for user in users:
-        if user.subs.filter(title=current_net.title).exists():
-            current_subscribers.append(user) 
+    current_subscribers = NetUser.objects.filter(subs__title=current_net.title) 
     if request.method == 'POST':
-        form = ChangeModerators(request.POST, instance=current_net)
+        form = ChangeModerators(request.POST)
         if form.is_valid():
-            form.save()
+            current_net.moderators.set(form.cleaned_data['moderators'])
             return redirect(f'/nets/{net_title}/')
     form = ChangeModerators(initial={'moderators': current_moderators})
+    form.fields['moderators'].queryset = current_subscribers.order_by('username')
     context = {'form': form}
     return render(request, "forms.html", context)
 
