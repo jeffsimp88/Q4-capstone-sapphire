@@ -55,6 +55,7 @@ def post_image_view(request, net_title):
 
 def post_comment_view(request, post_id):
     post = Post.objects.filter(id=post_id).first()
+    post.created_by = request.user
     root_post = post.get_root()
     if request.method == 'POST':
         form = CommentForm(request.POST)
