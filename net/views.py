@@ -7,6 +7,7 @@ from net_user_app.models import NetUser
 from posts.models import Post
 
 
+
 def index_view(request):
     net_not_found = False
     user_not_found = False
@@ -104,6 +105,13 @@ def individual_net_view(request, net_title):
         is_subscribed=""
     search_form = SearchForm()
     user_form = UserSearchForm()
+    if request.method == 'POST':
+        return_url = search_net(request)
+        searched_user_url = search_user(request)
+        if return_url:
+            return redirect(return_url)
+        if searched_user_url: 
+            return redirect(searched_user_url)
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     moderators = selected_net.moderators.all().order_by('username')
     subscribers = NetUser.objects.filter(subs__title=selected_net.title)
