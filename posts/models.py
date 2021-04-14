@@ -31,9 +31,9 @@ class Post(MPTTModel):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     has_liked = models.ManyToManyField(NetUser, related_name='has_liked',          
-                                           null=True, blank=True)
+                                           blank=True)
     has_disliked = models.ManyToManyField(NetUser, related_name='has_disliked',
-                                              null=True, blank=True)
+                                              blank=True)
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
