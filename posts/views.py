@@ -53,6 +53,7 @@ def post_image_view(request, net_title):
 
 def post_comment_view(request, post_id):
     post = Post.objects.filter(id=post_id).first()
+    root_post = post.get_root()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -64,7 +65,7 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
-            return HttpResponseRedirect(f"/posts/{post.id}/")
+            return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
     context = {'form': form}
     return render(request, "forms.html", context)
