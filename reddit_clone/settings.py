@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'mptt',
     'authentication',
     'direct_messages',
+    'notification'
 ]
 
 MIDDLEWARE = [
