@@ -7,18 +7,117 @@
 }
 
 .NetDetailsBox{
+    box-sizing: border-box;
     margin: 10px;
     background-color: var(--gray);
     width: 50%;
+    /* padding: 10px; */
+    border-radius: 25px 0px 25px 0px;
+}
+
+.NetSubscriber{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.NetButton{
+    width: 100px;
+    background-color: rgb(36, 36, 36);
+    text-decoration: none;
+    border-radius: 15px;
     padding: 5px;
+    transition-duration: .2s;
+    text-align: center;
+}
+
+.NetButton.Subscribed{
+    color: whitesmoke;
+    transition-duration: .2s;
+}
+.NetButton.Subscribed:hover span{
+    display: none;
+}
+.NetButton.Subscribed:hover:before{
+    transition-duration: .3s;
+    content: "Join us!";
+}
+
+.NetButton.Subscribed:hover{
+    color: rgb(3, 139, 3);
+}
+.NetButton.UnSubscribed{
+    color: white;
+    transition-duration: .2s;
+}
+
+.NetButton.UnSubscribed:hover span{
+    display: none;
+}
+.NetButton.UnSubscribed:hover:before{
+    transition-duration: .3s;
+    content: "You sure?";
+}
+.NetButton.UnSubscribed:hover {
+    color: rgb(163, 0, 0);
+    
+}
+
+.NetRules{
+    padding: 10px;
+}
+
+.NetDescription{
+    background-color: rgb(184, 184, 184);
+    padding: 10px;
+}
+
+.NetModeratorsList{
+    padding: 10px;
+    background-color: rgb(184, 184, 184);
+    border-radius: 0px 0px 25px 0px;
+}
+
+#EditNetButtons{
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 3px;
+    border: 1px solid var(--blue);
+    color: var(--blue)
+}
+
+#EditNetButtons:hover{
+    background-color: var(--blue);
+    color: rgb(184, 184, 184);
 }
 
 .NetPostListBox{
+    box-sizing: border-box;
     width: 80%;
     margin: 10px;
+    padding: 10px;
+    background-color: var(--gray);
+}
+
+#PostButton{
+    box-sizing: border-box;
+    text-decoration: none;
+    background-color: var(--gray);
+    color: whitesmoke;
+    border: 1px solid var(--blue);
+    padding: 3px;
+    margin: 3px;
+    transition-duration: .2s;    
+}
+#PostButton:hover{
+    background-color: var(--blue);
 }
 
 .NetPostBox{
+    border-radius: 5px;
     background-color: var(--blue);
     color: whitesmoke;
     margin: 10px;
@@ -42,9 +141,9 @@
     flex-direction: row;
     align-items: center;
     text-align: left;
-
     padding-left: 5px;
 }
+
 
 .Net.PostLink{
     text-decoration: none;
@@ -75,6 +174,7 @@
     flex-direction: row;
     justify-content: space-between;
     font-size: 11px;
+    border-radius: 0px 0px 5px 5px;
 }
 
 .Net.CommentLink{
