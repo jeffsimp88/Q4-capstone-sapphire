@@ -1,23 +1,22 @@
-from django.db import models
-from direct_messages.models import DirectMessage
-from net_user_app.models import NetUser
-from notification.models import Notification
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Notification
 
+
+@login_required
 
 def notifications(request):
-    if request.user.is_authenticated:
-        html = 'notifications.html'
-        notes = Notification.objects.filter(
-            notified_user=request.user).filter(viewed=False)
-        new_notify = DirectMessage.objects.filter(
-            id__in=[x.notify.id for x in notes]).order_by(
-                "-creation_date")
-        for note in notes:
-            note.viewed = True
-            note.save()
-        notified_user = NetUser.objects.get(id=request.user.id)
-        return render(request, html, {
-            'new_notify': new_notify,
-            'notes': notes,
-            'user': notified_user})
-    return redirect('/login/')
+    goto = request.GET.get('goto','')
+    notification_id = request.GET.get('notification', 0)
+
+    if goto != '':
+        notification = Notification.objects.get(pk=notification_id)
+        notification.is_read = True
+        notification.save()
+
+        if notification.notification_type == Notification.MESSAGE:
+            return redirect('view_application', application_id=notification.extra_id)
+        elif notification.notification_type == Notification.APPLICATION:
+            return redirect('view_application', application_id=notification.extra_id)
+
+    return render(request, 'notification/notifications.html')
