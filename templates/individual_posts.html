@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+
+
 <h2>{{header}}</h2>
 
 <div class="postBox">
     <div class="postBoxHeader">
-        <p style="font-size: 11px;">
-            <strong>posted by user: </strong>
-            <a href="/users/{{post.author.username}}/" id="linkButton">
-                {{post.author}}
-            </a>
-            <strong> in subnet: </strong>
-            <a href="/nets/{{post.subnet.title}}/" id="linkButton">
-                n/{{post.subnet}}
-            </a> <br>
-            <a href="/upvote/{{post.id}}/" id="linkButton">
-                &#8679 upvote
-            </a>
-            votes: {{post.total_score}}
-            <a id="linkButton" href="/downvote/{{post.id}}">
-                downvote &#8681
-            </a>
-        </p>
+        <div class="DetailLine">
+            <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
+                {{post.total_score}}
+                <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
+            </div>
+            <a id="linkButton" href="/nets/{{post.subnet.title}}/">n/{{post.subnet.title}}</a>
+            <p>
+                <strong>posted by user: </strong>
+                <a href="/users/{{post.author.username}}/" id="linkButton">
+                    {{post.author}}
+                </a>
+            </p>
+            <p title="{{post.timestamp}}"><strong>posted: </strong>{{time}}</p>
+        </div>
         <h3>{{post.header}}</h3>
     </div>
     <div class="postBoxBody">
@@ -36,56 +37,33 @@
 
     </div>
     <div class="postBoxFooter">
-        <p><strong>date posted: </strong>{{post.timestamp}}</p>
     </div>
     <div class="postBoxCommentsBox">
-        <a id="linkButton" href="/makecomment/{{post.id}}">Comment</a>
+
+        {% if request.user.is_authenticated %}
+        <div class="PostCommentForm">
+            <p>comment as <a id="linkButton" href="/users/{{request.user.username}}/">{{request.user.username}}</a></p>
+            <form enctype="multipart/form-data" action="" method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Comment">
+
+            </form>
+        </div>
+        {% endif %}
         {% if comments %}
-        <p>Comments:</p>
-        <ul>
-            {% for comment in comments %}
-
-            {% if forloop.counter|divisibleby:2 %}
-            <div class="postBoxComments Comment1">
-                <p style="font-size: 11px;">
-                    <strong>posted by user: </strong>
-                    <a href="/users/{{comment.author.username}}/" id="linkButton">
-                        {{comment.author}}
-                    </a>
-                    <a href="/upvote/{{comment.id}}/" id="linkButton">
-                        &#8679 upvote
-                    </a>
-                    votes: {{comment.total_score}}
-                    <a id="linkButton" href="/downvote/{{comment.id}}">
-                        downvote &#8681
-                    </a>
-                </p>
-                <p>{{comment.header}}</p>
-                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
-            </div>
-            {% else %}
-            <div class="postBoxComments Comment2">
-                <p style="font-size: 11px;">
-                    <strong>posted by user: </strong>
-                    <a href="/users/{{comment.author.username}}/" id="linkButton">
-                        {{comment.author}}
-                    </a>
-                    <a href="/upvote/{{comment.id}}/" id="linkButton">
-                        &#8679 upvote
-                    </a>
-                    votes: {{comment.total_score}}
-                    <a id="linkButton" href="/downvote/{{comment.id}}">
-                        downvote &#8681
-                    </a>
-                </p>
-                <p>{{comment.header}}</p>
-                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
-            </div>
-            {% endif %}
-
-            {% endfor %}
-        </ul>
-
+        <div class="PostBoxCommentsList">
+            <p>Comments:</p>
+            <ul>
+                {% for comment in comments %}
+                {% block comments %}
+                <div class="postBoxComments Comments1">
+                    {% include "comments.html" %}
+                </div>
+                {% endblock %}
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </div>
 </div>
