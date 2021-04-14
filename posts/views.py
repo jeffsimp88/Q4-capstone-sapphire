@@ -7,20 +7,10 @@ from net.forms import UserSearchForm, SearchForm
 
 
 def individual_post_view(request, post_id):
-    user_form = UserSearchForm()
-    net_form = SearchForm()
-    if request.method == 'POST':
-        return_url = search_net(request)
-        searched_user_url = search_user(request)
-        if return_url:
-            return redirect(return_url)
-        if searched_user_url: 
-            return redirect(searched_user_url)
     context = {'header': "Post Details"}
     post = Post.objects.get(id=post_id)
     comments = Post.objects.filter(parent=post)
-    context.update({'post': post, 'comments': comments,
-                    'user_form': user_form, 'search_form':net_form})
+    context.update({'post': post, 'comments': comments})
     return render(request, 'individual_posts.html', context)
 
 def create_post_view(request, net_title):
