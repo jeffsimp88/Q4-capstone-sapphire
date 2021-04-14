@@ -24,3 +24,8 @@ class ChangeModerators(forms.Form):
         queryset=NetUser.objects.all(),
         widget=forms.CheckboxSelectMultiple
     )
+class ChangeSubscribers(forms.Form):
+    subscribers = CustomMMCF(
+        queryset=NetUser.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )

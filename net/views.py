@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators
+from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators, ChangeSubscribers
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
@@ -106,15 +107,19 @@ def individual_net_view(request, net_title):
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     moderators = selected_net.moderators.all().order_by('username')
     subscribers = NetUser.objects.filter(subs__title=selected_net.title)
+    if request.user not in subscribers and selected_net.private:
+        allow_user = False
+    else:
+        allow_user = True
     context = {
         'net': selected_net,
         'moderators': moderators,
         'subscribers': subscribers,
         'is_subscribed': is_subscribed,
+        'user_allowed': allow_user,
         'posts': posts,
         'search_form': search_form,
-        'user_form': user_form
-        ,
+        'user_form': user_form,
         }
     return render(request, 'individual_nets.html', context)
 
@@ -126,6 +131,8 @@ def subscribe_net(request, net_title):
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
+        if current_user in current_net.moderators.all():
+            current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
@@ -133,18 +140,41 @@ def subscribe_net(request, net_title):
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
+@login_required
 def change_moderators(request, net_title):
     current_net = Net.objects.get(title=net_title)
     current_moderators = current_net.moderators.all().order_by('username')
-    users = NetUser.objects.all()
     current_subscribers = NetUser.objects.filter(subs__title=current_net.title) 
     if request.method == 'POST':
         form = ChangeModerators(request.POST)
         if form.is_valid():
             current_net.moderators.set(form.cleaned_data['moderators'])
             return redirect(f'/nets/{net_title}/')
-    form = ChangeModerators(initial={'moderators': current_moderators})
-    form.fields['moderators'].queryset = current_subscribers.order_by('username')
+    if request.user not in current_moderators:
+        form=None
+    else:
+        form = ChangeModerators(initial={'moderators': current_moderators})
+        form.fields['moderators'].queryset = current_subscribers.order_by('username')
+    context = {'form': form}
+    return render(request, "forms.html", context)
+
+@login_required
+def change_subscribers(request, net_title):
+    current_net = Net.objects.get(title=net_title)
+    current_moderators = current_net.moderators.all().order_by('username')
+    users = NetUser.objects.all()
+    current_subscribers = NetUser.objects.filter(subs__title=current_net.title)
+    if request.method == 'POST':
+        form = ChangeSubscribers(request.POST)
+        if form.is_valid():
+            selected_users = form.cleaned_data['subscribers']
+            for user in selected_users:
+                user.subs.add(current_net)
+            return redirect(f'/nets/{net_title}/')
+    if request.user not in current_moderators:
+        form=None
+    else:
+        form = ChangeSubscribers(initial={'subscribers': current_subscribers})
     context = {'form': form}
     return render(request, "forms.html", context)
 
