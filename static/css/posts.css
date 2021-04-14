@@ -4,20 +4,45 @@
     color: whitesmoke;
     border-radius: 2px;
     margin: 10px;
+    max-width: 1000px;
     }
-    
+
+.DetailLine{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 62%;
+}
+
+.DetailLine p{
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.PostScore{
+    font-size: 23px;
+}
+.PostScore>a{
+    text-decoration: none;
+}
+
 .postBoxHeader {
+    background-color: rgb(33, 63, 134);
 padding: 0px 5px 0px 5px;
 border-bottom: 1px solid white;
 }
-
+.postBoxHeader >h3{
+    margin: 0px 0px 5px 10px;
+    font-size: 25px;
+}
 .postBoxBody {
 font-size: 15px;
 padding: 0px 10px 0px 10px;
 }
 
 .postBoxFooter {
-font-size: 11px;
+font-size: 15px;
 padding: 0px 5px 0px 5px;
 border-top: 1px solid white;
 margin: 1px;
