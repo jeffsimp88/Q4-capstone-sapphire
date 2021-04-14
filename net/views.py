@@ -7,6 +7,7 @@ from net_user_app.models import NetUser
 from posts.models import Post
 
 
+
 def index_view(request):
     net_not_found = False
     user_not_found = False

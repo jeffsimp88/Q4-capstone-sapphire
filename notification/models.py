@@ -1,18 +1,15 @@
-# from django.contrib.auth.models import User
 from django.db import models
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
-# from direct_messages.models import DirectMessage
-# from net_user_app.models import NetUser
 
-# Create your models here.
+
 class Notification(models.Model):
     MESSAGE = 'message'
     APPLICATION = 'application'
 
     CHOICES = (
-        (MESSAGE, "Message"),
-        (APPLICATION, "Application"),
+        (MESSAGE, 'Message'),
+        (APPLICATION, 'Application')
     )
 
     to_user = models.ForeignKey(User, related_name='notifications', on_delete=models.CASCADE)

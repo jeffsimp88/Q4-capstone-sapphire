@@ -1,9 +1,7 @@
-from django.urls import path
-from notification import views
+from django.urls import path, include
 
-
-from . import views
+from .views import notifications
 
 urlpatterns = [
-    path("notifications/", views.notifications, name="notifications"),
+    path('', notifications, name='notifications'),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from posts.forms import PostForm, CommentForm, PostImage
 from posts.models import Post
 from net.models import Net
+from notification.utilities import create_notification
+
 
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
@@ -65,6 +67,7 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
+            create_notification(request, post.created_by, 'new_post', extra_id=new_post.id)
             return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
     context = {'form': form}
