@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+
+
 <h2>{{header}}</h2>
 
 <div class="postBox">
@@ -44,45 +48,11 @@
         <p>Comments:</p>
         <ul>
             {% for comment in comments %}
-
-            {% if forloop.counter|divisibleby:2 %}
-            <div class="postBoxComments Comment1">
-                <p style="font-size: 11px;">
-                    <strong>posted by user: </strong>
-                    <a href="/users/{{comment.author.username}}/" id="linkButton">
-                        {{comment.author}}
-                    </a>
-                    <a href="/upvote/{{comment.id}}/" id="linkButton">
-                        &#8679 upvote
-                    </a>
-                    votes: {{comment.total_score}}
-                    <a id="linkButton" href="/downvote/{{comment.id}}">
-                        downvote &#8681
-                    </a>
-                </p>
-                <p>{{comment.header}}</p>
-                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
+            {% block comments %}
+            <div class="postBoxComments Comments1">
+                {% include "comments.html" %}
             </div>
-            {% else %}
-            <div class="postBoxComments Comment2">
-                <p style="font-size: 11px;">
-                    <strong>posted by user: </strong>
-                    <a href="/users/{{comment.author.username}}/" id="linkButton">
-                        {{comment.author}}
-                    </a>
-                    <a href="/upvote/{{comment.id}}/" id="linkButton">
-                        &#8679 upvote
-                    </a>
-                    votes: {{comment.total_score}}
-                    <a id="linkButton" href="/downvote/{{comment.id}}">
-                        downvote &#8681
-                    </a>
-                </p>
-                <p>{{comment.header}}</p>
-                <p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}</p>
-            </div>
-            {% endif %}
-
+            {% endblock %}
             {% endfor %}
         </ul>
 
