@@ -10,9 +10,9 @@
 
     <div class="HomePageBody">
         <div class="HomeLinkList">
-            <a id="linkButton" href='/newnet/'>Create New Net</a>
 
             {% if request.user.is_authenticated %}
+            <a id="linkButton" href='/newnet/'>Create New Net</a>
             <h3 id="h3">Subscribed Nets</h3>
             {% for net in sub_nets %}
             <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
@@ -24,7 +24,6 @@
             {% for net in nets %}
             <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
             {% endfor %}
-
         </div>
 
         <div class="HomePageFeed">
@@ -35,7 +34,7 @@
                 <a id="linkButton" href="/"> Followers </a>
                 <a id="linkButton" href="/"> Popular </a>
             </div>
-            {% for post in recent_posts %}
+            {% for post in posts %}
             <div class="HomePageNetTitle">
                 <strong>
                     <a class="Home Net" href='nets/{{ post.subnet }}/'>n/{{post.subnet}}</a></strong>
