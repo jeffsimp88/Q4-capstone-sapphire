@@ -23,18 +23,82 @@ border-top: 1px solid white;
 margin: 1px;
 }
 
+
+
+
+/* Styling for Comments Form */
+
+.PostCommentForm{
+    margin: 10px;
+}
+.PostCommentForm p{
+    font-size: 15px;
+    margin: 0px;
+}
+.PostCommentForm form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.PostCommentForm form>p{
+    width: 50%;
+}
+.PostCommentForm input#id_header{
+    background-color: var(--lightblue);
+    font-family: var(--roboto);
+    font-size: 20px;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    width: 98%;
+    padding: 5px;
+}
+.PostCommentForm input::placeholder{
+    color: rgba(255, 255, 255, 0.794);
+}
+
+.PostCommentForm input[type=submit]{
+    font-family: var(--roboto);
+    border: 1px solid var(--lightblue);
+    color: whitesmoke;
+    background-color: var(--blue);
+    padding: 5px;
+    font-size: 17px;
+    border-radius: 5px;    
+    transition-duration: .2s;
+}
+
+.PostCommentForm input[type=submit]:hover{
+    background-color: var(--lightblue);
+    color: var(--blue);
+}
+
+/* Styling for Comments List */
+
+.PostBoxCommentsList{
+    margin: 5px 0px 0px 15px;
+}
+
 .postBoxCommentsBox {
 padding: 10px 5px 10px 5px;
 background-color: var(--blue);
 }
+
 .postBoxComments {
-padding: 3px;
+    background-color: rgb(33, 63, 134);
+    padding: 0px 5px 5px 5px;
+    margin: 0px 0px 10px 0px;
+    width: 80%;
+    border-left: 2px solid black;
 }
+
 .Comment1 {
 background-color: var(--blue);
 }
-.Comment2 {
-background-color: var(--lightblue);
-margin-left: 50px ;
+
+.Subcomment {
+margin: 0px 0px 0px 50px;
+padding-bottom: 0px;
 
 }
