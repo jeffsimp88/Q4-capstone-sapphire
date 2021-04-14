@@ -5,23 +5,26 @@
 
 <div class="NetPage">
     <div class="NetDetailsBox">
-        <h2>Welcome to n/{{ net.title }}</h2>
-
+        <h2 style="text-align: center;">Welcome to n/{{ net.title }}</h2>
+        <hr style="width: 90%;">
         {% if not user_allowed %}
         <p style="white-space: pre-line;">Sorry, this net is private.
             Please contact a moderator for access.
         </p>
         {% else %}
-        <p>Subscribers: {{subscribers.count}}</p>
-        {% if request.user.is_authenticated %}
-        {% if is_subscribed %}
-        <p>You are currently subscribed</p>
-        <a id="linkButton" href='/subscribe/{{ net.title}}/'>Unsubscribe</a>
-        {% else %}
-        <a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
+        <div class="NetSubscriber">
+            <p>Subscribers: {{subscribers.count}}</p>
+            {% if request.user.is_authenticated %}
+            {% if is_subscribed %}
+            <a class="NetButton UnSubscribed" href='/subscribe/{{ net.title}}/'><span>Unsubscribe</span></a>
+            {% else %}
+            <a class="NetButton Subscribed" href='/subscribe/{{ net.title}}/'><span>Subscribe</span></a>
+            {% endif %}
+            {% endif %}
+        </div>
+
         {% endif %}
-        {% endif %}
-        {% endif %}
+
         {% if net.description %}
         <div class="NetDescription">
             <h3>n/{{net.title}}'s Description</h3>
@@ -45,14 +48,15 @@
             {% for mod in moderators %}
             <li><a id="linkButton" href="/users/{{mod.username}}/">{{mod}}</a></li>
             {% endfor %}
+            <br>
+            {% if request.user in moderators %}
+            <a id="EditNetButtons" href="/editmoderators/{{net.title}}/">Edit Moderators</a>
+            <a id="EditNetButtons" href="/editsubscribers/{{net.title}}/">Edit Subscribers</a>
+            {% endif %}
         </div>
         {% endif %}
 
 
-        {% if request.user in moderators %}
-        <a href="/editmoderators/{{net.title}}/">Edit Moderators</a>
-        <a href="/editsubscribers/{{net.title}}/">Edit Subscribers</a>
-        {% endif %}
 
     </div>
 
@@ -63,9 +67,9 @@
         {% else %}
 
 
-        <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
-        <br>
-        <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
+        <a id="PostButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+
+        <a id="PostButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
         {% for post in posts %}
         {% if post.post_type == "Post" %}
         <div class="NetpostBox">
