@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from posts.forms import PostForm, CommentForm, PostImage
 from posts.models import Post
 from net.models import Net
@@ -23,7 +24,16 @@ def individual_post_view(request, post_id):
             return redirect(f"/posts/{root_post.id}/")
     comment_form = CommentForm()
     comment_form.fields['header'].label = ""
-    context.update({'post': post, 'comments': comments, 'comment_form': comment_form})
+    time = (post.timestamp - timezone.now())
+    time_ago = round(time.total_seconds()/3600 *(-1))
+    if time_ago > 24:
+        time_ago = round(time_ago/24)
+        time_ago = f"{time_ago} days ago"
+    elif time_ago <= 1:
+        time_ago = f"less than {time_ago} hour ago"
+    else:
+        time_ago = f"{time_ago} hours ago"
+    context.update({'post': post, 'comments': comments, 'comment_form': comment_form, 'time': time_ago})
     return render(request, 'individual_posts.html', context)
 
 @login_required
@@ -48,7 +58,7 @@ def create_post_view(request, net_title):
 
 @login_required
 def post_image_view(request, net_title):
-    context = {'header': "Post a Post"}
+    context = {'header': "Post an Image"}
     user = request.user
     if request.method == 'POST':
         form = PostImage(request.POST, request.FILES, instance=user)
@@ -85,7 +95,9 @@ def post_comment_view(request, post_id):
             )
             return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
-    context = {'form': form}
+    header = f'Post a comment on \"{post.header}\":'
+    return_link = f"/posts/{root_post.id}/"
+    context = {'form': form, 'header': header, "root_link":return_link}
     return render(request, "forms.html", context)
 
 @login_required
