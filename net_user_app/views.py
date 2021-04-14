@@ -48,7 +48,7 @@ def profile_view(request, username):
         "user": page_user,
         'followers': followers,
         'posts': posts,
-        'subs': subs, 
+        'subs': subs,
         'total_votes': total_votes,
         'is_followed': is_followed,
         'search_form': search_form,
@@ -74,7 +74,7 @@ def update_user(request, user_id):
             return redirect(f'/users/{current_user.username}/')
     else:
         form = NetUserUpdateForm(initial={'username':current_user.username ,'bio':current_user.bio ,'email':current_user.email , 'profile_image': current_user.profile_image})
-        
+
     context = {'form': form}
     return render(request, 'forms.html', context)
 
