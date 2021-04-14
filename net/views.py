@@ -131,6 +131,8 @@ def subscribe_net(request, net_title):
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
+        if current_user in current_net.moderators.all():
+            current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
