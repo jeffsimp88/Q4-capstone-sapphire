@@ -14,12 +14,22 @@
 
 
     {% if form %}
+
+    {% if header %}
+    <h2>{{header}}</h2>
+    {% endif %}
+
     <form enctype="multipart/form-data" action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit!">
 
     </form>
+
+    {% if root_link %}
+    <a href="{{root_link}}">Return to Original Post</a>
+    {% endif %}
+
     {% else %}
     <h1>Sorry, you do not have permission to view this page.</h1>
     <a href="/">Back to Home</a>
