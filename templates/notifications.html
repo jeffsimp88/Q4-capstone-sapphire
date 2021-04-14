@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+{% comment %}
+<h1>Notifications for <a href={% url "user_detail" slug=user.slug %}> @{{user.username}}</a></h1>
+    <h2><a href={%url 'all_users'%}> See all users</a></h2>
+    <h1>Notify Feed</h1>
+{% endcomment %}
+<h3>You have {{notes.all|length}} New Notifications</h3>
+{% for notify in new_notify%}
+<hr />
+<div class="notify-notifications">
+    <a class="link-to-notify" href={% url "notify" pk=notify.pk %}>Link to Notify Detail</a>
+    <ul>
+        <li>
+            <b>Author: </b><a href={% url "user_detail" slug=notify.author.slug %}> @{{notify.author.username}} </a>
+        </li>
+        <li>
+            <b>Written: </b>{{notify.creation_date}}
+        </li>
+        <li>
+            <b>Notify: </b> {{notify.notify}}
+        </li>
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}
