@@ -6,9 +6,14 @@ from .models import Notification
 @login_required
 
 def notifications(request):
+<<<<<<< HEAD
     goto = request.GET.get('goto', '')
     notification_id = request.GET.get('notification', 0)
     extra_id = request.GET.get('extra_id', 0)
+=======
+    goto = request.GET.get('goto','')
+    notification_id = request.GET.get('notification', 0)
+>>>>>>> c5df4486717bb63c4069dcec2aa0d3c702466381
 
     if goto != '':
         notification = Notification.objects.get(pk=notification_id)

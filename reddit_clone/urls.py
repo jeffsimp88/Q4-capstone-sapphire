@@ -25,7 +25,10 @@ urlpatterns = [
     path('', include('net.urls')),
     path('', include('posts.urls')),
     path('', include('notification.urls')),
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5df4486717bb63c4069dcec2aa0d3c702466381
 ]
 
 if settings.DEBUG:
