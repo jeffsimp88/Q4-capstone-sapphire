@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
 from net.models import Net
+from net_user_app.models import NetUser
 # Create your models here.
 
 # DateTime,
@@ -29,6 +30,10 @@ class Post(MPTTModel):
     image = models.ImageField(upload_to="post_images/", null=True, blank=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
+    has_liked = models.ManyToManyField(NetUser, related_name='has_liked',          
+                                           blank=True)
+    has_disliked = models.ManyToManyField(NetUser, related_name='has_disliked',
+                                              blank=True)
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -51,3 +56,6 @@ class Post(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['header']
+    
+
+#
