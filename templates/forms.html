@@ -11,12 +11,20 @@
     <h3>{{message}}</h3>
     {% endfor %}
     {% endif %}
+
+
+    {% if form %}
     <form enctype="multipart/form-data" action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit!">
 
     </form>
+    {% else %}
+    <h1>Sorry, you do not have permission to view this page.</h1>
+    <a href="/">Back to Home</a>
+    {% endif %}
+
 
 
 
