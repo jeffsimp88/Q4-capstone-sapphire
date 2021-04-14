@@ -7,6 +7,11 @@
     <div class="NetDetailsBox">
         <h2>Welcome to n/{{ net.title }}</h2>
 
+        {% if not user_allowed %}
+        <p style="white-space: pre-line;">Sorry, this net is private.
+            Please contact a moderator for access.
+        </p>
+        {% else %}
         <p>Subscribers: {{subscribers.count}}</p>
         {% if request.user.is_authenticated %}
         {% if is_subscribed %}
@@ -16,12 +21,7 @@
         <a id="linkButton" href='/subscribe/{{ net.title}}/'>Subscribe</a>
         {% endif %}
         {% endif %}
-
-
-        <br>
-
-
-
+        {% endif %}
         {% if net.description %}
         <div class="NetDescription">
             <h3>n/{{net.title}}'s Description</h3>
@@ -36,6 +36,9 @@
         </div>
         {% endif %}
 
+
+
+
         {% if moderators %}
         <div class="NetModeratorsList">
             <h3>n/{{net.title}}'s Moderators</h3>
@@ -48,11 +51,18 @@
 
         {% if request.user in moderators %}
         <a href="/editmoderators/{{net.title}}/">Edit Moderators</a>
+        <a href="/editsubscribers/{{net.title}}/">Edit Subscribers</a>
         {% endif %}
 
     </div>
 
     <div class="NetPostListBox">
+
+        {% if not user_allowed %}
+        <p>Sorry, post will not appear on private nets unless subscribed.</p>
+        {% else %}
+
+
         <a id="linkButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
         <br>
         <a id="linkButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
@@ -99,6 +109,7 @@
         </div>
         {% endif %}
         {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
