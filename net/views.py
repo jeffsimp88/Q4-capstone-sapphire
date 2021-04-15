@@ -15,6 +15,7 @@ def index_view(request):
     if request.user.is_authenticated:
         followers = request.user.followers.all().order_by("username")
         sub_nets = request.user.subs.all().order_by('title')
+        subscribed_nets = request.user.subs.all()
         posts = []
         for sub in sub_nets:
             found = Post.objects.filter(subnet=sub)
@@ -23,14 +24,19 @@ def index_view(request):
     else:
         followers = []
         sub_nets = []
-        posts = recent_posts_helper()
-
+        subscribed_nets = []
+        posts = recent_posts_helper(request)
+        popular_nets = most_popular_nets_helper(request)
     nets = Net.objects.all().order_by('title')
+    newest_nets = Net.objects.all().order_by('-creation_date')[:10]
+    popular_nets = Net.objects.all().order_by('-subscribers')[:10]
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
-        "nets": nets,
+        "popular_nets": popular_nets,
         "posts": posts,
+        "newest_nets": newest_nets,
+        "subscribed_nets": subscribed_nets
         })
     return render(request, 'homepage.html', context)
 
@@ -66,6 +72,17 @@ def search_user(request):
 
 """ Search Functionality END """
 
+""" Helper Functions """
+
+def most_popular_nets_helper(request):
+    return Net.objects.all().order_by('-subscribers')[:10]
+
+def recent_posts_helper(request):
+    posts = Post.objects.filter(post_type='Post')
+    recent_posts = list(posts.order_by('-timestamp')[0:10])
+    return recent_posts  
+
+""" Helper Functions END """
 
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
@@ -134,16 +151,24 @@ def individual_net_view(request, net_title):
 def subscribe_net(request, net_title):
     current_user = request.user
     current_net = Net.objects.get(title=net_title)
+    print('current_net',current_net)
     check_sub = current_user.subs
+    print('check_sub:', check_sub)
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
+        current_net.subscribers -= 1
+        current_net.save()
+        print("sub_count",current_net.subscribers)
         if current_user in current_net.moderators.all():
             current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
         check_sub.add(current_net)
+        current_net.subscribers += 1
+        current_net.save()
+        print("sub_count",current_net.subscribers)
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
@@ -185,10 +210,7 @@ def change_subscribers(request, net_title):
     context = {'form': form}
     return render(request, "forms.html", context)
 
-def recent_posts_helper():
-    posts = Post.objects.filter(post_type='Post')
-    recent_posts = list(posts.order_by('-timestamp')[0:10])
-    return recent_posts
+
 
 
 def error_404_view(request, exception):

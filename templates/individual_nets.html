@@ -66,6 +66,8 @@
         <p>Sorry, post will not appear on private nets unless subscribed.</p>
         {% else %}
 
+
+        {% if request.user.is_authenticated %}
         <div class="PostForm">
 
             <details class="PostFormDetails">
@@ -107,6 +109,11 @@
                 </div>
             </details>
         </div>
+
+        {% endif %}
+
+
+
 
         {% block post %}
         {% for post in posts %}

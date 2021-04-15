@@ -8,6 +8,7 @@
     background-color: var(--blue);
     color: var(--yellow);
     padding: 10px;
+    border-radius: 5px;
 }
 .HomePageBody{
     display: flex;
@@ -17,6 +18,7 @@
     width: 80%;
     margin: 10px;
 }
+
 .HomeLinkList {
     background-color: var(--blue);
     border: 1px solid var(--blue);
@@ -26,10 +28,37 @@
     align-items: center;
     flex-wrap: wrap;
     padding: 5px;
-  }
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.LinkListContainer{
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#CreateNetButton{
+    font-family: var(--barlow-font);
+    font-size: 20px;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    border-radius: 5px;
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 5px 5px 0px 5px;
+    text-align: center;
+}
+
+#CreateNetButton:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
 
 .HomeLinkList>h3{
       color: var(--yellow);
+      text-align: center;
   }
 
 .HomeFilter{
@@ -55,17 +84,23 @@
 .Home.Net{
     color: var(--blue);
     text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: var(--barlow-font);
+    transition-duration: .2s;
 }
-
+.Home.Net:hover{
+    color: whitesmoke;
+}
 .HomePageNetTitle{
-    border: 2px solid var(--blue);
     border-radius: 5px;
-    background-color: var(--tan);
+    background-color: var(--gray);
     margin: 5px;
     text-align: center;
     box-shadow: 9px 2px 9px 0px rgba(0, 0, 0, 0.141);
     width: 500px;
     height: fit-content;
+    font-weight: 700;
 }
 
 .Home.Post{
@@ -79,6 +114,18 @@
     display: flex;
     justify-content: start;
     flex-direction: column;
+}
+
+.Popular-nets-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.Popular-nets-links{
+
+    margin:5px;
+
 }
 
 .PostHeaderDetails{
@@ -118,6 +165,8 @@
     color: white;
     padding: 3px;
     text-align: center;
+    width:90%;
+    border-radius: 5px;
 }
 
 .netlink:hover {
@@ -127,11 +176,11 @@
 
 .HomePageFollowers{
     background-color: var(--blue);
-    border-radius: 5px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
 }
 .HomePageFollowers>h3{
     color: var(--yellow);
