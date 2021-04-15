@@ -91,26 +91,26 @@ def post_comment_view(request, post_id):
 def upvotes_view(request, post_id):
     current_user = request.user
     post = Post.objects.filter(id=post_id).first()
-    for liked_posts in current_user.has_liked.all():
-        if liked_posts == post:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    current_user.has_liked.add(post)
-    current_user.has_disliked.remove(post)
-    post.upvotes +=1
-    current_user.save()
-    post.save()
-    return 
+    if post in current_user.has_liked.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        current_user.has_liked.add(post)
+        current_user.has_disliked.remove(post)
+        post.upvotes +=1
+        current_user.save()
+        post.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def downvotes_view(request, post_id):
     current_user = request.user
     post = Post.objects.filter(id=post_id).first()
-    for disliked_post in current_user.has_disliked.all():
-        if disliked_post == post:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    current_user.has_disliked.add(post)
-    current_user.has_liked.remove(post)
-    post.downvotes +=1
-    current_user.save()
-    post.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if post in current_user.has_disliked.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        current_user.has_disliked.add(post)
+        current_user.has_liked.remove(post)
+        post.downvotes +=1
+        current_user.save()
+        post.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
