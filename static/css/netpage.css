@@ -272,3 +272,20 @@ input:focus, textarea:focus{
 .Net.CommentLink:hover{
     color: var(--yellow);
 }
+.PostScore{
+    display: flex;
+    font-size: 23px;
+    align-items: center;
+}
+.PostScore>a{
+    text-decoration: none;
+}
+#fishImg{
+    height: 35px;
+    margin: 5px;
+    transition-duration: .2s;
+}
+
+#fishImg:hover{
+    filter: hue-rotate(76deg);
+}
