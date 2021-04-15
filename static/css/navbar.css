@@ -66,12 +66,14 @@
     background-color: white;
 }
 
-
-
-.NavBarSearch{
+.NavSearchBars{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+}
+
+.NavBarSearch{
     color: white;
 }
 
