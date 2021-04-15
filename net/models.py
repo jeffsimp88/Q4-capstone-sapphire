@@ -13,7 +13,7 @@ class Net(models.Model):
         related_name="moderators")
     creation_date = models.DateTimeField(default=timezone.now)
     private = models.BooleanField(default=False)
-    subscribers = models.IntegerField(default=0)
+    subscribers = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return self.title
