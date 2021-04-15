@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% block content %}
 <div id="titleBox">
     {% if logging_in %}
     <h3> Not a current user? <a href="/signup">Signup!</a></h3>
+    <h3> Google <a href="{% provider_login_url 'google' %}">login!</a></h3>
     {% elif signing_in %}
     <h3> Already a current user? <a href="/login">Login!</a></h3>
+    <h3> Google <a href="{% provider_login_url 'google' %}">login!</a></h3>
     {% endif %}
     {% if messages %}
     {% for message in messages %}
