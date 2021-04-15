@@ -30,8 +30,6 @@ def index_view(request):
         'followers': followers,
         "nets": nets,
         "posts": posts,
-        "search_form": search_form,
-        "user_form": user_search,
         })
     return render(request, 'homepage.html', context)
 
