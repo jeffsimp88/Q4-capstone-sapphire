@@ -10,17 +10,16 @@
 
     <div class="HomePageBody">
         <div class="LinkListContainer">
+            {% if request.user.is_authenticated %}
             <div class="HomeLinkList">
-
-                {% if request.user.is_authenticated %}
                 <h3 id="h3">Subscribed Nets</h3>
                 {% for net in sub_nets %}
                 <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
                 {% endfor %}
                 <hr width="100%">
                 <a id='CreateNetButton' href='/newnet/'>Create New Net</a>
-                {% endif %}
             </div>
+            {% endif %}
             <div class="HomeLinkList">
                 <h3 id="h3">Most Popular Nets</h3>
 

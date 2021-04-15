@@ -15,6 +15,7 @@ def index_view(request):
     if request.user.is_authenticated:
         followers = request.user.followers.all().order_by("username")
         sub_nets = request.user.subs.all().order_by('title')
+        subscribed_nets = request.user.subs.all()
         posts = []
         for sub in sub_nets:
             found = Post.objects.filter(subnet=sub)
@@ -23,12 +24,12 @@ def index_view(request):
     else:
         followers = []
         sub_nets = []
-        posts = recent_posts_helper()
-        popular_nets = most_popular_nets_helper()
+        subscribed_nets = []
+        posts = recent_posts_helper(request)
+        popular_nets = most_popular_nets_helper(request)
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
     popular_nets = Net.objects.all().order_by('-subscribers')[:10]
-    subscribed_nets = request.user.subs.all()
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
@@ -76,7 +77,7 @@ def search_user(request):
 def most_popular_nets_helper(request):
     return Net.objects.all().order_by('-subscribers')[:10]
 
-def recent_posts_helper():
+def recent_posts_helper(request):
     posts = Post.objects.filter(post_type='Post')
     recent_posts = list(posts.order_by('-timestamp')[0:10])
     return recent_posts  
