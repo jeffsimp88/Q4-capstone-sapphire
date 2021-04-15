@@ -7,7 +7,6 @@ from net.models import Net
 from net.views import search_net, search_user
 from net.forms import UserSearchForm, SearchForm
 
-
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
     post = Post.objects.get(id=post_id)
@@ -27,16 +26,7 @@ def individual_post_view(request, post_id):
             return redirect(f"/posts/{root_post.id}/")
     comment_form = CommentForm()
     comment_form.fields['header'].label = ""
-    time = (post.timestamp - timezone.now())
-    time_ago = round(time.total_seconds()/3600 *(-1))
-    if time_ago > 24:
-        time_ago = round(time_ago/24)
-        time_ago = f"{time_ago} days ago"
-    elif time_ago <= 1:
-        time_ago = f"less than {time_ago} hour ago"
-    else:
-        time_ago = f"{time_ago} hours ago"
-    context.update({'post': post, 'comments': comments, 'comment_form': comment_form, 'time': time_ago})
+    context.update({'post': post, 'comments': comments, 'comment_form': comment_form,})
     return render(request, 'individual_posts.html', context)
 
 @login_required
@@ -55,9 +45,6 @@ def create_post_view(request, net_title):
                 content = data['content'],
             )
             return HttpResponseRedirect(f'/nets/{net_title}')
-    form = PostForm()
-    context.update({'form':form})
-    return render(request, 'forms.html', context)
 
 @login_required
 def post_image_view(request, net_title):
@@ -77,9 +64,6 @@ def post_image_view(request, net_title):
             )
             form.save()
             return HttpResponseRedirect(f'/nets/{net_title}')
-    form = PostImage()
-    context.update({'form':form})
-    return render(request, 'forms.html', context)
 
 @login_required
 def post_comment_view(request, post_id):
@@ -107,26 +91,26 @@ def post_comment_view(request, post_id):
 def upvotes_view(request, post_id):
     current_user = request.user
     post = Post.objects.filter(id=post_id).first()
-    for liked_posts in current_user.has_liked.all():
-        if liked_posts == post:
-            return redirect('/')
-    current_user.has_liked.add(post)
-    current_user.has_disliked.remove(post)
-    post.upvotes +=1
-    current_user.save()
-    post.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if post in current_user.has_liked.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        current_user.has_liked.add(post)
+        current_user.has_disliked.remove(post)
+        post.upvotes +=1
+        current_user.save()
+        post.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def downvotes_view(request, post_id):
     current_user = request.user
     post = Post.objects.filter(id=post_id).first()
-    for disliked_post in current_user.has_disliked.all():
-        if disliked_post == post:
-            return redirect('/')
-    current_user.has_disliked.add(post)
-    current_user.has_liked.remove(post)
-    post.downvotes +=1
-    current_user.save()
-    post.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if post in current_user.has_disliked.all():
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        current_user.has_disliked.add(post)
+        current_user.has_liked.remove(post)
+        post.downvotes +=1
+        current_user.save()
+        post.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
