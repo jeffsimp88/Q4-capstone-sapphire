@@ -6,14 +6,15 @@
 <div class="profilePage">
     <div class="profileBody">
         <h3>user: {{user.username}}</h3>
-
-
-        {% if user.profile_image %}
-        <img style="height: 100px;" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
-        {% else %}
-        <img style="height: 100px;" src="{%static 'images/default_profile_img.png' %}" alt="Default Image">
-        {% endif %}
-
+        <div class="ProfileBox">
+            <img id="portholeImg" src="{%static 'images/porthole.png' %}" alt="">
+            {% if user.profile_image %}
+            <img id="profileImg" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+            {% else %}
+            <img id="profileImg" style="width: 77%;" src="{%static 'images/default_profile_img.png' %}"
+                alt="Default Image">
+            {% endif %}
+        </div>
 
         <p>total votes: {{total_votes}}</p>
 
@@ -98,7 +99,7 @@
             </p>
             {% endif %}
             <div class="profilePostFooter">
-                <p>total votes: {{post.total_score}} date posted: {{post.timestamp}}</p>
+                <p>total votes: {{post.total_score}} posted: {{post.time_ago}}</p>
             </div>
         </div>
         {% endfor %}

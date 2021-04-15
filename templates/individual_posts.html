@@ -6,12 +6,27 @@
 
 <h2>{{header}}</h2>
 
+
+
+
 <div class="postBox">
     <div class="postBoxHeader">
         <div class="DetailLine">
-            <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
+            <div class="PostScore">
+                {% if request.user in post.has_liked.all %}
+                <a href="/upvote/{{post.id}}/"><img id="fishImg" src="{% static 'images/upvote_fish_filled.png' %}"
+                        alt=""></a>
+                {% else %}
+                <a href="/upvote/{{post.id}}/"><img id="fishImg" src="{% static 'images/upvote_fish.png' %}" alt=""></a>
+                {% endif %}
                 {{post.total_score}}
-                <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
+                {% if request.user in post.has_disliked.all %}
+                <a href="/downvote/{{post.id}}"><img id="fishImg" src="{% static 'images/downvote_fish_filled.png' %}"
+                        alt=""></a>
+                {% else %}
+                <a href="/downvote/{{post.id}}"><img id="fishImg" src="{% static 'images/downvote_fish.png' %}"
+                        alt=""></a>
+                {% endif %}
             </div>
             <a id="linkButton" href="/nets/{{post.subnet.title}}/">n/{{post.subnet.title}}</a>
             <p>
@@ -20,7 +35,7 @@
                     {{post.author}}
                 </a>
             </p>
-            <p title="{{post.timestamp}}"><strong>posted: </strong>{{time}}</p>
+            <p title="{{post.timestamp}}"><strong>posted: </strong>{{post.time_ago}}</p>
         </div>
         <h3>{{post.header}}</h3>
     </div>

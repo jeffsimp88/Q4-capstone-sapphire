@@ -52,6 +52,21 @@ class Post(MPTTModel):
     @property
     def root(self):
         return self.get_root()
+
+    @property
+    def time_ago(self):
+        time = (self.timestamp - timezone.now())
+        time_ago = round(time.total_seconds()/3600 *(-1))
+        if time_ago > 24:
+            time_ago = round(time_ago/24)
+            time_ago = f"{time_ago} days ago"
+            return time_ago
+        elif time_ago <= 1:
+            time_ago = f"less than an hour ago"
+            return time_ago
+        else:
+            time_ago = f"{time_ago} hours ago"
+            return time_ago
     
     def __str__(self):
         return f'{self.header} | {self.author}'
