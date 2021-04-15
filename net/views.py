@@ -17,7 +17,8 @@ def index_view(request):
         sub_nets = request.user.subs.all().order_by('title')
         posts = []
         for sub in sub_nets:
-            posts += Post.objects.filter(subnet=sub).order_by('-timestamp')
+            found = Post.objects.filter(subnet=sub)
+            posts += found.filter(post_type='Post')
         posts.sort(key=lambda x:x.timestamp, reverse=True)
     else:
         followers = []
