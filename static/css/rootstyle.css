@@ -57,3 +57,7 @@ display: flex
 margin-left:20px
 }
 
+details:focus, summary:focus{
+    outline: none;
+}
+
