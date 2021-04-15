@@ -9,22 +9,36 @@
 <div class="HomePage">
 
     <div class="HomePageBody">
-        <div class="HomeLinkList">
+        <div class="LinkListContainer">
+            <div class="HomeLinkList">
 
-            {% if request.user.is_authenticated %}
-            <a id="linkButton" href='/newnet/'>Create New Net</a>
-            <h3 id="h3">Subscribed Nets</h3>
-            {% for net in sub_nets %}
-            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-            {% endfor %}
-            <hr width="100%">
-            {% endif %}
-
-            <h3 id="h3">All Nets</h3>
-            {% for net in nets %}
-            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-            {% endfor %}
-        </div>
+                {% if request.user.is_authenticated %}
+                <a id="linkButton" href='/newnet/'>Create New Net</a>
+                <h3 id="h3">Subscribed Nets</h3>
+                {% for net in sub_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+                <hr width="100%">
+                {% endif %}
+            </div>  
+            <div class="HomeLinkList">
+                <h3 id="h3">Most Popular Nets</h3>
+            
+                    {% for net in popular_nets %}
+                    
+                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                
+                    {% endfor %}
+            </div> 
+                <div class="HomeLinkList">
+                    <h3 id="h3">Newest Nets</h3>
+                    {% for net in newest_nets %}
+                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                    {% endfor %}
+                </div>
+              
+        </div> 
+            
 
         <div class="HomePageFeed">
             <div class="HomeFilter">
