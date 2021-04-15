@@ -62,7 +62,7 @@ class Post(MPTTModel):
             time_ago = f"{time_ago} days ago"
             return time_ago
         elif time_ago <= 1:
-            time_ago = f"less than {time_ago} hour ago"
+            time_ago = f"less than 1 hour ago"
             return time_ago
         else:
             time_ago = f"{time_ago} hours ago"
