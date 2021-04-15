@@ -12,8 +12,8 @@
     </a>
 </p>
 <p>{{comment.header}}</p>
-<p style="font-size: 11px;"> <strong>date posted: </strong> {{comment.timestamp}}<a id="linkButton"
-        href="/makecomment/{{comment.id}}">Comment</a></p>
+<p style="font-size: 11px;" title="{{comment.timestamp}}"> <strong>posted: </strong> {{comment.time_ago}} <a
+        id="linkButton" href="/makecomment/{{comment.id}}"> Comment</a></p>
 {% if comment.get_comments %}
 {% for comment in comment.get_comments %}
 {% block comments %}

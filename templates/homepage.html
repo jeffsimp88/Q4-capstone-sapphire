@@ -69,8 +69,10 @@
 
                     </div>
                     <div class="Home PostFooter">
-                        <p>{{post.get_comments.count}} <strong> comments</strong></p>
-                        <p><strong>date posted: </strong>{{post.timestamp}}</p>
+                        <a style="text-decoration: none;" id="linkButton" href="/posts/{{post.id}}/">
+                            <p>{{post.get_comments.count}} <strong> comments</strong></p>
+                        </a>
+                        <p title="{{post.timestamp}}"><strong>posted: </strong>{{post.time_ago}}</p>
                     </div>
                 </div>
             </div>
