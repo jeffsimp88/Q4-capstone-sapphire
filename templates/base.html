@@ -38,15 +38,15 @@
                 {% endif %}
                 {% endfor %}
                 {% endif %}
-                <form class="NavBarForm" action="" method="POST">
+                <form class="NavBarForm" action="/searchrequests/" method="POST">
                     {% csrf_token %}
-                    {{ search_form }}
+                    <input type="text" name="search_info" placeholder="Search for Net" maxlength="50" required="" id="id_search_info">
                     <input id="searchSubmitButton" type="submit" value="Submit!">
                 </form>
                 <div id="user-search">
-                    <form class="NavBarForm" action="" method="POST">
+                    <form class="NavBarForm" action="/searchrequests/" method="POST">
                         {% csrf_token %}
-                        {{ user_form }}
+                        <input type="text" name="user_info" placeholder="Search for User" maxlength="50" required="" id="id_user_info">
                         <input id="searchSubmitButton" type="submit" value="Submit!">
                     </form>
                 </div>

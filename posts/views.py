@@ -4,6 +4,9 @@ from django.utils import timezone
 from posts.forms import PostForm, CommentForm, PostImage
 from posts.models import Post
 from net.models import Net
+from net.views import search_net, search_user
+from net.forms import UserSearchForm, SearchForm
+
 
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
