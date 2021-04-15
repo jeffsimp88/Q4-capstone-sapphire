@@ -30,6 +30,7 @@
         <a class="Net PostLink" href="/posts/{{post.id}}/">
             <h3>{{post.header}}</h3>
         </a>
+
     </div>
     <div class="Net PostBody">
 
@@ -38,7 +39,9 @@
         {% endif %}
 
         {% if post.image %}
-        <img style="width: 300px; align-items: center;" src="{{post.image.url}}" alt="{{post.image}}">
+        <div class="PostBodyImg">
+            <img style="width: 300px;" src="{{post.image.url}}" alt="{{post.image}}">
+        </div>
         {% endif %}
 
 
