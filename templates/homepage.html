@@ -13,7 +13,9 @@
             <div class="HomeLinkList">
 
                 {% if request.user.is_authenticated %}
+                <button id='NavButton'>
                 <a id="linkButton" href='/newnet/'>Create New Net</a>
+                </button>
                 <h3 id="h3">Subscribed Nets</h3>
                 {% for net in sub_nets %}
                 <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
