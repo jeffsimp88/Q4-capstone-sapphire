@@ -67,53 +67,62 @@
         {% else %}
 
 
-        <a id="PostButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+        {% if request.user.is_authenticated %}
+        <div class="PostForm">
 
-        <a id="PostButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
+            <details class="PostFormDetails">
+                <summary> <img style="height: 30px; margin-right: 4px;" src="{% static 'images/post.png' %}"
+                        alt="Post Image"> Post a Post
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/makepost/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <textarea name="content" cols="40" rows="10" placeholder="Post your content...."></textarea>
+                        <input type="submit" value="Post">
+
+                    </form>
+                </div>
+            </details>
+            <details class="PostFormDetails">
+                <summary><img style="height: 30px; margin-right: 4px;" src="{% static 'images/image.png' %}"
+                        alt="Post Image"> Post an Image
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/postimage/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                        <input type="submit" value="Post image">
+
+                    </form>
+                </div>
+            </details>
+        </div>
+
+        {% endif %}
+
+
+
+
+        {% block post %}
         {% for post in posts %}
         {% if post.post_type == "Post" %}
-        <div class="NetpostBox">
-            <div class="Net PostHeader">
-                <div class="PostHeaderDetails">
-                    <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
-                        {{post.total_score}}
-                        <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
-                    </div>
-                    <p style="font-size: 13px;">
-                        &nbsp; |
-                        <strong>posted by user: </strong>
-                        <a href="/users/{{post.author.username}}/" id="linkButton">
-                            {{post.author}}
-                        </a>
-                    </p>
-                </div>
-                <a class="Net PostLink" href="/posts/{{post.id}}/">
-                    <h3>{{post.header}}</h3>
-                </a>
-            </div>
-            <div class="Net PostBody">
-
-                {% if post.content %}
-                <p>{{post.content}}</p>
-                {% endif %}
-
-                {% if post.image %}
-                <img style="width: 300px; align-items: center;" src="{{post.image.url}}" alt="{{post.image}}">
-                {% endif %}
-
-
-            </div>
-            <div class="Net PostFooter">
-                <a class="Net CommentLink" href="/posts/{{post.id}}/">
-                    <p>{{post.get_comments.count}} <strong> comments</strong></p>
-                </a>
-
-                <p><strong>date posted: </strong>{{post.timestamp}}</p>
-            </div>
-        </div>
+        {% include "post_component.html" %}
         {% endif %}
         {% endfor %}
+        {% endblock post %}
         {% endif %}
+
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

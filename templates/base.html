@@ -12,7 +12,7 @@
 
 {% endif %}
 
-
+<link rel="shortcut icon" type="image/png" href="{% static 'images/sub_yellow.png' %}" />
 <link rel="stylesheet" href="{% static 'css/rootstyle.css' %}">
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
@@ -34,21 +34,25 @@
                 {% if messages %}
                 {% for message in messages %}
                 {% if message.tags == 'error' %}
-                <p>{{message}}</p>
+                <p style="text-align: center; margin: 2px;">{{message}}</p>
                 {% endif %}
                 {% endfor %}
                 {% endif %}
-                <form class="NavBarForm" action="" method="POST">
-                    {% csrf_token %}
-                    {{ search_form }}
-                    <input id="searchSubmitButton" type="submit" value="Submit!">
-                </form>
-                <div id="user-search">
-                    <form class="NavBarForm" action="" method="POST">
+                <div class="NavSearchBars">
+                    <form class="NavBarForm" action="/searchrequests/" method="POST">
                         {% csrf_token %}
-                        {{ user_form }}
+                        <input type="text" name="search_info" placeholder="Search for Net" maxlength="50" required=""
+                            id="id_search_info">
                         <input id="searchSubmitButton" type="submit" value="Submit!">
                     </form>
+                    <div id="user-search">
+                        <form class="NavBarForm" action="/searchrequests/" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="user_info" placeholder="Search for User" maxlength="50" required=""
+                                id="id_user_info">
+                            <input id="searchSubmitButton" type="submit" value="Submit!">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="NavBarPageLinksList">

@@ -9,22 +9,35 @@
 <div class="HomePage">
 
     <div class="HomePageBody">
-        <div class="HomeLinkList">
-
+        <div class="LinkListContainer">
             {% if request.user.is_authenticated %}
-            <a id="linkButton" href='/newnet/'>Create New Net</a>
-            <h3 id="h3">Subscribed Nets</h3>
-            {% for net in sub_nets %}
-            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-            {% endfor %}
-            <hr width="100%">
+            <div class="HomeLinkList">
+                <h3 id="h3">Subscribed Nets</h3>
+                {% for net in sub_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+                <hr width="100%">
+                <a id='CreateNetButton' href='/newnet/'>Create New Net</a>
+            </div>
             {% endif %}
+            <div class="HomeLinkList">
+                <h3 id="h3">Most Popular Nets</h3>
 
-            <h3 id="h3">All Nets</h3>
-            {% for net in nets %}
-            <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-            {% endfor %}
+                {% for net in popular_nets %}
+
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+
+                {% endfor %}
+            </div>
+            <div class="HomeLinkList">
+                <h3 id="h3">Newest Nets</h3>
+                {% for net in newest_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+            </div>
+
         </div>
+
 
         <div class="HomePageFeed">
             <div class="HomeFilter">
@@ -38,41 +51,8 @@
             <div class="HomePageNetTitle">
                 <strong>
                     <a class="Home Net" href='nets/{{ post.subnet }}/'>n/{{post.subnet}}</a></strong>
-                <br></br>
-                <div class="Home Post">
-                    <div class="Home PostHeader">
-                        <div class="PostHeaderDetails">
-                            <div class="PostScore"><a href="/upvote/{{post.id}}/" id="linkButton">&#8679</a>
-                                {{post.total_score}}
-                                <a id="linkButton" href="/downvote/{{post.id}}">&#8681</a>
-                            </div>
-                            <p style="font-size: 13px;">
-                                &nbsp; |
-                                <strong>posted by user: </strong>
-                                <a href="/users/{{post.author.username}}/" id="linkButton">
-                                    {{post.author}}
-                                </a>
-                            </p>
-                        </div>
-                        <h3>{{post.header}}</h3>
-                    </div>
-                    <div class="Home PostBody">
+                {% include "post_component.html" %}
 
-                        {% if post.content %}
-                        <p>{{post.content}}</p>
-                        {% endif %}
-
-                        {% if post.image %}
-                        <img style="width: 300px; align-items: center;" src="{{post.image.url}}" alt="{{post.image}}">
-                        {% endif %}
-
-
-                    </div>
-                    <div class="Home PostFooter">
-                        <p>{{post.get_comments.count}} <strong> comments</strong></p>
-                        <p><strong>date posted: </strong>{{post.timestamp}}</p>
-                    </div>
-                </div>
             </div>
 
             {% endfor %}

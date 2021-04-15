@@ -12,6 +12,30 @@
     margin: 10px;
 }
 
+.profilebox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#portholeImg{
+    width: 107%;
+    position: absolute;
+    bottom: -7px;
+    z-index: 1;
+}
+#profileImg{
+    display: block;
+    width: 100%;
+    /* z-index: 1; */
+}
+
 .profilePostList{
     background-color: var(--gray);
     margin: 10px;
