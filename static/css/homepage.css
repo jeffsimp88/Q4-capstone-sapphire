@@ -37,10 +37,28 @@
     justify-content: flex-start;
 }
 
+#CreateNetButton{
+    font-family: var(--barlow-font);
+    font-size: 20px;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    border-radius: 5px;
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 5px 5px 0px 5px;
+    text-align: center;
+}
 
+#CreateNetButton:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
 
 .HomeLinkList>h3{
       color: var(--yellow);
+      text-align: center;
   }
 
 .HomeFilter{
@@ -67,8 +85,13 @@
     color: var(--blue);
     text-decoration: none;
     font-weight: bold;
+    font-size: 30px;
+    font-family: var(--barlow-font);
+    transition-duration: .2s;
 }
-
+.Home.Net:hover{
+    color: whitesmoke;
+}
 .HomePageNetTitle{
     border: 2px solid var(--blue);
     border-radius: 5px;

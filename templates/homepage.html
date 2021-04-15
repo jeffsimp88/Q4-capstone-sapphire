@@ -13,34 +13,32 @@
             <div class="HomeLinkList">
 
                 {% if request.user.is_authenticated %}
-                <button id='NavButton'>
-                <a id="linkButton" href='/newnet/'>Create New Net</a>
-                </button>
                 <h3 id="h3">Subscribed Nets</h3>
                 {% for net in sub_nets %}
                 <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
                 {% endfor %}
                 <hr width="100%">
+                <a id='CreateNetButton' href='/newnet/'>Create New Net</a>
                 {% endif %}
-            </div>  
+            </div>
             <div class="HomeLinkList">
                 <h3 id="h3">Most Popular Nets</h3>
-            
-                    {% for net in popular_nets %}
-                    
-                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-                
-                    {% endfor %}
-            </div> 
-                <div class="HomeLinkList">
-                    <h3 id="h3">Newest Nets</h3>
-                    {% for net in newest_nets %}
-                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
-                    {% endfor %}
-                </div>
-              
-        </div> 
-            
+
+                {% for net in popular_nets %}
+
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+
+                {% endfor %}
+            </div>
+            <div class="HomeLinkList">
+                <h3 id="h3">Newest Nets</h3>
+                {% for net in newest_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+
 
         <div class="HomePageFeed">
             <div class="HomeFilter">
@@ -54,7 +52,6 @@
             <div class="HomePageNetTitle">
                 <strong>
                     <a class="Home Net" href='nets/{{ post.subnet }}/'>n/{{post.subnet}}</a></strong>
-                <br></br>
                 {% include "post_component.html" %}
 
             </div>
