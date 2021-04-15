@@ -93,7 +93,6 @@
     color: whitesmoke;
 }
 .HomePageNetTitle{
-    border: 2px solid var(--blue);
     border-radius: 5px;
     background-color: var(--gray);
     margin: 5px;
