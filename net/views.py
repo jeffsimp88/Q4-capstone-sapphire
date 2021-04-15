@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators, ChangeSubscribers
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
+
 
 
 def index_view(request):
@@ -16,13 +17,26 @@ def index_view(request):
         sub_nets = request.user.subs.all().order_by('title')
         posts = []
         for sub in sub_nets:
-            posts += Post.objects.filter(subnet=sub).order_by('-timestamp')
+            found = Post.objects.filter(subnet=sub)
+            posts += found.filter(post_type='Post')
         posts.sort(key=lambda x:x.timestamp, reverse=True)
     else:
         followers = []
         sub_nets = []
         posts = recent_posts_helper()
 
+    nets = Net.objects.all().order_by('title')
+    context.update({
+        "sub_nets": sub_nets,
+        'followers': followers,
+        "nets": nets,
+        "posts": posts,
+        })
+    return render(request, 'homepage.html', context)
+
+""" Search Functionality """
+
+def search_request_view(request):
     if request.method == 'POST':
         return_url = search_net(request)
         searched_user_url = search_user(request)
@@ -30,26 +44,27 @@ def index_view(request):
             return redirect(return_url)
         if searched_user_url: 
             return redirect(searched_user_url)
-        elif not return_url and searched_user_url == None:
-            messages.error(request, "Not found. Please Try Again!")
-            net_not_found = True
-        elif not searched_user_url and return_url == None:
-            messages.error(request, "User not Found. Please Try Again!")
-            user_not_found = True
-    nets = Net.objects.all().order_by('title')
-    search_form = SearchForm()
-    user_search = UserSearchForm()
-    context.update({
-        "sub_nets": sub_nets,
-        'followers': followers,
-        "nets": nets,
-        "posts": posts,
-        "search_form": search_form,
-        "user_form": user_search,
-        "net_not_found": net_not_found,
-        "user_not_found": user_not_found,
-        })
-    return render(request, 'homepage.html', context)
+        else:
+            messages.error(request, "Sorry, not found")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def search_net(request):
+    search = SearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for items in Net.objects.all():
+            if items.title.casefold() == data["search_info"].casefold():       
+                return (f"/nets/{items.title}/")  
+
+def search_user(request):
+    search = UserSearchForm(request.POST)
+    if search.is_valid():
+        data = (search.cleaned_data)
+        for users in NetUser.objects.all():
+            if users.username.casefold() == data['user_info'].casefold():
+                return(f"/users/{users.username}/")
+
+""" Search Functionality END """
 
 
 def check_subscribe(request, net_title):
@@ -63,13 +78,7 @@ def check_subscribe(request, net_title):
     return is_subscribed
 
 
-def search_net(request):
-    search = SearchForm(request.POST)
-    if search.is_valid():
-        data = (search.cleaned_data)
-        for items in Net.objects.all():
-            if items.title.casefold() == data["search_info"].casefold():       
-                return (f"/nets/{items.title}/")         
+       
 
 
 def create_net_view(request):
@@ -96,14 +105,14 @@ def create_net_view(request):
 
 
 
+
 def individual_net_view(request, net_title):
     selected_net = Net.objects.filter(title=net_title).first()
     if request.user.is_authenticated:
         is_subscribed = check_subscribe(request, selected_net)
     else:
         is_subscribed=""
-    search_form = SearchForm()
-    user_form = UserSearchForm()
+
     posts = Post.objects.filter(subnet=selected_net).order_by("-timestamp")
     moderators = selected_net.moderators.all().order_by('username')
     subscribers = NetUser.objects.filter(subs__title=selected_net.title)
@@ -118,8 +127,6 @@ def individual_net_view(request, net_title):
         'is_subscribed': is_subscribed,
         'user_allowed': allow_user,
         'posts': posts,
-        'search_form': search_form,
-        'user_form': user_form,
         }
     return render(request, 'individual_nets.html', context)
 
@@ -188,13 +195,7 @@ def error_404_view(request, exception):
     return render(request,'404.html')
 
 
-def search_user(request):
-    search = UserSearchForm(request.POST)
-    if search.is_valid():
-        data = (search.cleaned_data)
-        for users in NetUser.objects.all():
-            if users.username.casefold() == data['user_info'].casefold():
-                return(f"/users/{users.username}/")
+
 
 
 
