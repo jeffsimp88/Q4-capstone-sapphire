@@ -21,10 +21,40 @@
 }
 
 .PostScore{
+    display: flex;
     font-size: 23px;
+    align-items: center;
 }
 .PostScore>a{
     text-decoration: none;
+}
+
+#fishImg{
+    height: 35px;
+    margin: 5px;
+    transition-duration: .2s;
+}
+
+#fishImg:hover{
+    filter: hue-rotate(76deg);
+}
+
+.CommentScore{
+    display: flex;
+    font-size: 17px;
+    align-items: center;
+}
+.CommentScore>a{
+    text-decoration: none;
+}
+#commentfishImg{
+    height: 18px;
+    margin: 5px;
+    transition-duration: .2s;
+}
+
+#commentfishImg:hover{
+    filter: hue-rotate(76deg); 
 }
 
 .postBoxHeader {
@@ -123,7 +153,88 @@ background-color: var(--blue);
 }
 
 .Subcomment {
-margin: 0px 0px 0px 50px;
+margin: 10px 0px 0px 50px;
 padding-bottom: 0px;
 
+}
+
+
+/* Reply Comment Forms */
+
+.CommentDetails{
+    display: flex;
+    flex-direction: row;
+}
+
+.CommentForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.CommentFormDetails>details::marker,.CommentFormDetails>summary::marker{
+    content: none;
+}
+
+.CommentFormDetails>summary{
+    font-size: 12px;
+    color: var(--yellow);
+    transition-duration: .2s;
+}
+.CommentFormDetails>summary:hover{
+    color: whitesmoke;
+    cursor: pointer;
+}
+.CommentFormDetails>div{
+    padding: 5px;
+    margin: 0px 11px;
+}
+#CommentFormUser{
+    margin: 3px 0px 3px 0px;
+    font-size: 13px;
+}
+.CommentFormDetails>input{
+    margin: 0px;
+}
+
+input:focus{
+    outline: none;
+}
+
+.NetCommentForm>input[type=text]{
+    background-color: var(--lightblue);
+    font-family: var(--roboto);
+    font-size: 15px;
+    border: none;
+    margin: 3px;
+    padding: 3px;
+    width: 80%;
+    border-radius: 3px;
+    resize: none;
+}
+.NetCommentForm>input::placeholder{
+    color: rgba(245, 245, 245, 0.507);
+    font-family: var(--roboto)
+}
+.NetCommentForm>input[type=submit]{
+    background-color: #213f86;
+    font-family: var(--barlow-reg);
+    font-weight: 600;
+    margin: 3px;
+    font-size: 16px;
+    border: 1px solid var(--lightblue);
+    border-radius: 5px;
+    color: whitesmoke;
+    padding: 3px;
+    transition-duration: .2s;
+}
+.NetCommentForm>input[type=submit]:hover{
+    background-color: var(--lightblue);
+    color: #213f86;
+}
+.NetCommentForm{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin: 0px;
 }
