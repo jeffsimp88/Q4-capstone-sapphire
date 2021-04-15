@@ -19,20 +19,7 @@ def get_total_user_votes(posts):
 
 
 def profile_view(request, username):
-    context = {}
-    if request.method == 'POST':
-        return_url = search_net(request)
-        searched_user_url = search_user(request)
-        if return_url:
-            return redirect(return_url)
-        else:
-            print("working")
-            net_not_found = True
-        if searched_user_url:
-            return redirect(searched_user_url)
-        else:
-            user_not_found = True
-    
+    context = {}    
     page_user = NetUser.objects.get(username=username)
     followers = page_user.followers.all().order_by("username")
     posts = Post.objects.filter(author=page_user).order_by('-timestamp')
@@ -51,8 +38,6 @@ def profile_view(request, username):
         'subs': subs, 
         'total_votes': total_votes,
         'is_followed': is_followed,
-        'search_form': search_form,
-        'user_form': user_form,
         })
     return render(request, 'profile.html', context)
 
