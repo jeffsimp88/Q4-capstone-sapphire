@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators, ChangeSubscribers
@@ -43,6 +43,9 @@ def search_request_view(request):
             return redirect(return_url)
         if searched_user_url: 
             return redirect(searched_user_url)
+        else:
+            messages.error(request, "Sorry, not found")
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def search_net(request):
     search = SearchForm(request.POST)
