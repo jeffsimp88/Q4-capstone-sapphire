@@ -66,10 +66,48 @@
         <p>Sorry, post will not appear on private nets unless subscribed.</p>
         {% else %}
 
+        <div class="PostForm">
 
-        <a id="PostButton" href="/makepost/{{net.title}}/">Make a post on n/{{net.title}}</a>
+            <details class="PostFormDetails">
+                <summary> <img style="height: 30px; margin-right: 4px;" src="{% static 'images/post.png' %}"
+                        alt="Post Image"> Post a Post
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/makepost/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <textarea name="content" cols="40" rows="10" placeholder="Post your content...."></textarea>
+                        <input type="submit" value="Post">
 
-        <a id="PostButton" href="/postimage/{{net.title}}/">Post image on n/{{net.title}}</a>
+                    </form>
+                </div>
+            </details>
+            <details class="PostFormDetails">
+                <summary><img style="height: 30px; margin-right: 4px;" src="{% static 'images/image.png' %}"
+                        alt="Post Image"> Post an Image
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/postimage/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                        <input type="submit" value="Post image">
+
+                    </form>
+                </div>
+            </details>
+        </div>
+
         {% for post in posts %}
         {% if post.post_type == "Post" %}
         <div class="NetpostBox">
@@ -114,6 +152,6 @@
         {% endif %}
         {% endfor %}
         {% endif %}
+
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
