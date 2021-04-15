@@ -7,7 +7,6 @@ from net.models import Net
 from net.views import search_net, search_user
 from net.forms import UserSearchForm, SearchForm
 
-
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
     post = Post.objects.get(id=post_id)
@@ -27,16 +26,7 @@ def individual_post_view(request, post_id):
             return redirect(f"/posts/{root_post.id}/")
     comment_form = CommentForm()
     comment_form.fields['header'].label = ""
-    time = (post.timestamp - timezone.now())
-    time_ago = round(time.total_seconds()/3600 *(-1))
-    if time_ago > 24:
-        time_ago = round(time_ago/24)
-        time_ago = f"{time_ago} days ago"
-    elif time_ago <= 1:
-        time_ago = f"less than {time_ago} hour ago"
-    else:
-        time_ago = f"{time_ago} hours ago"
-    context.update({'post': post, 'comments': comments, 'comment_form': comment_form, 'time': time_ago})
+    context.update({'post': post, 'comments': comments, 'comment_form': comment_form,})
     return render(request, 'individual_posts.html', context)
 
 @login_required
