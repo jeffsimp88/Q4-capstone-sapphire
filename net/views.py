@@ -28,12 +28,14 @@ def index_view(request):
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
     popular_nets = Net.objects.all().order_by('-subscribers')[:10]
+    subscribed_nets = request.user.subs.all()
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
         "popular_nets": popular_nets,
         "posts": posts,
-        "newest_nets": newest_nets
+        "newest_nets": newest_nets,
+        "subscribed_nets": subscribed_nets
         })
     return render(request, 'homepage.html', context)
 
