@@ -45,9 +45,6 @@ def create_post_view(request, net_title):
                 content = data['content'],
             )
             return HttpResponseRedirect(f'/nets/{net_title}')
-    form = PostForm()
-    context.update({'form':form})
-    return render(request, 'forms.html', context)
 
 @login_required
 def post_image_view(request, net_title):
@@ -67,9 +64,6 @@ def post_image_view(request, net_title):
             )
             form.save()
             return HttpResponseRedirect(f'/nets/{net_title}')
-    form = PostImage()
-    context.update({'form':form})
-    return render(request, 'forms.html', context)
 
 @login_required
 def post_comment_view(request, post_id):
