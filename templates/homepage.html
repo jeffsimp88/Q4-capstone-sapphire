@@ -66,6 +66,9 @@
                                 <a href="/users/{{post.author.username}}/" id="linkButton">
                                     {{post.author}}
                                 </a>
+                            {% if post.subnet not in subscribed_nets %}
+                            <a id="linkButton" href='/subscribe/{{ post.subnet }}/'>Subscribe</a>
+                            {% endif %}
                             </p>
                         </div>
                         <h3>{{post.header}}</h3>
