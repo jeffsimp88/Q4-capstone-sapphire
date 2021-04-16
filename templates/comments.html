@@ -29,7 +29,7 @@
 </p>
 <p>{{comment.header}}</p>
 
-{% if requests.user.is_authenticated %}
+{% if request.user.is_authenticated %}
 <details class="CommentFormDetails">
     <summary> Comment</summary>
     <div>
