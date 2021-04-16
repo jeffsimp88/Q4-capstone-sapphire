@@ -60,8 +60,11 @@
 
                 {% if request.user.is_authenticated %}
                 <a href="/users/{{request.user}}" id="NavButton">Profile</a>
-                <a id = "NavButton" href="{% url 'notifications' %}" class="navbar-item">Notifications ({{ notifications.count }})</a>
-                <!-- <a href="{% url 'notifications' %}" class="navbar-item">Notifications ({{ notifications.count }})</a> -->
+                <a id="NavButton" href="/notifications/" class="NavButton">Notifications
+                    {% if notifications.count > 0 %}
+                    ({{ notifications.count }})
+
+                    {% endif %}</a>
                 <a id="NavButton" href="/logout">Logout</a>
                 {% else %}
                 <a id="NavButton" href="/login">Login</a>
