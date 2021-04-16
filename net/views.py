@@ -151,24 +151,20 @@ def individual_net_view(request, net_title):
 def subscribe_net(request, net_title):
     current_user = request.user
     current_net = Net.objects.get(title=net_title)
-    print('current_net',current_net)
     check_sub = current_user.subs
-    print('check_sub:', check_sub)
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
-        current_net.subscribers -= 1
-        current_net.save()
-        print("sub_count",current_net.subscribers)
+        # current_net.subscribers -= 1
+        # current_net.save()
         if current_user in current_net.moderators.all():
             current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
         check_sub.add(current_net)
-        current_net.subscribers += 1
-        current_net.save()
-        print("sub_count",current_net.subscribers)
+        # current_net.subscribers += 1
+        # current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 

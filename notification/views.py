@@ -10,7 +10,6 @@ def notifications(request):
     notification_id = request.GET.get('notification', 0)
     extra_id = request.GET.get('extra_id', 0)
     user_notification = Notification.objects.filter(to_user=request.user)
-    print(user_notification)
     if goto != '':
         notification = Notification.objects.get(pk=notification_id)
         notification.is_read = True
@@ -24,7 +23,6 @@ def notifications(request):
     return render(request, 'notifications.html', {"notifications": user_notification})
 
 def create_notification(request, post):
-    print(request,post)
     Notification.objects.create(
         to_user=post.author,
         notification_type="MESSAGE",
