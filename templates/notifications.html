@@ -7,8 +7,8 @@
   <div class="notification">
     <p>
       <a href="/posts/{{notification.post_comment.id}}/">
-        <strong>{{ notification.created_by.username }}</strong> You got
-        comment<br />
+        <strong>{{ notification.to_user.username }}</strong> You got
+        comment from {{notification.created_by.username}}<br />
         <small>{{ notification.created_at|timesince }} ago</small>
       </a>
     </p>
