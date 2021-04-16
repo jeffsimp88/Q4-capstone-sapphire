@@ -29,15 +29,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
 LOGIN_URL = "/login/"
 
-# STATICFILES_DIRS = [
-#     BASE_DIR/'static'
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR/'static'
+]
 
 # Application definition
 
@@ -147,12 +147,9 @@ CORS_ALL_ALL_ORIGINS = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
-
-MEDIA_URL = '/static/media/'
+MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'net_user_app.NetUser'
 
