@@ -19,6 +19,8 @@
     flex-direction: column;
 }
 
+
+
 #titleBox{
     background-color: var(--blue);
     border: 1px solid var(--blue);
@@ -34,21 +36,21 @@
     margin-left:460px
 }
 
-input[name=title]{
+/* input[name=title]{
     
+} */
+
+.newnet-submit {
+   width: 100px;
 }
 
-input[type=submit]{
-    width: 100px;
-}
-
-textarea[name=description]{
+/* textarea[name=description]{
     
 }
 
 textarea[name=rules]{
 
-}
+} */
 
 label[for=id_title]{
     color: var(--yellow);
@@ -73,5 +75,6 @@ label[for=id_private]{
 select[name=private]{
     color: var(--yellow);
     margin-bottom: 15px;
+    
 
 }
