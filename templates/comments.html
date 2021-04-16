@@ -29,6 +29,7 @@
 </p>
 <p>{{comment.header}}</p>
 
+{% if request.user.is_authenticated %}
 <details class="CommentFormDetails">
     <summary> Comment</summary>
     <div>
@@ -43,6 +44,16 @@
         </form>
     </div>
 </details>
+{% else %}
+<details class="CommentFormDetails">
+    <summary> Comment</summary>
+    <div>
+        <p>Please <a id="linkButton" href="/login/">login</a> to comment</p>
+    </div>
+</details>
+{% endif %}
+
+
 {% if comment.get_comments %}
 {% for comment in comment.get_comments %}
 {% block comments %}

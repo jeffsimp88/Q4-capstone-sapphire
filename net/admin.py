@@ -17,19 +17,20 @@ class NetAdmin(admin.ModelAdmin):
         )
     fieldsets = (
         (None, {
-            "fields": ('title', 'description', 'rules', 'moderators', 'creation_date', 'private'),
+            "fields": ('title', 'description', 'rules', 'moderators', 'creation_date', 'private', 'subscribers'),
         }),
     )
     
     add_fieldsets = (
         (None, {
             'classes':('wide'), 
-            'fields': ('title', 'description', 'rules', 'moderators', 'creation_date', 'private'),
+            'fields': ('title', 'description', 'rules', 'moderators', 'creation_date', 'private','subscribers'),
         },),)
     ordering = (
         'title',
         'creation_date',
         'private',
+        'subscribers',
         )
 
 admin.site.register(Net, NetAdmin)
