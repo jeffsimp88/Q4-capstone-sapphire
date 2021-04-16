@@ -22,3 +22,12 @@ def notifications(request):
             return redirect('view_application', application_id=notification.extra_id)
 
     return render(request, 'notifications.html', {"notifications": user_notification})
+
+def create_notification(request, post):
+    print("working")
+    Notification.objects.create(
+        to_user=post.author,
+        notification_type="MESSAGE",
+        created_by=request.user,
+        post_comment=post,
+        )

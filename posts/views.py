@@ -6,6 +6,7 @@ from posts.models import Post
 from net.models import Net
 from net.views import search_net, search_user
 from net.forms import UserSearchForm, SearchForm
+from notification.views import create_notification
 
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
@@ -81,7 +82,8 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
-            create_notification(request, post.created_by, 'new_post', extra_id=new_post.id)
+            print("yeah85")
+            create_notification(request, post)
             return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
     header = f'Post a comment on \"{post.header}\":'
