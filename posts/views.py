@@ -6,6 +6,7 @@ from posts.models import Post
 from net.models import Net
 from net.views import search_net, search_user
 from net.forms import UserSearchForm, SearchForm
+from notification.views import create_notification
 
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
@@ -68,6 +69,7 @@ def post_image_view(request, net_title):
 @login_required
 def post_comment_view(request, post_id):
     post = Post.objects.filter(id=post_id).first()
+    post.created_by = request.user
     root_post = post.get_root()
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -80,6 +82,7 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
+            create_notification(request, post)
             return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
     header = f'Post a comment on \"{post.header}\":'
@@ -94,8 +97,8 @@ def upvotes_view(request, post_id):
     if post in current_user.has_liked.all():
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        current_user.has_liked.add(post)
-        current_user.has_disliked.remove(post)
+        # current_user.has_liked.add(post)
+        # current_user.has_disliked.remove(post)
         post.upvotes +=1
         current_user.save()
         post.save()
@@ -108,8 +111,8 @@ def downvotes_view(request, post_id):
     if post in current_user.has_disliked.all():
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        current_user.has_disliked.add(post)
-        current_user.has_liked.remove(post)
+        # current_user.has_disliked.add(post)
+        # current_user.has_liked.remove(post)
         post.downvotes +=1
         current_user.save()
         post.save()
