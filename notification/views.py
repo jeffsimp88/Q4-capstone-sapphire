@@ -24,7 +24,7 @@ def notifications(request):
     return render(request, 'notifications.html', {"notifications": user_notification})
 
 def create_notification(request, post):
-    print("working")
+    print(request,post)
     Notification.objects.create(
         to_user=post.author,
         notification_type="MESSAGE",
