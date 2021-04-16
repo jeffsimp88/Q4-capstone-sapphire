@@ -8,8 +8,13 @@
     background-color: var(--blue);
     width: 35%;
     height: fit-content;
-    padding: 10px;
     margin: 10px;
+    border-radius: 25px 0px;
+}
+
+.profileBody>div{
+    padding: 15;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .profilebox{
@@ -24,6 +29,7 @@
     z-index: 1;
 }
 
+
 #portholeImg{
     width: 107%;
     position: absolute;
@@ -36,6 +42,31 @@
     /* z-index: 1; */
 }
 
+#UpdateProfileButton{
+    text-decoration: none;
+    text-align: center;
+    font-family: var(--barlow-font);
+    font-weight: 500;
+    font-size: 15px;
+    background-color: var(--blue);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 3px;    
+    border-radius: 3px;
+    transition-duration: .2s;
+}
+
+#UpdateProfileButton:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+
+.ProfileFollowlist{
+    background-color: var(--lightblue);
+}
+
+
+/* Profile's Post List */
 .profilePostList{
     background-color: var(--gray);
     margin: 10px;

@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1 class="title">Notifications</h1>
+
+  {% if not notifications %} No notifications yet! {% endif %}
+  {% for notification in notifications %}
+  <div class="notification">
+    <p>
+      <a href="/posts/{{notification.post_comment.root.id}}/">
+        <strong>{{ notification.to_user.username }}</strong> You got
+        comment from {{notification.created_by.username}}<br />
+        <small>{{ notification.created_at|timesince }} ago</small>
+      </a>
+    </p>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

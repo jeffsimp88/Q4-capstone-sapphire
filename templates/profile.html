@@ -5,61 +5,66 @@
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <div class="profilePage">
     <div class="profileBody">
-        <h3>user: {{user.username}}</h3>
-        <div class="ProfileBox">
-            <img id="portholeImg" src="{%static 'images/porthole.png' %}" alt="">
-            {% if user.profile_image %}
-            <img id="profileImg" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+        <div class="ProfileDetials">
+            <h3>user: {{user.username}}</h3>
+            <div class="ProfileBox">
+                <img id="portholeImg" src="{%static 'images/porthole.png' %}" alt="">
+                {% if user.profile_image %}
+                <img id="profileImg" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+                {% else %}
+                <img id="profileImg" style="width: 77%;" src="{%static 'images/default_profile_img.png' %}"
+                    alt="Default Image">
+                {% endif %}
+            </div>
+
+            <p>total votes: {{total_votes}}</p>
+
+            {% if request.user.is_authenticated %}
+            {% if user != request.user %}
+            {% if is_followed %}
+            <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
             {% else %}
-            <img id="profileImg" style="width: 77%;" src="{%static 'images/default_profile_img.png' %}"
-                alt="Default Image">
+            <a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+
+
+
+            {% if user.bio %}
+            <p>bio: {{user.bio}}</p>
+            {% endif %}
+
+            <p>email: {{user.email}}</p>
+            {% if user == request.user %}
+            <br>
+            <a href="/updateuser/{{user.id}}/" id="UpdateProfileButton">update profile</a>
+            {% if messages %}
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="ProfileFollowlist">
+            {% if followers %}
+            <h5>Users Following:</h5>
+            {% for follower in followers %}
+            <li><a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a></li>
+            {% endfor %}
             {% endif %}
         </div>
 
-        <p>total votes: {{total_votes}}</p>
-
-        {% if request.user.is_authenticated %}
-        {% if user != request.user %}
-        {% if is_followed %}
-        <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
-        {% else %}
-        <a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
-        {% endif %}
-        {% endif %}
-        {% endif %}
+        <div class="ProfileSubsList">
+            {% if subs %}
+            <h5>Nets Subscribed:</h5>
+            {% for sub in subs %}
+            <li><a href="/nets/{{sub.title}}/" id="linkButton">n/{{sub}}</a></li>
+            {% endfor %}
+            {% endif %}
+        </div>
 
 
-
-        {% if user.bio %}
-        <p>bio: {{user.bio}}</p>
-        {% endif %}
-
-        <p>email: {{user.email}}</p>
-
-        {% if followers %}
-        <h5>Users Following:</h5>
-        {% for follower in followers %}
-        <li><a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a></li>
-        {% endfor %}
-        {% endif %}
-
-        {% if subs %}
-        <h5>Nets Subscribed:</h5>
-        {% for sub in subs %}
-        <li><a href="/nets/{{sub.title}}/" id="linkButton">n/{{sub}}</a></li>
-        {% endfor %}
-        {% endif %}
-
-
-        {% if user == request.user %}
-        <br>
-        <a href="/updateuser/{{user.id}}/" id="linkButton">update profile</a>
-        {% if messages %}
-        {% for message in messages %}
-        <h3>{{message}}</h3>
-        {% endfor %}
-        {% endif %}
-        {% endif %}
 
     </div>
 
