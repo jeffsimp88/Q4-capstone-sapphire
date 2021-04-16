@@ -6,7 +6,7 @@
   {% for notification in notifications %}
   <div class="notification">
     <p>
-      <a href="/posts/{{notification.post_comment.id}}/">
+      <a href="/posts/{{notification.post_comment.root.id}}/">
         <strong>{{ notification.to_user.username }}</strong> You got
         comment from {{notification.created_by.username}}<br />
         <small>{{ notification.created_at|timesince }} ago</small>
