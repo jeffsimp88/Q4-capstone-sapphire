@@ -6,7 +6,7 @@ from posts.models import Post
 from net.models import Net
 from net.views import search_net, search_user
 from net.forms import UserSearchForm, SearchForm
-from notification.views import create_notification
+from notification.views import create_comment_notification, create_subnet_notifications
 
 def individual_post_view(request, post_id):
     context = {'header': "Post Details"}
@@ -45,6 +45,7 @@ def create_post_view(request, net_title):
                 header = data['header'],
                 content = data['content'],
             )
+            create_subnet_notifications(request, subnet, new_post)
             return HttpResponseRedirect(f'/nets/{net_title}')
 
 @login_required
@@ -64,6 +65,7 @@ def post_image_view(request, net_title):
                 image = data['image'],
             )
             form.save()
+            create_subnet_notifications(request, subnet, new_post)
             return HttpResponseRedirect(f'/nets/{net_title}')
 
 @login_required
@@ -82,7 +84,8 @@ def post_comment_view(request, post_id):
                 parent = post,
                 subnet = post.subnet
             )
-            create_notification(request, post)
+            print(post.id)
+            create_comment_notification(request, post)
             return redirect(f"/posts/{root_post.id}/")
     form = CommentForm()
     header = f'Post a comment on \"{post.header}\":'
