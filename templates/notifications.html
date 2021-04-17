@@ -8,8 +8,15 @@
   <div class="NotifBox">
     <h1 class="title">Notifications</h1>
 
+    {% if not user_notifications %}
+    <p>No new notifications</p>
+
+    {% endif %}
+
 
     <div class="NotifList">
+
+
       {% for notification in user_notifications %}
 
       {% if not notification.is_read %}
@@ -39,7 +46,6 @@
 
 
       {% endif %}
-
       {% endfor %}
     </div>
     <a href="/makeallread/" id="NotifButton">Mark all as Read</a>
