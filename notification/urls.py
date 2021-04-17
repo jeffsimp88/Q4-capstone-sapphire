@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from notification import views
-from .views import notifications
 
 urlpatterns = [
     path('notifications/', views.notifications, name='notifications'),
+    path('makeallread/', views.mark_as_read, name="Mark all as Read"),
 ]
