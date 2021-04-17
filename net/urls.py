@@ -12,3 +12,4 @@ urlpatterns = [
 ]
 
 handler404 = 'net.views.error_404_view'
+handler500 = 'net.views.error_500_view'
