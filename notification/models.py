@@ -1,10 +1,10 @@
 from django.db import models
 from django.conf import settings
-User = settings.AUTH_USER_MODEL
 from posts.models import Post
 from net.models import Net
 
 
+User = settings.AUTH_USER_MODEL
 class Notification(models.Model):
 
     CHOICES = (
