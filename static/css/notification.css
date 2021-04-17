@@ -1,0 +1,47 @@
+.NotifPage{
+    display: flex;
+    justify-content: center;
+}
+
+.NotifBox{
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0px 35px;
+    border-radius: 20px;
+    margin: 60px 0px 20px 0px;
+    color: white;
+    width: fit-content;
+}
+
+#NotifLink{
+    text-decoration: none;
+    color: var(--yellow);
+    transition-duration: .2s;
+}
+
+#NotifLink:hover{
+    color: var(--lightblue);
+}
+
+#NotifButton{
+    outline: none;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 2px solid var(--yellow);
+    font-family: var(--roboto);
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 3px;
+    margin: 15px 3px;
+    transition-duration: .2s;
+}
+
+#NotifButton:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
