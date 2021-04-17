@@ -60,8 +60,14 @@
 
                 {% if request.user.is_authenticated %}
                 <a href="/users/{{request.user}}" id="NavButton">Profile</a>
-                <a id="NavButton" href="/notifications/" class="NavButton">Notifications</a>
                 <a id="NavButton" href="/logout">Logout</a>
+                <a href="/notifications/" class="NavNotifButton">
+                    {% if notifications.count > 0 %}
+                    <div id="NotifNumberUnRead">{{ notifications.count }}</div>
+                    {% else %}
+                    <div id="NotifNumberRead"></div>
+                    {% endif %}
+                </a>
                 {% else %}
                 <a id="NavButton" href="/login">Login</a>
                 or
