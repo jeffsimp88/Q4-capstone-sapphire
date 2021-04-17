@@ -6,8 +6,8 @@ from .models import Notification
 @login_required
 def notifications(request):
     context ={}
-    user_notification = Notification.objects.filter(to_user=request.user) 
-    context.update({"user_notifications": user_notification})
+    user_notification = Notification.objects.filter(to_user=request.user)
+    context.update({"user_notifications": user_notification.filter(is_read=False)})
     return render(request, 'notifications.html', context)
 
 def create_comment_notification(request, post):
