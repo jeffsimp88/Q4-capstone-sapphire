@@ -62,3 +62,49 @@ details:focus, summary:focus{
     outline: none;
 }
 
+
+.Errorpage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Errorbox{
+    width: fit-content;
+    background-color: var(--blue);
+    color: var(--yellow);
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin: 50px;
+}
+
+.Errorbox>h1{
+    display: flex;
+    font-family: var(--fredoka-font);
+    font-size: 120px;
+    margin: 20px 0px;
+    align-items: center;
+}
+.Errorbox>h2{
+    margin: 20px 0px;
+}
+
+.Errorlink{
+    color: var(--yellow);
+    text-decoration: none;
+    transition-duration: .2s;
+    font-family: var(--barlow-reg);
+    border: 1px solid var(--yellow);
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.Errorlink:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+
