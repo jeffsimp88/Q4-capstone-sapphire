@@ -4,28 +4,36 @@ from .models import Notification
 
 
 @login_required
-
 def notifications(request):
-    goto = request.GET.get('goto', '')
-    notification_id = request.GET.get('notification', 0)
-    extra_id = request.GET.get('extra_id', 0)
-    user_notification = Notification.objects.filter(to_user=request.user)
-    if goto != '':
-        notification = Notification.objects.get(pk=notification_id)
-        notification.is_read = True
-        notification.save()
+    context ={}
+    user_notification = Notification.objects.filter(to_user=request.user) 
+    context.update({"user_notifications": user_notification})
+    return render(request, 'notifications.html', context)
 
-        if notification.notification_type == Notification.MESSAGE:
-            return redirect('view_application', application_id=notification.extra_id)
-        elif notification.notification_type == Notification.APPLICATION:
-            return redirect('view_application', application_id=notification.extra_id)
-
-    return render(request, 'notifications.html', {"notifications": user_notification})
-
-def create_notification(request, post):
+def create_comment_notification(request, post):
     Notification.objects.create(
         to_user=post.author,
-        notification_type="MESSAGE",
+        notification_type="Post",
         created_by=request.user,
         post_comment=post,
+        subnet = post.subnet
         )
+
+def create_subnet_notifications(request, subnet, post):
+    moderators = subnet.moderators.all()
+    for mod in moderators:
+        Notification.objects.create(
+            to_user=mod,
+            notification_type="Subnet",
+            created_by=request.user,
+            post_comment = post,
+            subnet=subnet,
+        )
+
+def mark_as_read(request):
+    user_notifications = Notification.objects.filter(to_user=request.user)
+    unread_notifications = user_notifications.filter(is_read = False)
+    for notif in unread_notifications:
+        notif.is_read = True
+        notif.save()
+    return redirect("/notifications/")
