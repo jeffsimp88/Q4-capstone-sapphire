@@ -1,0 +1,80 @@
+/* .form-container{
+    display: flex;
+    flex-direction: column;
+} */
+
+.newnet-form{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.newnet-h1{
+    color: var(--yellow);
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+#titleBox{
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-radius: 20px;
+    margin-top: 100px;
+    color: white;
+    width: 50%;
+    margin-left:460px
+}
+
+/* input[name=title]{
+    
+} */
+
+.newnet-submit {
+   width: 100px;
+}
+
+/* textarea[name=description]{
+    
+}
+
+textarea[name=rules]{
+
+} */
+
+label[for=id_title]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_description]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_rules]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_private]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+select[name=private]{
+    color: var(--yellow);
+    margin-bottom: 15px;
+    
+
+}

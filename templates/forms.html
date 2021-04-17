@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
 <div id="titleBox">
     {% if logging_in %}
     <h3> Not a current user? <a href="/signup">Signup!</a></h3>
@@ -22,12 +25,19 @@
     <h2>{{header}}</h2>
     {% endif %}
 
-    <form enctype="multipart/form-data" action="" method="POST">
+    
+    <form class=newnet-form enctype="multipart/form-data" action="" method="POST">
+        <h1 class=newnet-h1>Create New Net</h1>
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit!">
-
+        
+        {{ form }}
+        
+    <div class="form-bottom-border"></div>  
+        <input class=newnet-submit type="submit" value="Submit!">
+    
     </form>
+</div>
+    
 
     {% if root_link %}
     <a href="{{root_link}}">Return to Original Post</a>
