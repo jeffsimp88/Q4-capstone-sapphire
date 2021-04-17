@@ -4,40 +4,41 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 
-<div id="titleBox">
-    {% if logging_in %}
-    <h3> Not a current user? <a href="/signup">Signup!</a></h3>
-    <h3> Google <a href="{% provider_login_url 'google' %}">login!</a></h3>
-    {% elif signing_in %}
-    <h3> Already a current user? <a href="/login">Login!</a></h3>
-    <h3> Google <a href="{% provider_login_url 'google' %}">login!</a></h3>
-    {% endif %}
-    {% if messages %}
-    {% for message in messages %}
-    <h3>{{message}}</h3>
-    {% endfor %}
-    {% endif %}
+<div class="FormsPage">
+    <div id="titleBox">
+        {% if header %}
+        <h2>{{header}}</h2>
+        {% endif %}
 
 
-    {% if form %}
+        {% if logging_in %}
+        <h3> Not a current user? <a href="/signup">Signup!</a></h3>
+        <h3><a href="{% provider_login_url 'google' %}">Login</a> with Google! </h3>
+        {% elif signing_in %}
+        <h3> Already a current user? <a href="/login">Login!</a></h3>
+        <h3><a href="{% provider_login_url 'google' %}">Signup</a> with Google! </h3>
+        {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+        {% endif %}
 
-    {% if header %}
-    <h2>{{header}}</h2>
-    {% endif %}
 
-    
-    <form class=newnet-form enctype="multipart/form-data" action="" method="POST">
-        <h1 class=newnet-h1>Create New Net</h1>
-        {% csrf_token %}
-        
-        {{ form }}
-        
-    <div class="form-bottom-border"></div>  
-        <input class=newnet-submit type="submit" value="Submit!">
-    
-    </form>
-</div>
-    
+        {% if form %}
+
+        <form class=newnet-form enctype="multipart/form-data" action="" method="POST">
+
+            {% csrf_token %}
+
+            {{ form }}
+
+            <div class="form-bottom-border"></div>
+            <input class=newnet-submit type="submit" value="Submit!">
+
+        </form>
+    </div>
+
 
     {% if root_link %}
     <a href="{{root_link}}">Return to Original Post</a>
@@ -47,9 +48,6 @@
     <h1>Sorry, you do not have permission to view this page.</h1>
     <a href="/">Back to Home</a>
     {% endif %}
-
-
-
 
 </div>
 {% endblock %}
