@@ -21,8 +21,8 @@ class SignupView(CreateView):
         html = 'forms.html'
         context = {
             'form': form,
-            'heading': "Signup as a User",
-            'signing_in': True,
+            'header': "Signup as a User",
+            'signing_in':True
             }
         return render(req, html, context)
 
@@ -59,7 +59,7 @@ class LoginView(FormView):
         form = LoginForm()
         context = {
             'form': form,
-            'heading': "Login as a User",
+            'header': "Login as a User",
             'logging_in': True,
         }
         return render(req, 'forms.html', context)
