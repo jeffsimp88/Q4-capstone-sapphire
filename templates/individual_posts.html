@@ -58,7 +58,7 @@
         {% if request.user.is_authenticated %}
         <div class="PostCommentForm">
             <p>comment as <a id="linkButton" href="/users/{{request.user.username}}/">{{request.user.username}}</a></p>
-            <form enctype="multipart/form-data" action="" method="POST">
+            <form enctype="multipart/form-data" action="/makecomment/{{post.id}}/" method="POST">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
                 <input type="submit" value="Comment">
