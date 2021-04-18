@@ -10,6 +10,7 @@
         {% if messages %}
         <div class="MessagesList">
             {% for message in messages %}
+
             <div class="MessageBox">
                 <p>{{message.sender}} sent you the message:</p>
                 <p>to {{message.reciever}}, {{message.msg_content}}</p>
@@ -20,6 +21,18 @@
         {% else %}
         <h3>No New Messages</h3>
         {% endif %}
+
+        {% if sent_messages %}
+        <h2>Sent Messages</h2>
+        {% for message in sent_messages %}
+        <div class="MessageBox">
+            <p>{{message.sender}} sent you the message:</p>
+            <p>to {{message.reciever}}, {{message.msg_content}}</p>
+            <p>sent on {{message.created_at}}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+
         <a id="linkButton" href="/users/{{request.user.username}}">Back to Profile</a>
     </div>
 </div>
