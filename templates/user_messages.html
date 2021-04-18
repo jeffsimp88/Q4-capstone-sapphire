@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+
+<div class="MessagesPage">
+    <div class="MessagesBody">
+        <h1>Messages</h1>
+        <form class="MessageForm" enctype="multipart/form-data" action="" method="POST">
+            {% csrf_token %}
+            <input name="msg_content" type="text" placeholder="Send a message..">
+            <input type="submit" value="Send">
+        </form>
+        {% if messages %}
+        <div class="MessagesList">
+            {% for message in messages %}
+
+            {% if message.sender == request.user %}
+
+            <div class="MessageBox User">
+
+                <h4>{{message.msg_content}}</h4>
+                <p title="{{message.sender}} sent on: {{message.created_at}}">you sent {{message.created_at|timesince}}
+                    ago</p>
+            </div>
+            {% else %}
+            <div class="MessageBox Reciever">
+                <h4>{{message.msg_content}}</h4>
+                <p title="{{message.sender}} sent on: {{message.created_at}}">{{message.sender}} sent
+                    {{message.created_at|timesince}} ago</p>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <h3>No New Messages</h3>
+        {% endif %}
+
+
+        <a id="linkButton" href="/users/{{request.user.username}}">Back to Profile</a>
+    </div>
+</div>
+
+
+{% endblock %}
