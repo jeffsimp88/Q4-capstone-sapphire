@@ -9,7 +9,8 @@ class Notification(models.Model):
 
     CHOICES = (
         ('Post', 'Post'),
-        ('Subnet', 'Subnet')
+        ('Subnet', 'Subnet'),
+        ('Message', 'Message'),
     )
 
     to_user = models.ForeignKey(User, related_name='notifications', on_delete=models.CASCADE)

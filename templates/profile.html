@@ -21,6 +21,8 @@
 
             {% if request.user.is_authenticated %}
             {% if user != request.user %}
+            <a id="linkButton" href="/messages/{{user.username}}/">Message {{user.username}}</a>
+            <br>
             {% if is_followed %}
             <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
             {% else %}

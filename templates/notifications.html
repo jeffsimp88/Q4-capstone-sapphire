@@ -40,8 +40,19 @@
             <small>{{ notification.created_at|timesince }} ago</small>
           </a>
         </p>
-      </div>
 
+      </div>
+      {% elif notification.notification_type == 'Message' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/messages/{{notification.created_by.username}}/">
+            <strong>{{ notification.to_user.username }}</strong>, You got
+            a new message from {{notification.created_by.username}}<br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+
+      </div>
       {% endif %}
 
 

@@ -6,21 +6,16 @@
 
 <div class="MessagesPage">
     <div class="MessagesBody">
-        <h1>Messages</h1>
-        {% if messages %}
+        <h1>Messages with users:</h1>
+
         <div class="MessagesList">
-            {% for message in messages %}
-            <div class="MessageBox">
-                <p>{{message.sender}} sent you the message:</p>
-                <p>to {{message.reciever}}, {{message.msg_content}}</p>
-                <p>sent on {{message.created_at}}</p>
-            </div>
+            {% if users %}
+            {% for user in users %}
+            <a href="/messages/{{user.username}}/" id="MessageListLink">{{user.username}}</a>
             {% endfor %}
+            {% endif %}
         </div>
-        {% else %}
-        <h3>No New Messages</h3>
-        {% endif %}
-        <a id="linkButton" href="/users/{{request.user.username}}">Back to Profile</a>
+
     </div>
 </div>
 
