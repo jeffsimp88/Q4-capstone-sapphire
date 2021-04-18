@@ -13,13 +13,74 @@
     border-radius: 10px;
     padding: 15px;
     margin: 25px 10px;
+    width: 400px;
+}
+
+.MessageForm{
+    display: flex;
+    flex-direction: row;
 }
 
 .MessagesBody>h1{
     color: var(--yellow);
 }
 
+.MessageForm input[type=text]{
+    background-color: var(--lightblue);
+    font-family: var(--roboto);
+    font-size: 20px;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    outline: none;
+    width: 98%;
+    padding: 5px;
+}
+
+.MessageForm input[type=submit]{
+    font-family: var(--roboto);
+    border: 1px solid var(--lightblue);
+    color: whitesmoke;
+    background-color: var(--blue);
+    padding: 5px;
+    font-size: 17px;
+    border-radius: 5px;
+    transition-duration: .2s;
+}
+
+.MessageForm input[type=submit]:hover{
+    background-color: var(--lightblue);
+    color: var(--blue);
+}
+
 .MessagesList{
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    width: 90%;
+
+}
+
+.MessageBox{
+    border-radius: 15px;
+    padding: 5px;
+    margin: 3px;
+}
+.MessageBox.User, .MessageBox.Reciever{
+    padding: 3px;
+    padding: 0px 8px;
+}
+
+.MessageBox.User>p, .MessageBox.Reciever>p{
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.MessageBox.User{
+    background-color: rgba(0, 65, 0, 0.7);
+    align-self: flex-end;
+}
+
+.MessageBox.Reciever{
+    background-color: rgba(109, 0, 0, 0.7);
+    align-self: flex-start;
 }
