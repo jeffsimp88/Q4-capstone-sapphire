@@ -5,6 +5,7 @@ from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
 from net.forms import SearchForm, UserSearchForm
+from direct_messages.forms import DirectMessageForm
 
 import os
 
@@ -27,10 +28,9 @@ def profile_view(request, username):
     total_votes = get_total_user_votes(posts)
     if request.user.is_authenticated:
         is_followed = check_follow(request, username)
+        message_form = DirectMessageForm()
     else:
         is_followed = ""
-    search_form = SearchForm()
-    user_form = UserSearchForm()
     context.update({
         "user": page_user,
         'followers': followers,
@@ -38,6 +38,7 @@ def profile_view(request, username):
         'subs': subs,
         'total_votes': total_votes,
         'is_followed': is_followed,
+        'message_form': message_form
         })
     return render(request, 'profile.html', context)
 
