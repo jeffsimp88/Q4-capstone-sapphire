@@ -60,6 +60,7 @@
 
                 {% if request.user.is_authenticated %}
                 <a href="/users/{{request.user}}" id="NavButton">Profile</a>
+                <a href="/messages/" id="NavButton">Messages</a>
                 <a id="NavButton" href="/logout">Logout</a>
                 <a href="/notifications/" class="NavNotifButton">
                     {% if notifications.count > 0 %}

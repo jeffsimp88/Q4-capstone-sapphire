@@ -6,10 +6,10 @@
 
 <div class="MessagesPage">
     <div class="MessagesBody">
-        <h1>Messages</h1>
+        <h1>Messages with <br> {{recieving_user.username}}</h1>
         <form class="MessageForm" enctype="multipart/form-data" action="" method="POST">
             {% csrf_token %}
-            <input name="msg_content" type="text" placeholder="Send a message..">
+            <input name="msg_content" type="text" maxlength="100" placeholder="Send a message..">
             <input type="submit" value="Send">
         </form>
         {% if messages %}
@@ -27,7 +27,8 @@
             {% else %}
             <div class="MessageBox Reciever">
                 <h4>{{message.msg_content}}</h4>
-                <p title="{{message.sender}} sent on: {{message.created_at}}">{{message.sender}} sent
+                <p title="{{message.sender}} sent on: {{message.created_at}}"><a id="MessageBoxLink"
+                        href="/users/{{message.sender.username}}/">{{message.sender}} </a> sent
                     {{message.created_at|timesince}} ago</p>
             </div>
 
@@ -39,7 +40,7 @@
         {% endif %}
 
 
-        <a id="linkButton" href="/users/{{request.user.username}}">Back to Profile</a>
+        <a id="MessageListLink" href="/messages/">Back to Messages</a>
     </div>
 </div>
 
