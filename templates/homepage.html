@@ -13,9 +13,15 @@
             {% if request.user.is_authenticated %}
             <div class="HomeLinkList">
                 <h3 id="h3">Subscribed Nets</h3>
+
+                {% if sub_nets %}
                 {% for net in sub_nets %}
                 <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
                 {% endfor %}
+                {% else %}
+                <p style="color: whitesmoke;">No subscribed nets</p>
+                {% endif %}
+
                 <hr width="100%">
                 <a id='CreateNetButton' href='/newnet/'>Create New Net</a>
             </div>
@@ -47,6 +53,9 @@
                 <a id="linkButton" href="/"> Followers </a>
                 <a id="linkButton" href="/"> Popular </a>
             </div>
+            {% if posts %}
+
+
             {% for post in posts %}
             <div class="HomePageNetTitle">
                 <strong>
@@ -54,16 +63,26 @@
                 {% include "post_component.html" %}
 
             </div>
-
             {% endfor %}
+            {% else %}
+            <div class="HomePageNetTitle">
+                <strong>Subscribed Post Yet</strong>
+            </div>
+            {% endif %}
         </div>
 
         {% if request.user.is_authenticated %}
         <div class="HomePageFollowers">
             <h3>Users Following:</h3>
+
+            {% if followers %}
             {% for follower in followers %}
             <a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a>
             {% endfor %}
+            {% else %}
+            <p style="color: whitesmoke;">No followers</p>
+            {% endif %}
+
         </div>
 
         {% endif %}
