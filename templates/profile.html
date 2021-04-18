@@ -21,6 +21,11 @@
 
             {% if request.user.is_authenticated %}
             {% if user != request.user %}
+            <form enctype="multipart/form-data" action="/sendmessage/{{user.username}}/" method="POST">
+                {% csrf_token %}
+                {{message_form.as_p}}
+                <input type="submit" value="Send Message">
+            </form>
             {% if is_followed %}
             <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
             {% else %}
