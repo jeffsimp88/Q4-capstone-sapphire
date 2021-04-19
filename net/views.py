@@ -74,6 +74,16 @@ def search_user(request):
 
 """ Helper Functions """
 
+def most_popular_posts_helper(request):
+    current_user = request.user
+    user_subs = current_user.subs.all()
+    pop_sub_list = []
+    for sub in user_subs:
+        sub_posts = Post.objects.filter(subnet=sub)
+        pop_sub_list.append(sub_posts)
+    
+    
+
 def most_popular_nets_helper(request):
     return Net.objects.all().order_by('-subscribers')[:10]
 
@@ -155,16 +165,16 @@ def subscribe_net(request, net_title):
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
-        # current_net.subscribers -= 1
-        # current_net.save()
+        current_net.subscribers -= 1
+        current_net.save()
         if current_user in current_net.moderators.all():
             current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
         check_sub.add(current_net)
-        # current_net.subscribers += 1
-        # current_net.save()
+        current_net.subscribers += 1
+        current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
