@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
-from net.views import search_net, search_user
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
-from net.forms import SearchForm, UserSearchForm
+from net.forms import SearchForm
 from direct_messages.forms import DirectMessageForm
 import os
 
