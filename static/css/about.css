@@ -17,7 +17,8 @@
     color: var(--yellow);
     font-family: var(--fredoka-font);
     font-weight: 100;
-    font-size: 50px;
+    font-size: 50px;    
+    text-align: center;
 }
 
 .AboutBox>p{
