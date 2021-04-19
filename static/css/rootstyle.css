@@ -46,8 +46,18 @@ footer{
     position: sticky;
     bottom: 0px;
     margin: 0px;
-    height: 29px;
+    height: 19px;
     padding: 5px;
+}
+
+#aboutUsLink{
+    text-decoration: none;
+    color: whitesmoke;
+    transition-duration: .2s;
+}
+
+#aboutUsLink:hover{
+    text-decoration: underline;
 }
 
 #ThemeButton{
