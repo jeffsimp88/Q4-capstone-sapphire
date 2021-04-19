@@ -32,6 +32,13 @@
     margin-top: 30px;
 }
 
+.HomeLinkList>details{
+    color: whitesmoke;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+} 
+
 .LinkListContainer{
     flex-direction: column;
     justify-content: flex-start;
