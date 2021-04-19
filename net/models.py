@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from django.apps import apps
 
 
 
@@ -17,5 +18,10 @@ class Net(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def total_subscribers(self):
+        users = apps.get_model('net_user_app', 'Netuser')
+        return len(users.objects.filter(subs__title=self.title))
 
     

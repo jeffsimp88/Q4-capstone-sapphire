@@ -30,7 +30,13 @@ def index_view(request):
         popular_nets = most_popular_nets_helper(request)
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
-    popular_nets = Net.objects.all().order_by('-subscribers')[:10]
+    # popular_nets = Net.objects.all().order_by('-subscribers')[:10]
+    popular_nets = Net.objects.all()
+    # popular_nets.sort(key=lambda x:x.total_subscribers, reverse=True)
+    sorted_popular = []
+    for net in popular_nets:
+        sorted_popular.append(net)
+    sorted_popular.sort(key=lambda x:x.total_subscribers, reverse=True)
     if 'orderbypopular' in request.GET.keys():
         posts = most_popular_posts_helper(request)
     if 'orderbydisliked' in request.GET.keys():
@@ -40,7 +46,7 @@ def index_view(request):
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
-        "popular_nets": popular_nets,
+        "popular_nets": sorted_popular[:10],
         "posts": posts,
         "newest_nets": newest_nets,
         "subscribed_nets": subscribed_nets,
@@ -205,6 +211,7 @@ def individual_net_view(request, net_title):
         'user_allowed': allow_user,
         'posts': posts,
         }
+    print(selected_net.total_subscribers)
     return render(request, 'individual_nets.html', context)
 
 
