@@ -5,6 +5,7 @@ from net.forms import CreateNet, SearchForm, ChangeModerators, ChangeSubscribers
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
+from notification.models import Notification
 
 
 
@@ -210,6 +211,7 @@ def individual_net_view(request, net_title):
 def subscribe_net(request, net_title):
     current_user = request.user
     current_net = Net.objects.get(title=net_title)
+    mods = current_net.moderators.all()
     check_sub = current_user.subs
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
@@ -223,6 +225,13 @@ def subscribe_net(request, net_title):
     else:
         check_sub.add(current_net)
         current_net.subscribers += 1
+        for mod in mods:
+            Notification.objects.create(
+            to_user=mod,
+            notification_type="Subscribe",
+            created_by=current_user,
+            subnet=current_net,
+            )
         current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
