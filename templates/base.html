@@ -41,18 +41,14 @@
                 <div class="NavSearchBars">
                     <form class="NavBarForm" action="/searchrequests/" method="POST">
                         {% csrf_token %}
-                        <input type="text" name="search_info" placeholder="Search for Net" maxlength="50" required=""
+                        <input type="text" name="search_info" placeholder="Search" maxlength="50" required=""
                             id="id_search_info">
-                        <input id="searchSubmitButton" type="submit" value="Submit!">
+                        <select name="params" id="search_parmas">
+                            <option value="Nets">Nets</option>
+                            <option value="Users">Users</option>
+                        </select>
+                        <input id="searchSubmitButton" type="submit" value="Search">
                     </form>
-                    <div id="user-search">
-                        <form class="NavBarForm" action="/searchrequests/" method="POST">
-                            {% csrf_token %}
-                            <input type="text" name="user_info" placeholder="Search for User" maxlength="50" required=""
-                                id="id_user_info">
-                            <input id="searchSubmitButton" type="submit" value="Submit!">
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class="NavBarPageLinksList">

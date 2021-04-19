@@ -10,10 +10,8 @@ class CreateNet(forms.Form):
     private = forms.ChoiceField(label="Is this Public or Private", choices=IS_PRIVATE, required=False)
 
 class SearchForm(forms.Form):
-    search_info = forms.CharField(max_length=50, label="", widget=forms.TextInput(attrs={'placeholder': 'Search for Net'}))
-    
-class UserSearchForm(forms.Form):
-    user_info = forms.CharField(max_length=50, label="", widget=forms.TextInput(attrs={'placeholder': 'Search for User'}))
+    search_info = forms.CharField(max_length=50, label="", widget=forms.TextInput(attrs={'placeholder': 'Search'}))
+    params = forms.CharField(max_length=20, label="", required=False)
 
 class CustomMMCF(forms.ModelMultipleChoiceField):
     def label_from_instance(self, member):

@@ -114,13 +114,36 @@
 .NavBarSearch{
     color: white;
 }
-
 .NavBarForm>input{
-background-color: var(--header-lightblue);
-outline: none;
+    outline: none;
 }
+.NavBarForm>input[type=text]{
+    background-color: var(--header-lightblue);
+    outline: none;
+    border: none;
+    padding: 4px 9px;
+    border-radius: 5px;
+    color: whitesmoke;
+    font-family: var(--roboto);
+    font-size: 20px;
+}
+
 .NavBarForm>input::placeholder{
-    color: white;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#search_parmas{
+    outline: none;
+    background-color: var(--blue);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 3px;
+    transition-duration: .2s;
+}
+
+#search_parmas:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
 }
 
 #searchSubmitButton{
@@ -128,6 +151,7 @@ outline: none;
     color: var(--header-yellow);
     background-color: var(--header-blue);
     transition-duration: .2s;
+    padding: 3px;
 }
 
 #searchSubmitButton:hover{
