@@ -95,11 +95,12 @@ def follow_user(request, username):
         return redirect(f'/users/{username}/')
     else:
         check_follower.add(other_user)
-        Notification.objects.create(
-            to_user=other_user,
-            created_by=current_user,
-            notification_type='Follow'
-        )
+        if other_user != current_user:
+            Notification.objects.create(
+                to_user=other_user,
+                created_by=current_user,
+                notification_type='Follow'
+            )
         is_followed = True
         return redirect(f'/users/{username}/')
 

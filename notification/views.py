@@ -11,24 +11,26 @@ def notifications(request):
     return render(request, 'notifications.html', context)
 
 def create_comment_notification(request, post):
-    Notification.objects.create(
-        to_user=post.author,
-        notification_type="Post",
-        created_by=request.user,
-        post_comment=post,
-        subnet = post.subnet
-        )
+    if post.author != request.user:
+        Notification.objects.create(
+            to_user=post.author,
+            notification_type="Post",
+            created_by=request.user,
+            post_comment=post,
+            subnet = post.subnet
+            )
 
 def create_subnet_notifications(request, subnet, post):
     moderators = subnet.moderators.all()
     for mod in moderators:
-        Notification.objects.create(
-            to_user=mod,
-            notification_type="Subnet",
-            created_by=request.user,
-            post_comment = post,
-            subnet=subnet,
-        )
+        if mod != request.user:
+            Notification.objects.create(
+                to_user=mod,
+                notification_type="Subnet",
+                created_by=request.user,
+                post_comment = post,
+                subnet=subnet,
+            )
 
 def mark_as_read(request):
     user_notifications = Notification.objects.filter(to_user=request.user)
