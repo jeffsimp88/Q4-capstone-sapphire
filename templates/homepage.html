@@ -41,6 +41,15 @@
                 <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
                 {% endfor %}
             </div>
+            <div class="HomeLinkList">
+                <h3 id="h3">All Nets</h3>
+                <details>
+                    <summary>List of all nets</summary>
+                    {% for net in nets %}
+                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                    {% endfor %}
+                </details>
+            </div>
 
         </div>
 

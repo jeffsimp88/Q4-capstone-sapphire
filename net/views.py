@@ -5,6 +5,7 @@ from net.forms import CreateNet, SearchForm, ChangeModerators, ChangeSubscribers
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
+from notification.models import Notification
 
 
 
@@ -30,13 +31,20 @@ def index_view(request):
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
     popular_nets = Net.objects.all().order_by('-subscribers')[:10]
+    if 'orderbypopular' in request.GET.keys():
+        posts = most_popular_posts_helper(request)
+    if 'orderbydisliked' in request.GET.keys():
+        posts = disliked_posts_helper(request)
+    if 'orderbyliked' in request.GET.keys():
+        posts = liked_posts_helper(request)
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
         "popular_nets": popular_nets,
         "posts": posts,
         "newest_nets": newest_nets,
-        "subscribed_nets": subscribed_nets
+        "subscribed_nets": subscribed_nets,
+        'nets': nets,
         })
     return render(request, 'homepage.html', context)
 
@@ -66,6 +74,63 @@ def search_request_view(request):
 
 """ Helper Functions """
 
+def follower_popular_posts_helper(request):
+    current_user = request.user
+    followers = current_user.followers.all()
+    follwers_sub_dict = {}
+    for follower in followers:
+        follower_posts = Post.objects.filter(author=follower)
+        original_posts = follower_posts.filter(parent=None)
+        for posts in original_posts:
+            if posts.total_score > 0:
+                follwers_sub_dict[posts] = posts.total_score
+    return dict(reversed(sorted(follwers_sub_dict.items(), key=lambda item: item[1])))
+        
+
+
+def most_popular_posts_helper(request):
+    current_user = request.user
+    user_subs = current_user.subs.all()
+    pop_sub_dict = {}
+    for sub in user_subs:
+        sub_posts = Post.objects.filter(subnet=sub)
+        original_posts = sub_posts.filter(parent=None)
+        for posts in original_posts:
+            if posts.total_score > 0:
+                pop_sub_dict[posts] = posts.total_score
+    return dict(reversed(sorted(pop_sub_dict.items(), key=lambda item: item[1])))
+
+def liked_posts_helper(request):
+    current_user = request.user
+    user_subs = current_user.subs.all()
+    liked_list = []
+    for sub in user_subs:
+        sub_posts = Post.objects.filter(subnet=sub)
+        original_posts = sub_posts.filter(parent=None)
+        for post in original_posts:
+            if current_user in post.has_liked.all():
+                liked_list.append(post)
+    return liked_list
+
+
+def disliked_posts_helper(request):
+    current_user = request.user
+    user_subs = current_user.subs.all()
+    disliked_list = []
+    for sub in user_subs:
+        sub_posts = Post.objects.filter(subnet=sub)
+        original_posts = sub_posts.filter(parent=None)
+        for post in original_posts:
+            if current_user in post.has_disliked.all():
+                disliked_list.append(post)
+    return disliked_list
+
+
+
+def popular_post_view(request):
+    return most_popular_posts_helper(request)
+    
+
 def most_popular_nets_helper(request):
     return Net.objects.all().order_by('-subscribers')[:10]
 
@@ -75,6 +140,8 @@ def recent_posts_helper(request):
     return recent_posts  
 
 """ Helper Functions END """
+
+
 
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
@@ -144,20 +211,28 @@ def individual_net_view(request, net_title):
 def subscribe_net(request, net_title):
     current_user = request.user
     current_net = Net.objects.get(title=net_title)
+    mods = current_net.moderators.all()
     check_sub = current_user.subs
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
-        # current_net.subscribers -= 1
-        # current_net.save()
+        current_net.subscribers -= 1
+        current_net.save()
         if current_user in current_net.moderators.all():
             current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
         check_sub.add(current_net)
-        # current_net.subscribers += 1
-        # current_net.save()
+        current_net.subscribers += 1
+        for mod in mods:
+            Notification.objects.create(
+            to_user=mod,
+            notification_type="Subscribe",
+            created_by=current_user,
+            subnet=current_net,
+            )
+        current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
@@ -203,10 +278,10 @@ def change_subscribers(request, net_title):
 
 
 def error_404_view(request, exception):
-    return render(request,'404.html')
+    return render(request, '404.html')
 
 def error_500_view(request):
-    return render(request,'500.html')
+    return render(request, '500.html')
 
 
 

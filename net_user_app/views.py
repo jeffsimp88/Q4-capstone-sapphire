@@ -5,6 +5,7 @@ from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
 from net.forms import SearchForm
 from direct_messages.forms import DirectMessageForm
+from notification.models import Notification
 import os
 
 def get_total_user_votes(posts):
@@ -93,9 +94,16 @@ def follow_user(request, username):
         return redirect(f'/users/{username}/')
     else:
         check_follower.add(other_user)
+        Notification.objects.create(
+            to_user=other_user,
+            created_by=current_user,
+            notification_type='Follow'
+        )
         is_followed = True
         return redirect(f'/users/{username}/')
 
 
 
-
+def about_us_view(request):
+    context={'header': "About us!"}
+    return render(request, "about.html", context)
