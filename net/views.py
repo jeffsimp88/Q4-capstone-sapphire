@@ -47,20 +47,20 @@ def search_request_view(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            if data['params'] == 'Nets' and data['search_info']:
+            if data['params'] == 'Nets':
                 for net in Net.objects.all():
                     if net.title.casefold() == data['search_info'].casefold():       
                         return HttpResponseRedirect(f"/nets/{net.title}/")
-                    else:
-                        messages.error(request, "Sorry, net not found")
-                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                    
+                messages.error(request, "Sorry, net not found")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             elif data['params'] == 'Users':
                 for user in NetUser.objects.all():
                     if user.username.casefold() == data['search_info'].casefold():
                         return HttpResponseRedirect(f"/users/{user.username}/")
-                    else:
-                        messages.error(request, "Sorry, user not found")
-                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                    
+                messages.error(request, "Sorry, user not found")
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 """ Search Functionality END """
 
