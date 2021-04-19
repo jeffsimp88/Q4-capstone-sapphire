@@ -1,0 +1,34 @@
+.AboutPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.AboutBox{
+    background-color: var(--blue);
+    color: whitesmoke;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 20px 5px;
+}
+
+.AboutBox>h1{
+    color: var(--yellow);
+    font-family: var(--fredoka-font);
+    font-weight: 100;
+    font-size: 50px;
+}
+
+.AboutBox>p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+    margin: 0px 15px;
+}
+#AboutImg{
+    height: 75px;
+    border-radius: 50%;
+    margin: 5px;
+}
