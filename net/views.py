@@ -226,12 +226,13 @@ def subscribe_net(request, net_title):
         check_sub.add(current_net)
         current_net.subscribers += 1
         for mod in mods:
-            Notification.objects.create(
-            to_user=mod,
-            notification_type="Subscribe",
-            created_by=current_user,
-            subnet=current_net,
-            )
+            if mod != current_user:
+                Notification.objects.create(
+                to_user=mod,
+                notification_type="Subscribe",
+                created_by=current_user,
+                subnet=current_net,
+                )
         current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
