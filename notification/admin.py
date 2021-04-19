@@ -19,11 +19,11 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = (
         'to_user',
         'notification_type',
+        'created_by',
         'is_read',
         'post_comment',
         'subnet',
         'created_at',
-        'created_by',
         )
 
     fieldsets = (
