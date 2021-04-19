@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from net.forms import CreateNet, SearchForm, UserSearchForm, ChangeModerators, ChangeSubscribers
+from net.forms import CreateNet, SearchForm, ChangeModerators, ChangeSubscribers
 from net.models import Net
 from net_user_app.models import NetUser
 from posts.models import Post
@@ -44,31 +44,23 @@ def index_view(request):
 
 def search_request_view(request):
     if request.method == 'POST':
-        return_url = search_net(request)
-        searched_user_url = search_user(request)
-        if return_url:
-            return redirect(return_url)
-        if searched_user_url: 
-            return redirect(searched_user_url)
-        else:
-            messages.error(request, "Sorry, not found")
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-def search_net(request):
-    search = SearchForm(request.POST)
-    if search.is_valid():
-        data = (search.cleaned_data)
-        for items in Net.objects.all():
-            if items.title.casefold() == data["search_info"].casefold():       
-                return (f"/nets/{items.title}/")  
-
-def search_user(request):
-    search = UserSearchForm(request.POST)
-    if search.is_valid():
-        data = (search.cleaned_data)
-        for users in NetUser.objects.all():
-            if users.username.casefold() == data['user_info'].casefold():
-                return(f"/users/{users.username}/")
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            if data['params'] == 'Nets' and data['search_info']:
+                for net in Net.objects.all():
+                    if net.title.casefold() == data['search_info'].casefold():       
+                        return HttpResponseRedirect(f"/nets/{net.title}/")
+                    else:
+                        messages.error(request, "Sorry, net not found")
+                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            elif data['params'] == 'Users':
+                for user in NetUser.objects.all():
+                    if user.username.casefold() == data['search_info'].casefold():
+                        return HttpResponseRedirect(f"/users/{user.username}/")
+                    else:
+                        messages.error(request, "Sorry, user not found")
+                        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 """ Search Functionality END """
 
@@ -113,7 +105,8 @@ def create_net_view(request):
                 private=data['private'],
                 )
             new_net.moderators.add(request.user)
-            return redirect("/")
+            request.user.subs.add(new_net)
+            return redirect(f"/nets/{new_net.title}/")
     form = CreateNet()
 
     context = {'header': 'Create New Net', 'form': form}

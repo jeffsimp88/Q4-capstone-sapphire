@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib import messages
-from net.views import search_net, search_user
 from net_user_app.models import NetUser
 from net_user_app.forms import NetUserUpdateForm
 from posts.models import Post
-from net.forms import SearchForm, UserSearchForm
+from net.forms import SearchForm
 from direct_messages.forms import DirectMessageForm
-
 import os
 
 def get_total_user_votes(posts):
@@ -15,9 +13,6 @@ def get_total_user_votes(posts):
     for post in posts:
         total_votes = total_votes + post.total_score
     return total_votes
-
-
-
 
 def profile_view(request, username):
     context = {}    
@@ -61,7 +56,7 @@ def update_user(request, user_id):
     else:
         form = NetUserUpdateForm(initial={'username':current_user.username ,'bio':current_user.bio ,'email':current_user.email , 'profile_image': current_user.profile_image})
 
-    context = {'form': form}
+    context = {'header': 'Update User Info', 'form': form}
     return render(request, 'forms.html', context)
 
 def change_theme(request):
