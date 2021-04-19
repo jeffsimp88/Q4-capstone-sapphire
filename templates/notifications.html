@@ -53,6 +53,28 @@
         </p>
 
       </div>
+      {% elif notification.notification_type == 'Follow' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/users/{{notification.created_by.username}}/">
+            <strong>{{ notification.to_user.username }}</strong>,
+            {{notification.created_by.username}} started following you<br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+
+      </div>
+      {% elif notification.notification_type == 'Subscribe' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/users/{{notification.created_by.username}}/">
+            <strong>{{ notification.to_user.username }}</strong>,
+            {{notification.created_by.username}} subscribed to n/{{notification.subnet}}<br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+
+      </div>
       {% endif %}
 
 
