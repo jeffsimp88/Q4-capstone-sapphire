@@ -116,3 +116,28 @@ input[type=submit]:hover{
     color: var(--blue);
     background-color: var(--yellow);
 }
+
+/* Styling for update user profile form */
+
+#id_username, #id_email, #id_bio, #id_password{
+    background-color: var(--lightblue);
+    color: whitesmoke;
+    font-family: var(--roboto);
+    font-size: 17px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+input#file-upload-button{
+    background-color: var(--blue);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+}
+.newnet-form>a{
+    color: whitesmoke;
+    text-decoration: none;
+}
+#text, #profile_image-clear_id, label[for="profile_image-clear_id"]{
+    display: none;
+}
