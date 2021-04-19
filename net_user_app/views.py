@@ -98,4 +98,6 @@ def follow_user(request, username):
 
 
 
-
+def about_us_view(request):
+    context={'header': "About us!"}
+    return render(request, "about.html", context)
