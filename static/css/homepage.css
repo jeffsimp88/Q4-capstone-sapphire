@@ -75,6 +75,20 @@
     justify-content: space-around;
     width: 500px;
 }
+
+#FilterLink{
+    text-decoration: none;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    padding: 3px;
+    transition-duration: .2s;
+}
+
+#FilterLink:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
   
 .HomePageFeed{
     display: flex;
