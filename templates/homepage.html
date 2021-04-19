@@ -41,11 +41,12 @@
 
         <div class="HomePageFeed">
             <div class="HomeFilter">
-                <p>filter by: </p>
+                <h3>Filter by: </h3>
                 <br>
-                <a id="linkButton" href="/"> Subscribes </a>
-                <a id="linkButton" href="/"> Followers </a>
-                <a id="linkButton" href="/"> Popular </a>
+                <a id="NavButton" href="/?orderbyliked=liked/"> Liked Posts </a>
+                <a id="NavButton" href="/?orderbydisliked=disliked/"> Disliked Posts </a>
+                <a id="NavButton" href="/?orderbypopular=popular/"> Highest Score </a>
+            
             </div>
             {% for post in posts %}
             <div class="HomePageNetTitle">
