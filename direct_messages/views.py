@@ -36,11 +36,12 @@ def user_message_view(request, username):
                 reciever = reciever_user,
                 msg_content = data['msg_content'],
             )
-            Notification.objects.create(
-                to_user=reciever_user,
-                notification_type="Message",
-                created_by=request.user,
-            )
+            if reciever_user != request.user:
+                Notification.objects.create(
+                    to_user=reciever_user,
+                    notification_type="Message",
+                    created_by=request.user,
+                )
             return HttpResponseRedirect(f'/messages/{reciever_user.username}/')
     message_form = DirectMessageForm()
     context={'messages': messages, 'recieving_user': reciever_user}
@@ -58,11 +59,12 @@ def create_message(request, username):
                 sender = request.user,
                 reciever = reciever_user,
                 msg_content = data['msg_content'],
-            )            
-            Notification.objects.create(
-                to_user=reciever_user,
-                notification_type="Message",
-                created_by=request.user,
             )
+            if reciever_user != request.user:            
+                Notification.objects.create(
+                    to_user=reciever_user,
+                    notification_type="Message",
+                    created_by=request.user,
+                )
             return HttpResponseRedirect(f'/users/{reciever_user.username}/')
 
