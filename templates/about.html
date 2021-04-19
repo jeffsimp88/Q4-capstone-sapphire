@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<div class="AboutPage">
+    <div class="AboutBox">
+        <h1>{{header}}</h1>
+        <h2>Subnet Created by:</h2>
+
+        <p><img src="{% static 'images/mike.jpg' %}" id='AboutImg' alt="">Mike Hartley</p>
+
+        <p><img src="{% static 'images/donny.jpg' %}" id='AboutImg' alt="">Donny McClain</p>
+
+        <p><img src="{% static 'images/jeffrey.jpg' %}" id='AboutImg' alt="">Jeffrey Simpson</p>
+
+        <p><img src="{% static 'images/david.jpg' %}" id='AboutImg' alt="">David Sreesangkom</p>
+    </div>
+</div>
+
+
+{% endblock %}
