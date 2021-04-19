@@ -59,8 +59,9 @@
       {% endif %}
       {% endfor %}
     </div>
+    {%if user_notifications %}
     <a href="/makeallread/" id="NotifButton">Mark all as Read</a>
-
+    {% endif %}
   </div>
 </div>
 {% endblock %}
