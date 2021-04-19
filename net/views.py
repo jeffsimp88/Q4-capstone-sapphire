@@ -113,7 +113,8 @@ def create_net_view(request):
                 private=data['private'],
                 )
             new_net.moderators.add(request.user)
-            return redirect("/")
+            request.user.subs.add(new_net)
+            return redirect(f"/nets/{new_net.title}/")
     form = CreateNet()
 
     context = {'header': 'Create New Net', 'form': form}
