@@ -6,4 +6,5 @@ urlpatterns = [
     path('changetheme/', views.change_theme, name="Change Theme"),
     path('follow/<username>/', views.follow_user, name="Follow User"),
     path('updateuser/<int:user_id>/', views.update_user, name="Update User"),
+    path('about/', views.about_us_view, name='About Us'),
 ]
