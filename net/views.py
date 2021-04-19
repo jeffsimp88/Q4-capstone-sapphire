@@ -30,11 +30,13 @@ def index_view(request):
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
     popular_nets = Net.objects.all().order_by('-subscribers')[:10]
+    popular_posts = most_popular_posts_helper(request)
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
         "popular_nets": popular_nets,
         "posts": posts,
+        "popular_posts": popular_posts,
         "newest_nets": newest_nets,
         "subscribed_nets": subscribed_nets
         })
@@ -77,10 +79,15 @@ def search_user(request):
 def most_popular_posts_helper(request):
     current_user = request.user
     user_subs = current_user.subs.all()
-    pop_sub_list = []
+    pop_sub_dict = {}
     for sub in user_subs:
         sub_posts = Post.objects.filter(subnet=sub)
-        pop_sub_list.append(sub_posts)
+        original_posts = sub_posts.filter(parent=None)
+        for posts in original_posts:
+            if posts.total_score > 0:
+                pop_sub_dict[posts] = posts.total_score
+    return dict(reversed(sorted(pop_sub_dict.items(), key=lambda item: item[1])))
+
     
     
 
