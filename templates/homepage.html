@@ -46,13 +46,15 @@
 
 
         <div class="HomePageFeed">
+            {% if request.user.is_authenticated %}
             <div class="HomeFilter">
-                <p>filter by: </p>
-                <br>
-                <a id="linkButton" href="/"> Subscribes </a>
-                <a id="linkButton" href="/"> Followers </a>
-                <a id="linkButton" href="/"> Popular </a>
+                <h3>Filter by: </h3>
+                <a id="FilterLink" href="/?orderbyliked=liked/"> Liked Posts </a>
+                <a id="FilterLink" href="/?orderbydisliked=disliked/"> Disliked Posts </a>
+                <a id="FilterLink" href="/?orderbypopular=popular/"> Highest Score </a>
+
             </div>
+            {% endif %}
             {% if posts %}
 
 
