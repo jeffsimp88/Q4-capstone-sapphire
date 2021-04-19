@@ -36,7 +36,8 @@ def index_view(request):
         "popular_nets": popular_nets,
         "posts": posts,
         "newest_nets": newest_nets,
-        "subscribed_nets": subscribed_nets
+        "subscribed_nets": subscribed_nets,
+        'nets': nets,
         })
     return render(request, 'homepage.html', context)
 

@@ -5,8 +5,10 @@
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <div class="profilePage">
     <div class="profileBody">
-        <div class="ProfileDetials">
-            <h3>user: {{user.username}}</h3>
+        <div class="ProfileDetails">
+            <h3>
+                <p>user: </p> {{user.username}}
+            </h3>
             <div class="ProfileBox">
                 <img id="portholeImg" src="{%static 'images/porthole.png' %}" alt="">
                 {% if user.profile_image %}
@@ -16,28 +18,35 @@
                     alt="Default Image">
                 {% endif %}
             </div>
-
-            <p>total votes: {{total_votes}}</p>
-
-            {% if request.user.is_authenticated %}
-            {% if user != request.user %}
-            <a id="linkButton" href="/messages/{{user.username}}/">Message {{user.username}}</a>
-            <br>
-            {% if is_followed %}
-            <a href="/follow/{{user.username}}/" id="linkButton">Unfollow</a>
-            {% else %}
-            <a href="/follow/{{user.username}}/" id="linkButton">Follow</a>
-            {% endif %}
-            {% endif %}
-            {% endif %}
+            <h4>
+                <p>total catches: </p>
+                {{total_votes}}
+            </h4>
 
 
 
             {% if user.bio %}
-            <p>bio: {{user.bio}}</p>
+            <h4>
+                <p>bio: </p>{{user.bio}}
+            </h4>
+            {% endif %}
+            <h4>
+                <p>email: </p>{{user.email}}
+            </h4>
+
+            {% if request.user.is_authenticated %}
+            {% if user != request.user %}
+            <div class="UserButtons">
+                <a id="MessageButton" href="/messages/{{user.username}}/">Message {{user.username}}</a>
+                {% if is_followed %}
+                <a href="/follow/{{user.username}}/" id="MessageButton">Unfollow</a>
+                {% else %}
+                <a href="/follow/{{user.username}}/" id="MessageButton">Follow</a>
+                {% endif %}
+            </div>
+            {% endif %}
             {% endif %}
 
-            <p>email: {{user.email}}</p>
             {% if user == request.user %}
             <br>
             <a href="/updateuser/{{user.id}}/" id="UpdateProfileButton">update profile</a>
@@ -92,7 +101,6 @@
                 {% endif %}
 
                 {% if post.image %}
-                <br>
                 <img style="width: 300px;" src="{{post.image.url}}" alt="{{post.image}}">
                 {% endif %}
 
@@ -110,7 +118,8 @@
             </p>
             {% endif %}
             <div class="profilePostFooter">
-                <p>total votes: {{post.total_score}} posted: {{post.time_ago}}</p>
+                <p>catches: {{post.total_score}}</p>
+                <p title="{{post.timestamp}}">posted: {{post.time_ago}}</p>
             </div>
         </div>
         {% endfor %}
