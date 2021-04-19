@@ -99,8 +99,8 @@ def upvotes_view(request, post_id):
     if post in current_user.has_liked.all():
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        # current_user.has_liked.add(post)
-        # current_user.has_disliked.remove(post)
+        current_user.has_liked.add(post)
+        current_user.has_disliked.remove(post)
         post.upvotes +=1
         current_user.save()
         post.save()
@@ -113,8 +113,8 @@ def downvotes_view(request, post_id):
     if post in current_user.has_disliked.all():
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        # current_user.has_disliked.add(post)
-        # current_user.has_liked.remove(post)
+        current_user.has_disliked.add(post)
+        current_user.has_liked.remove(post)
         post.downvotes +=1
         current_user.save()
         post.save()
