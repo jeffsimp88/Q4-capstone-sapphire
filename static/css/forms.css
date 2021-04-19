@@ -117,6 +117,14 @@ input[type=submit]:hover{
     background-color: var(--yellow);
 }
 
+/* Styling for search bars */
+
+#id_search_info, #id_user_info{
+    border: none;
+    padding: 4px 9px;
+    border-radius: 5px;
+}
+
 /* Styling for update user profile form */
 
 #id_username, #id_email, #id_bio, #id_password{
