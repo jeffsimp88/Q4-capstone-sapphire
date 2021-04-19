@@ -1,0 +1,118 @@
+.FormsPage{
+    display: flex;
+    justify-content: center;
+}
+.newnet-form{
+    flex-direction: column;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+#titleBox>h2{
+    color: var(--yellow);
+    font-family: 'Barlow Semi Condensed';
+    font-size: 36px;
+    margin: 10px 0px;
+}
+#titleBox>h3{
+    font-family: 'Barlow Semi Condensed';
+    font-size: 25px;
+    font-weight: 500;
+    margin: 5px 0px;
+}
+
+h3>a{
+    text-decoration: none;
+    color: var(--yellow);
+    transition-duration: .2s;
+}
+
+h3>a:hover{
+    color: var(--lightblue);
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#titleBox{
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0px 35px;
+    border-radius: 20px;
+    margin: 60px 0px 20px 0px;
+    color: white;
+    width: fit-content;
+}
+
+.newnet-submit {
+   width: 100px;
+}
+
+label{
+    margin: 5px 0px;
+    outline: none;
+}
+
+input, textarea{
+    outline: none;
+}
+
+label[for=id_title]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_description]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_rules]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+label[for=id_private]{
+    color: var(--yellow);
+    margin-bottom: 5px;
+}
+
+select[name=private]{
+    outline: none;
+    color: var(--yellow);
+    background-color: var(--blue);
+    font-family: var(--roboto);
+    font-size: 16px;
+    padding: 3px;
+    margin-bottom: 15px;
+    transition-duration: .2s;
+}
+select[name=private]:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
+
+input[type=submit]{
+    outline: none;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 2px solid var(--yellow);
+    font-family: var(--roboto);
+    font-size: 16px;
+    font-weight: 800;
+    padding: 3px;
+    margin: 15px 3px;
+    transition-duration: .2s;
+}
+
+input[type=submit]:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}

@@ -1,18 +1,66 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container">
-  <h1 class="title">Notifications</h1>
+{% extends 'base.html' %}
+{% block content %}
 
-  {% if not notifications %} No notifications yet! {% endif %}
-  {% for notification in notifications %}
-  <div class="notification">
-    <p>
-      <a href="/posts/{{notification.post_comment.root.id}}/">
-        <strong>{{ notification.to_user.username }}</strong> You got
-        comment from {{notification.created_by.username}}<br />
-        <small>{{ notification.created_at|timesince }} ago</small>
-      </a>
-    </p>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/notification.css' %}">
+
+<div class="NotifPage">
+  <div class="NotifBox">
+    <h1 class="title">Notifications</h1>
+
+    {% if not user_notifications %}
+    <p>No new notifications</p>
+
+    {% endif %}
+
+
+    <div class="NotifList">
+
+
+      {% for notification in user_notifications %}
+
+      {% if not notification.is_read %}
+      {% if notification.notification_type == 'Subnet' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/posts/{{notification.post_comment.root.id}}/">
+            User, <strong>{{notification.created_by.username}}</strong>,
+            posted on net, n/{{notification.subnet}}
+            <br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+      </div>
+      {% elif notification.notification_type == 'Post' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/posts/{{notification.post_comment.root.id}}/">
+            <strong>{{ notification.to_user.username }}</strong>, You got
+            comment from {{notification.created_by.username}}<br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+
+      </div>
+      {% elif notification.notification_type == 'Message' %}
+      <div class="notification">
+        <p>
+          <a id="NotifLink" href="/messages/{{notification.created_by.username}}/">
+            <strong>{{ notification.to_user.username }}</strong>, You got
+            a new message from {{notification.created_by.username}}<br />
+            <small>{{ notification.created_at|timesince }} ago</small>
+          </a>
+        </p>
+
+      </div>
+      {% endif %}
+
+
+      {% endif %}
+      {% endfor %}
+    </div>
+    <a href="/makeallread/" id="NotifButton">Mark all as Read</a>
+
   </div>
 </div>
-{% endfor %}
 {% endblock %}

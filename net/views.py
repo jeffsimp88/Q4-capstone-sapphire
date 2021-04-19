@@ -116,7 +116,7 @@ def create_net_view(request):
             return redirect("/")
     form = CreateNet()
 
-    context = {'form': form}
+    context = {'header': 'Create New Net', 'form': form}
     return render(request, 'forms.html', context)
 
 
@@ -183,7 +183,7 @@ def change_moderators(request, net_title):
     else:
         form = ChangeModerators(initial={'moderators': current_moderators})
         form.fields['moderators'].queryset = current_subscribers.order_by('username')
-    context = {'form': form}
+    context = {'header': 'Add/Remove Moderators','form': form}
     return render(request, "forms.html", context)
 
 @login_required
@@ -203,7 +203,7 @@ def change_subscribers(request, net_title):
         form=None
     else:
         form = ChangeSubscribers(initial={'subscribers': current_subscribers})
-    context = {'form': form}
+    context = {'header': 'Add/Remove Subscribers', 'form': form}
     return render(request, "forms.html", context)
 
 
@@ -211,6 +211,9 @@ def change_subscribers(request, net_title):
 
 def error_404_view(request, exception):
     return render(request,'404.html')
+
+def error_500_view(request):
+    return render(request,'500.html')
 
 
 

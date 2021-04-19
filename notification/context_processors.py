@@ -1,7 +1,8 @@
-from .models import Notification
+from notification.models import Notification
 
-def notifications(request):
+def get_notifications(request):
     if request.user.is_authenticated:
-        return {'notifications': request.user.notifications.filter(is_read=False)}
+        user_notifications = Notification.objects.filter(to_user=request.user)
+        return {'notifications': user_notifications.filter(is_read=False)}
     else:
         return {'notifications': []}
