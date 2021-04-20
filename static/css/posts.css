@@ -84,8 +84,15 @@ border-bottom: 1px solid white;
     font-size: 25px;
 }
 .postBoxBody {
+    display: flex;
+    flex-direction: column;
 font-size: 15px;
 padding: 0px 10px 0px 10px;
+}
+
+.postBoxBody>img{
+    align-self: center;
+    width: 65%;
 }
 
 .postBoxFooter {
