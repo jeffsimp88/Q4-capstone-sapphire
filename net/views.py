@@ -220,15 +220,15 @@ def subscribe_net(request, net_title):
     is_subscribed = False
     if check_sub.filter(title=current_net).exists():
         check_sub.remove(current_net)
-        current_net.subscribers -= 1
-        current_net.save()
+        # current_net.subscribers -= 1
+        # current_net.save()
         if current_user in current_net.moderators.all():
             current_net.moderators.remove(current_user)
         is_subscribed = False
         return redirect(f'/nets/{net_title}/')
     else:
         check_sub.add(current_net)
-        current_net.subscribers += 1
+        # current_net.subscribers += 1
         for mod in mods:
             if mod != current_user:
                 Notification.objects.create(
@@ -237,7 +237,7 @@ def subscribe_net(request, net_title):
                 created_by=current_user,
                 subnet=current_net,
                 )
-        current_net.save()
+        # current_net.save()
         is_subscribed = True
         return redirect(f'/nets/{net_title}/')
 
