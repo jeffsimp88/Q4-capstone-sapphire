@@ -10,8 +10,6 @@ from notification.models import Notification
 
 
 def index_view(request):
-    net_not_found = False
-    user_not_found = False
     context = {}
     if request.user.is_authenticated:
         followers = request.user.followers.all().order_by("username")
@@ -30,13 +28,7 @@ def index_view(request):
         popular_nets = most_popular_nets_helper(request)
     nets = Net.objects.all().order_by('title')
     newest_nets = Net.objects.all().order_by('-creation_date')[:10]
-    # popular_nets = Net.objects.all().order_by('-subscribers')[:10]
-    popular_nets = Net.objects.all()
-    # popular_nets.sort(key=lambda x:x.total_subscribers, reverse=True)
-    sorted_popular = []
-    for net in popular_nets:
-        sorted_popular.append(net)
-    sorted_popular.sort(key=lambda x:x.total_subscribers, reverse=True)
+    popular_nets = get_popular_nets()
     if 'orderbypopular' in request.GET.keys():
         posts = most_popular_posts_helper(request)
     if 'orderbydisliked' in request.GET.keys():
@@ -46,7 +38,7 @@ def index_view(request):
     context.update({
         "sub_nets": sub_nets,
         'followers': followers,
-        "popular_nets": sorted_popular[:10],
+        "popular_nets": popular_nets[:10],
         "posts": posts,
         "newest_nets": newest_nets,
         "subscribed_nets": subscribed_nets,
@@ -79,6 +71,14 @@ def search_request_view(request):
 """ Search Functionality END """
 
 """ Helper Functions """
+
+def get_popular_nets():
+    sorted_popular = []
+    nets = Net.objects.all()
+    for net in nets:
+        sorted_popular.append(net)
+    sorted_popular.sort(key=lambda x:x.total_subscribers, reverse=True)
+    return sorted_popular
 
 def follower_popular_posts_helper(request):
     current_user = request.user
