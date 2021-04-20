@@ -145,9 +145,6 @@ def recent_posts_helper(request):
     recent_posts = list(posts.order_by('-timestamp')[0:10])
     return recent_posts  
 
-""" Helper Functions END """
-
-
 
 def check_subscribe(request, net_title):
     net_info = Net.objects.get(title=net_title)
@@ -161,6 +158,7 @@ def check_subscribe(request, net_title):
 
 
        
+""" Helper Functions END """
 
 
 def create_net_view(request):
@@ -211,10 +209,9 @@ def individual_net_view(request, net_title):
         'user_allowed': allow_user,
         'posts': posts,
         }
-    print(selected_net.total_subscribers)
     return render(request, 'individual_nets.html', context)
 
-
+@login_required
 def subscribe_net(request, net_title):
     current_user = request.user
     current_net = Net.objects.get(title=net_title)
