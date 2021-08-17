@@ -1,7 +1,6 @@
 asgiref @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/9c/90/26/d9fa1dfd567d8ba46faa44b741eb6442f3b97eb9f10a40bc1ad7a7f10e/asgiref-3.3.1-py3-none-any.whl
 astroid @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/ad/77/92/f88f08f667ea1d24c09a28f96c9ab0fd77c57ef7e34fd4f0955ae9b8ea/astroid-2.5.3-py3-none-any.whl
 certifi @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/d8/df/24/ed696681f34f8916b0aef99138db9a94e37d54684b9829af34a7fd4e39/certifi-2020.12.5-py2.py3-none-any.whl
-cffi @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/6f/3e/aa/695e0fce0a6ea594bbe73f9f18593d2d37564d139fbc8f58d377a00d93/cffi-1.14.5-cp39-cp39-macosx_10_9_x86_64.whl
 chardet @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/11/63/f9/797eda27963177a6b75a340f62aa194d462ea69e6b0dbb77a651fa2b62/chardet-4.0.0-py2.py3-none-any.whl
 cryptography @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/c7/6d/36/40b404429242377c0424cb9957a04887a4be7399a62c1505197845c09f/cryptography-3.4.7-cp36-abi3-macosx_10_10_x86_64.whl
 defusedxml @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/2b/69/07/7b13f7eaf3a4d7af737dcebe24d3d17b1c2a2f457fbddf746f5642bc43/defusedxml-0.7.1-py2.py3-none-any.whl
