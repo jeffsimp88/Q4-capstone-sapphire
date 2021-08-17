@@ -1,0 +1,39 @@
+asgiref @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/9c/90/26/d9fa1dfd567d8ba46faa44b741eb6442f3b97eb9f10a40bc1ad7a7f10e/asgiref-3.3.1-py3-none-any.whl
+astroid @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/ad/77/92/f88f08f667ea1d24c09a28f96c9ab0fd77c57ef7e34fd4f0955ae9b8ea/astroid-2.5.3-py3-none-any.whl
+certifi @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/d8/df/24/ed696681f34f8916b0aef99138db9a94e37d54684b9829af34a7fd4e39/certifi-2020.12.5-py2.py3-none-any.whl
+cffi @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/6f/3e/aa/695e0fce0a6ea594bbe73f9f18593d2d37564d139fbc8f58d377a00d93/cffi-1.14.5-cp39-cp39-macosx_10_9_x86_64.whl
+chardet @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/11/63/f9/797eda27963177a6b75a340f62aa194d462ea69e6b0dbb77a651fa2b62/chardet-4.0.0-py2.py3-none-any.whl
+cryptography @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/c7/6d/36/40b404429242377c0424cb9957a04887a4be7399a62c1505197845c09f/cryptography-3.4.7-cp36-abi3-macosx_10_10_x86_64.whl
+defusedxml @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/2b/69/07/7b13f7eaf3a4d7af737dcebe24d3d17b1c2a2f457fbddf746f5642bc43/defusedxml-0.7.1-py2.py3-none-any.whl
+dj-database-url==0.5.0
+Django @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/80/9f/e8/7dbac946baeff06413dea73548571fa188758ff084c6258f4e50a09137/Django-3.1.7-py3-none-any.whl
+django-allauth @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/ac/37/ed/693b82aea515922cb564fc362da29e4bab31f43ce5db99305edb08c8cc/django-allauth-0.44.0.tar.gz
+django-environ @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/87/d0/e4/2e59fd1e2526f0f52d73260ba0356904cb9c2bcd82299d5a3f88b3e341/django_environ-0.4.5-py2.py3-none-any.whl
+django-heroku==0.3.1
+django-js-asset @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/00/7c/b4/e3ecaf08b9600fd79e9d915c0d908b307b9ce8de512033d71731d19cbc/django_js_asset-1.2.2-py2.py3-none-any.whl
+django-mptt @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/af/12/49/56b4c6bf07216383dc0f2aaf3cb3f0177c5688e704fef8cb32ab2376ef/django_mptt-0.12.0-py2.py3-none-any.whl
+flake8 @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/09/d4/ba/f775b54656730d949029bb13567c7e05972fd4dce4ec8f780263878eae/flake8-3.9.0-py2.py3-none-any.whl
+gunicorn==20.1.0
+idna @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/ef/7f/a9/19cc0b8760bdf6f696290c06532496f8bb29fbdaad044f852fed00ec82/idna-2.10-py2.py3-none-any.whl
+isort @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/2c/6b/32/7acaeb42372692d28a31dfd6de22b903d9a0605a162d2ce42be82c41f5/isort-5.8.0-py3-none-any.whl
+lazy-object-proxy @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/90/b5/8e/8f640c9ef1c6ffccfae726111c6a3299013f6240fac55dbbcab0a78240/lazy_object_proxy-1.6.0-cp39-cp39-macosx_10_14_x86_64.whl
+mccabe @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/96/5e/5f/21ae5296697ca7f94de4da6e21d4936d74029c352a35202e4c339a4253/mccabe-0.6.1-py2.py3-none-any.whl
+mimesis @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/cd/f6/9a/487feb5dd75e4b4e720ac3f881226bd9650a911f1228f0923a07814870/mimesis-4.1.3.tar.gz
+oauthlib @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/cd/73/ce/de02d263260699199b7d71249cfb85d546e2d53bbf3a508267e87b233e/oauthlib-3.1.0-py2.py3-none-any.whl
+Pillow @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/35/64/6b/72e6b71a0b44c1db7d8e2685bd760d1c5e20ed63a5dcfe938ba8b42441/Pillow-8.2.0-cp39-cp39-macosx_10_10_x86_64.whl
+psycopg2==2.9.1
+pycodestyle @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/4c/30/97/026c283ef67eb248e5b7e6fad1f8ffb99dae50c11fd93eb939fd7c1f46/pycodestyle-2.7.0-py2.py3-none-any.whl
+pycparser @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/37/8e/5a/0ea4f84bc7f11e0e3468110efa2c7783241ea7eaa63a92a751de06f78f/pycparser-2.20-py2.py3-none-any.whl
+pyflakes @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/eb/c4/2c/47fcc1b3f387b1f7033e85b3ac6ee7772338461a8de8ac3977c6a7dcc1/pyflakes-2.3.1-py2.py3-none-any.whl
+PyJWT @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/33/2d/3b/c07cd30707fdf78d1c8279fdbc13b6aca325b3091040eff97623d32f78/PyJWT-2.1.0-py3-none-any.whl
+pylint @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/78/90/93/3544455b4ba81d1beb909e21a95594505c5c120e1210a4dcf598355859/pylint-2.7.4-py3-none-any.whl
+python3-openid @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/1f/82/2a/9ee77fff1d166e4fb92a4e474625188183ed34c63cf73820cd4c41120a/python3_openid-3.2.0-py3-none-any.whl
+pytz @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/b0/a7/8d/54de3ab4d1ff29abbbca1e9ccbaefdc2a1b290138311b84f73bee16de1/pytz-2021.1-py2.py3-none-any.whl
+requests @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/22/0a/9d/0df883fbffbb406d0cddbb35e881e4ac6bfb8f0dee8733056b6a054bf7/requests-2.25.1-py2.py3-none-any.whl
+requests-oauthlib @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/11/f5/eb/81a5da1da15ae0d7c5c1cc43f729856e59f8a0f09c77051ed1841bd01d/requests_oauthlib-1.3.0-py2.py3-none-any.whl
+sqlparse @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/bc/af/02/8aa71b17fd39b26b858293918c5c6412f83768a0bfd0a4626f660aa5f8/sqlparse-0.4.1-py3-none-any.whl
+toml @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/6b/6a/c9/53b19f7870a77d855e8b05ecdc98193944e5d246dafe11bbcad850ecba/toml-0.10.2-py2.py3-none-any.whl
+urllib3 @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/fa/fd/9d/56169af5b3d1505ce8a40dc152136e8733b2df5060a6f86f013a1a9b3d/urllib3-1.26.4-py2.py3-none-any.whl
+vercel @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/e8/7a/c2/3f81ab35542a08c9a9e7c848b2916c81a29d010bbabdd11baf3338e45c/vercel-0.2.1-py3-none-any.whl
+whitenoise==5.3.0
+wrapt @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/6c/e2/d9/2c022794d212a87320efa16fd1b05654bf6656b6cf0510c072845ecc95/wrapt-1.12.1.tar.gz

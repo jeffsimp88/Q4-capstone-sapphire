@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
 
 env = environ.Env()
 
@@ -140,6 +141,8 @@ USE_TZ = True
 
 CORS_ALL_ALL_ORIGINS = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -175,3 +178,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+django_heroku.settings(locals())
