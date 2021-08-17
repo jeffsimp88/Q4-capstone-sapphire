@@ -2,7 +2,7 @@ asgiref @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/9c/90/26/d
 astroid @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/ad/77/92/f88f08f667ea1d24c09a28f96c9ab0fd77c57ef7e34fd4f0955ae9b8ea/astroid-2.5.3-py3-none-any.whl
 certifi @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/d8/df/24/ed696681f34f8916b0aef99138db9a94e37d54684b9829af34a7fd4e39/certifi-2020.12.5-py2.py3-none-any.whl
 chardet @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/11/63/f9/797eda27963177a6b75a340f62aa194d462ea69e6b0dbb77a651fa2b62/chardet-4.0.0-py2.py3-none-any.whl
-cryptography @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/c7/6d/36/40b404429242377c0424cb9957a04887a4be7399a62c1505197845c09f/cryptography-3.4.7-cp36-abi3-macosx_10_10_x86_64.whl
+# cryptography @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/c7/6d/36/40b404429242377c0424cb9957a04887a4be7399a62c1505197845c09f/cryptography-3.4.7-cp36-abi3-macosx_10_10_x86_64.whl
 defusedxml @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/2b/69/07/7b13f7eaf3a4d7af737dcebe24d3d17b1c2a2f457fbddf746f5642bc43/defusedxml-0.7.1-py2.py3-none-any.whl
 dj-database-url==0.5.0
 Django @ file:///Users/mikehartley/Library/Caches/pypoetry/artifacts/80/9f/e8/7dbac946baeff06413dea73548571fa188758ff084c6258f4e50a09137/Django-3.1.7-py3-none-any.whl
