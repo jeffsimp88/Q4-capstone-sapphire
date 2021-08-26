@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<div class="profilePage">
+    <div class="profileBody">
+        <div class="ProfileDetails">
+            <h3>
+                <p>user: </p> {{user.username}}
+            </h3>
+            <div class="ProfileBox">
+                <img id="portholeImg" src="{%static 'images/porthole.png' %}" alt="">
+                {% if user.profile_image %}
+                <img id="profileImg" src="{{user.profile_image.url}}" alt="{{user.username}}'s profile image">
+                {% else %}
+                <img id="profileImg" style="width: 77%;" src="{%static 'images/default_profile_img.png' %}"
+                    alt="Default Image">
+                {% endif %}
+            </div>
+            <h4>
+                <p>total catches: </p>
+                {{total_votes}}
+            </h4>
+
+
+
+            {% if user.bio %}
+            <h4>
+                <p>bio: </p>{{user.bio}}
+            </h4>
+            {% endif %}
+            <h4>
+                <p>email: </p>{{user.email}}
+            </h4>
+
+            {% if request.user.is_authenticated %}
+            {% if user != request.user %}
+            <div class="UserButtons">
+                <a id="MessageButton" href="/messages/{{user.username}}/">Message {{user.username}}</a>
+                {% if is_followed %}
+                <a href="/follow/{{user.username}}/" id="MessageButton">Unfollow</a>
+                {% else %}
+                <a href="/follow/{{user.username}}/" id="MessageButton">Follow</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endif %}
+
+            {% if user == request.user %}
+            <br>
+            <a href="/updateuser/{{user.id}}/" id="UpdateProfileButton">update profile</a>
+            {% if messages %}
+            {% for message in messages %}
+            <h3>{{message}}</h3>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="ProfileFollowlist">
+            <h5>Users Following:</h5>
+            {% if followers %}
+            {% for follower in followers %}
+            <li><a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a></li>
+            {% endfor %}
+            {% else %}
+            <p>Not following anyone.</p>
+            {% endif %}
+        </div>
+
+        <div class="ProfileSubsList">
+            <h5>Nets Subscribed:</h5>
+            {% if subs %}
+            {% for sub in subs %}
+            <li><a href="/nets/{{sub.title}}/" id="linkButton">n/{{sub}}</a></li>
+            {% endfor %}
+            {% else %}
+            <p>Not subscribed to any nets.</p>
+            {% endif %}
+        </div>
+
+
+
+    </div>
+
+    <div class="profilePostList">
+        <h3>{{user.username}}'s posts:</h3>
+        {% if posts %}
+        {% for post in posts %}
+        <div class="profilePostBox">
+            {% if post.post_type == "Post" %}
+            <div class="profilePostHeader">
+                <p class="profilePost">Posted in
+                    <a href="/nets/{{post.subnet.title}}/" id="linkButton">n/{{post.subnet.title}}</a>
+                    :
+            </div>
+            <div class="profilePostBody">
+                <a href="/posts/{{post.id}}/" id="linkButton">{{post.header}}</a>
+                {% if post.content %}
+                <p>{{post.content}}</p>
+                {% endif %}
+
+                {% if post.image %}
+                <img style="width: 300px;" src="{{post.image.url}}" alt="{{post.image}}">
+                {% endif %}
+
+
+
+            </div>
+            </p>
+            {% else %}
+            <div class="profilePostHeader">
+                <p class="profileComment">Commented on
+                    <a href="/posts/{{post.root.id}}/" id="linkButton">post</a>
+                    :
+            </div>
+            <div class="profilePostBody"><a href="/posts/{{post.parent.id}}/" id="linkButton">{{post.header}}</a></div>
+            </p>
+            {% endif %}
+            <div class="profilePostFooter">
+                <p>catches: {{post.total_score}}</p>
+                <p title="{{post.timestamp}}">posted: {{post.time_ago}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>You don't have any posts yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

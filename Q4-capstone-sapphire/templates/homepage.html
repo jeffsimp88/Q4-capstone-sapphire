@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+
+
+<div class="HomePage">
+
+    <div class="HomePageBody">
+        <div class="LinkListContainer">
+            {% if request.user.is_authenticated %}
+            <div class="HomeLinkList">
+                <h3 id="h3">Subscribed Nets</h3>
+
+                {% if sub_nets %}
+                {% for net in sub_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+                {% else %}
+                <p style="color: whitesmoke;">No subscribed nets</p>
+                {% endif %}
+
+                <hr width="100%">
+                <a id='CreateNetButton' href='/newnet/'>Create New Net</a>
+            </div>
+            {% endif %}
+            <div class="HomeLinkList">
+                <h3 id="h3">Most Popular Nets</h3>
+
+                {% for net in popular_nets %}
+
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+
+                {% endfor %}
+            </div>
+            <div class="HomeLinkList">
+                <h3 id="h3">Newest Nets</h3>
+                {% for net in newest_nets %}
+                <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                {% endfor %}
+            </div>
+            <div class="HomeLinkList">
+                <h3 id="h3">All Nets</h3>
+                <details>
+                    <summary>List of all nets</summary>
+                    {% for net in nets %}
+                    <a class='netlink' href='nets/{{ net.title }}/'>n/{{ net.title }}</a>
+                    {% endfor %}
+                </details>
+            </div>
+
+        </div>
+
+
+        <div class="HomePageFeed">
+            {% if request.user.is_authenticated %}
+            <div class="HomeFilter">
+                <h3>Filter by: </h3>
+                <a id="FilterLink" href="/"> All </a>
+                <a id="FilterLink" href="/?orderbyliked=liked/"> Liked Posts </a>
+                <a id="FilterLink" href="/?orderbydisliked=disliked/"> Disliked Posts </a>
+                <a id="FilterLink" href="/?orderbypopular=popular/"> Most Catches </a>
+
+            </div>
+            {% endif %}
+            {% if posts %}
+
+
+            {% for post in posts %}
+            <div class="HomePageNetTitle">
+                <strong>
+                    <a class="Home Net" href='nets/{{ post.subnet }}/'>n/{{post.subnet}}</a></strong>
+                {% include "post_component.html" %}
+
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="HomePageNetTitle">
+                <strong>No Subscribed Post Yet</strong>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <div class="HomePageFollowers">
+            <h3>Users Following:</h3>
+
+            {% if followers %}
+            {% for follower in followers %}
+            <a href="/users/{{follower.username}}/" id="linkButton">{{follower}}</a>
+            {% endfor %}
+            {% else %}
+            <p style="color: whitesmoke;">No followers</p>
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

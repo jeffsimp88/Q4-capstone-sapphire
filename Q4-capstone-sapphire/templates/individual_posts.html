@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+<div class="PostPage">
+
+    <h2>{{header}}</h2>
+
+    <div class="postBox">
+        <div class="postBoxHeader">
+            <div class="DetailLine">
+                <div class="PostScore">
+                    {% if request.user in post.has_liked.all %}
+                    <a href="/upvote/{{post.id}}/"><img id="fishImg" src="{% static 'images/upvote_fish_filled.png' %}"
+                            alt=""></a>
+                    {% else %}
+                    <a href="/upvote/{{post.id}}/"><img id="fishImg" src="{% static 'images/upvote_fish.png' %}"
+                            alt=""></a>
+                    {% endif %}
+                    {{post.total_score}}
+                    {% if request.user in post.has_disliked.all %}
+                    <a href="/downvote/{{post.id}}"><img id="fishImg"
+                            src="{% static 'images/downvote_fish_filled.png' %}" alt=""></a>
+                    {% else %}
+                    <a href="/downvote/{{post.id}}"><img id="fishImg" src="{% static 'images/downvote_fish.png' %}"
+                            alt=""></a>
+                    {% endif %}
+                </div>
+                <a id="linkButton" href="/nets/{{post.subnet.title}}/">n/{{post.subnet.title}}</a>
+                <p>
+                    <strong>posted by user: </strong>
+                    <a href="/users/{{post.author.username}}/" id="linkButton">
+                        {{post.author}}
+                    </a>
+                </p>
+                <p title="{{post.timestamp}}"><strong>posted: </strong>{{post.time_ago}}</p>
+            </div>
+            <h3>{{post.header}}</h3>
+        </div>
+        <div class="postBoxBody">
+
+            {% if post.content %}
+            <p>{{post.content}}</p>
+            {% endif %}
+
+            {% if post.image %}
+            <img src="{{post.image.url}}" alt="{{post.image}}">
+            {% endif %}
+
+
+        </div>
+        <div class="postBoxFooter">
+        </div>
+        <div class="postBoxCommentsBox">
+
+            {% if request.user.is_authenticated %}
+            <div class="PostCommentForm">
+                <p>comment as <a id="linkButton" href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                </p>
+                <form enctype="multipart/form-data" action="/makecomment/{{post.id}}/" method="POST">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="submit" value="Comment">
+
+                </form>
+            </div>
+            {% endif %}
+            {% if comments %}
+            <div class="PostBoxCommentsList">
+                <p>Comments:</p>
+                <ul>
+                    {% for comment in comments %}
+                    {% block comments %}
+                    <div class="postBoxComments Comments1">
+                        {% include "comments.html" %}
+                    </div>
+                    {% endblock %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <a id="linkButton" href="/nets/{{post.subnet.title}}/">Back to n/{{post.subnet.title}}</a>
+</div>
+{% endblock %}

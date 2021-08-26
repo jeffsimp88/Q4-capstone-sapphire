@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+
+<div class="MessagesPage">
+    <div class="MessagesBody">
+        <h1>Messages with users:</h1>
+
+        <div class="MessagesList">
+            {% if users %}
+            {% for user in users %}
+            <a href="/messages/{{user.username}}/" id="MessageListLink">{{user.username}}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

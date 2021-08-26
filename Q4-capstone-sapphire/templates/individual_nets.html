@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/netpage.css' %}">
+
+<div class="NetPage">
+    <div class="NetDetailsBox">
+        <h2 style="text-align: center;">Welcome to n/{{ net.title }}</h2>
+        <hr style="width: 90%;">
+        {% if not user_allowed %}
+        <p style="white-space: pre-line;">Sorry, this net is private.
+            Please contact a moderator for access.
+        </p>
+        {% else %}
+        <div class="NetSubscriber">
+            <p>Subscribers: {{subscribers.count}}</p>
+            {% if request.user.is_authenticated %}
+            {% if is_subscribed %}
+            <a class="NetButton UnSubscribed" href='/subscribe/{{ net.title}}/'><span>Unsubscribe</span></a>
+            {% else %}
+            <a class="NetButton Subscribed" href='/subscribe/{{ net.title}}/'><span>Subscribe</span></a>
+            {% endif %}
+            {% endif %}
+        </div>
+
+        {% endif %}
+
+        {% if net.description %}
+        <div class="NetDescription">
+            <h3>n/{{net.title}}'s Description</h3>
+            <p>{{ net.description | urlize}}</p>
+        </div>
+        {% endif %}
+
+        {% if net.rules %}
+        <div class="NetRules">
+            <h3>n/{{net.title}}'s Rules</h3>
+            <p>{{net.rules | urlize}}</p>
+        </div>
+        {% endif %}
+
+
+
+
+        {% if moderators %}
+        <div class="NetModeratorsList">
+            <h3>n/{{net.title}}'s Moderators</h3>
+            {% for mod in moderators %}
+            <li><a id="linkButton" href="/users/{{mod.username}}/">{{mod}}</a></li>
+            {% endfor %}
+            <br>
+            {% if request.user in moderators %}
+            <a id="EditNetButtons" href="/editmoderators/{{net.title}}/">Edit Moderators</a>
+            <a id="EditNetButtons" href="/editsubscribers/{{net.title}}/">Edit Subscribers</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+
+
+    </div>
+
+    <div class="NetPostListBox">
+
+        {% if not user_allowed %}
+        <p>Sorry, post will not appear on private nets unless subscribed.</p>
+        {% else %}
+
+
+        {% if request.user.is_authenticated %}
+        <div class="PostForm">
+
+            <details class="PostFormDetails">
+                <summary> <img style="height: 30px; margin-right: 4px;" src="{% static 'images/post.png' %}"
+                        alt="Post Image"> Post a Post
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/makepost/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <textarea name="content" cols="40" rows="10" placeholder="Post your content...."></textarea>
+                        <input type="submit" value="Post">
+
+                    </form>
+                </div>
+            </details>
+            <details class="PostFormDetails">
+                <summary><img style="height: 30px; margin-right: 4px;" src="{% static 'images/image.png' %}"
+                        alt="Post Image"> Post an Image
+                </summary>
+                <div>
+                    <p id="PostFormUser">post as: <a id="linkButton"
+                            href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+                    </p>
+                    <form class="NetPostForm" enctype="multipart/form-data" action="/postimage/{{net.title}}/"
+                        method="POST">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="text" name="header" id="" placeholder="Post your header..." required>
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                        <input type="submit" value="Post image">
+
+                    </form>
+                </div>
+            </details>
+        </div>
+
+        {% endif %}
+
+
+
+
+        {% block post %}
+        {% for post in posts %}
+        {% if post.post_type == "Post" %}
+        {% include "post_component.html" %}
+        {% endif %}
+        {% endfor %}
+        {% endblock post %}
+        {% endif %}
+
+    </div>
+    {% endblock %}

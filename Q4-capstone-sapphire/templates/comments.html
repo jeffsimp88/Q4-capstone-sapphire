@@ -1,0 +1,65 @@
+{% load static %}
+<div class="CommentDetails">
+    <div class="CommentScore">
+        {% if request.user in comment.has_liked.all %}
+        <a href="/upvote/{{comment.id}}/"><img id="commentfishImg" src="{% static 'images/upvote_fish_filled.png' %}"
+                alt=""></a>
+        {% else %}
+        <a href="/upvote/{{comment.id}}/"><img id="commentfishImg" src="{% static 'images/upvote_fish.png' %}"
+                alt=""></a>
+        {% endif %}
+        {{comment.total_score}}
+        {% if request.user in comment.has_disliked.all %}
+        <a href="/downvote/{{comment.id}}"><img id="commentfishImg" src="{% static 'images/downvote_fish_filled.png' %}"
+                alt=""></a>
+        {% else %}
+        <a href="/downvote/{{comment.id}}"><img id="commentfishImg" src="{% static 'images/downvote_fish.png' %}"
+                alt=""></a>
+        {% endif %}
+    </div>
+    <p style="font-size: 13px;">
+        <strong>posted by user: </strong>
+        <a href="/users/{{comment.author.username}}/" id="linkButton">
+            {{comment.author}}
+        </a>
+    <p style="font-size: 13px; margin-left: 5px;" title="{{comment.timestamp}}"> <strong>posted: </strong>
+        {{comment.time_ago}}</p>
+</div>
+
+</p>
+<p>{{comment.header}}</p>
+
+{% if request.user.is_authenticated %}
+<details class="CommentFormDetails">
+    <summary> Comment</summary>
+    <div>
+        <p id="CommentFormUser">comment as: <a id="linkButton"
+                href="/users/{{request.user.username}}/">{{request.user.username}}</a>
+        </p>
+        <form class="NetCommentForm" enctype="multipart/form-data" action="/makecomment/{{comment.id}}/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="header" id="" placeholder="reply comment..." required>
+            <input type="submit" value="Comment">
+
+        </form>
+    </div>
+</details>
+{% else %}
+<details class="CommentFormDetails">
+    <summary> Comment</summary>
+    <div>
+        <p>Please <a id="linkButton" href="/login/">login</a> to comment</p>
+    </div>
+</details>
+{% endif %}
+
+
+{% if comment.get_comments %}
+{% for comment in comment.get_comments %}
+{% block comments %}
+<div class="postBoxComments Subcomment">
+    {% include "comments.html" %}</div>
+{% endblock %}
+{% endfor %}
+
+{% endif %}

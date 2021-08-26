@@ -1,0 +1,212 @@
+.homePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.HomeFilter{
+    background-color: var(--blue);
+    color: var(--yellow);
+    padding: 10px;
+    border-radius: 5px;
+}
+.HomePageBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+    width: 80%;
+    margin: 10px;
+}
+
+.HomeLinkList {
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.HomeLinkList>details{
+    color: whitesmoke;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+} 
+
+.LinkListContainer{
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#CreateNetButton{
+    font-family: var(--barlow-font);
+    font-size: 20px;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    border-radius: 5px;
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 5px 5px 0px 5px;
+    text-align: center;
+}
+
+#CreateNetButton:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
+
+.HomeLinkList>h3{
+      color: var(--yellow);
+      text-align: center;
+  }
+
+.HomeFilter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+}
+
+#FilterLink{
+    text-decoration: none;
+    color: var(--yellow);
+    background-color: var(--blue);
+    border: 1px solid var(--yellow);
+    padding: 3px;
+    transition-duration: .2s;
+}
+
+#FilterLink:hover{
+    color: var(--blue);
+    background-color: var(--yellow);
+}
+  
+.HomePageFeed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.HomePageFeed>h3{
+    color: var(--yellow);
+}
+
+.Home.Net{
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: var(--barlow-font);
+    transition-duration: .2s;
+}
+.Home.Net:hover{
+    color: whitesmoke;
+}
+.HomePageNetTitle{
+    border-radius: 5px;
+    background-color: var(--gray);
+    margin: 5px;
+    text-align: center;
+    box-shadow: 9px 2px 9px 0px rgba(0, 0, 0, 0.141);
+    width: 500px;
+    height: fit-content;
+    font-weight: 700;
+}
+
+.Home.Post{
+    border-radius: 5px;
+    background-color: var(--blue);
+    color: white;
+    margin: 2px;
+}
+
+.Home.PostHeader{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.Popular-nets-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.Popular-nets-links{
+
+    margin:5px;
+
+}
+
+.PostHeaderDetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+
+    padding-left: 5px;
+}
+
+.PostScore>a{
+    text-decoration: none;
+}
+
+.Home.PostBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    text-align: left;
+}
+
+.Home.PostFooter{
+    background-color: var(--lightblue);
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.netlink {
+    margin: 3px;
+    text-decoration: none;
+    background-color: var(--gray);
+    color: white;
+    padding: 3px;
+    text-align: center;
+    width:90%;
+    border-radius: 5px;
+}
+
+.netlink:hover {
+    background: white;
+    color: var(--gray);
+}
+
+.HomePageFollowers{
+    background-color: var(--blue);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+.HomePageFollowers>h3{
+    color: var(--yellow);
+}
+.HomePageFollowers>a{
+    margin: 3px;
+    text-decoration: none;
+}

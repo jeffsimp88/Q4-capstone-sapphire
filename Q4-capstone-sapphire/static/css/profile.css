@@ -1,0 +1,233 @@
+.profilePage{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+.profileBody{
+    color: var(--tan);
+    background-color: var(--blue);
+    width: 35%;
+    height: fit-content;
+    margin: 10px;
+    border-radius: 25px 0px;
+}
+
+.profileBody>div{
+    padding: 15;
+}
+
+.ProfileDetails>h3{
+    color: var(--yellow);
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    font-size: 38px;
+    text-align: center;
+    margin: 6px 3px;
+    font-family: var(--barlow-font);
+    font-weight: 800;
+}
+
+h3>p{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 20px;
+    margin: 0px 5px;
+    font-family: var(--roboto);
+    font-weight: normal;
+}
+
+.ProfileDetails>h4{
+    color: var(--yellow);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    font-size: 20px;
+    text-align: left;
+    margin: 6px 3px;
+    font-family: var(--barlow-font);
+    font-weight: 500;
+    margin: 5px 3px;
+}
+
+h4>p{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 14px;
+    margin: 0px 5px;
+    font-family: var(--roboto);
+    font-weight: normal;
+}
+
+/* For buttons of users follow/message buttons */
+
+.UserButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 3px;
+}
+
+#MessageButton{
+    text-decoration: none;
+    text-align: center;
+    font-family: var(--barlow-font);
+    font-weight: 500;
+    font-size: 20px;
+    background-color: var(--blue);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 4px;
+    border-radius: 5px;
+    transition-duration: .2s;
+}
+
+#MessageButton:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+.profilebox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+
+#portholeImg{
+    width: 107%;
+    position: absolute;
+    bottom: -7px;
+    z-index: 1;
+}
+#profileImg{
+    display: block;
+    width: 100%;
+}
+
+#UpdateProfileButton{
+    text-decoration: none;
+    text-align: center;
+    font-family: var(--barlow-font);
+    font-weight: 500;
+    font-size: 15px;
+    background-color: var(--blue);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    padding: 3px;    
+    border-radius: 3px;
+    transition-duration: .2s;
+}
+
+#UpdateProfileButton:hover{
+    background-color: var(--yellow);
+    color: var(--blue);
+}
+
+.ProfileFollowlist{
+    background-color: var(--lightblue);
+}
+
+.ProfileFollowlist>h5, .ProfileSubslist>h5{
+    font-family: var(--barlow-font);
+    margin: 5px 0px;
+    font-size: 23px;
+}
+
+li>a{
+    text-decoration: none;
+    padding: 2px;
+}
+li>a:hover{
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+
+/* Profile's Post List */
+
+.profilePostList{
+    background-color: var(--gray);
+    margin: 10px;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.profilePostList>h3{
+    font-family: var(--barlow-font);
+    font-size: 30px;
+    margin: 3px 0px;
+    display: flex;
+    align-items: baseline;
+}
+
+.profilePostBox{
+    margin: 15px 5px;
+    background-color: var(--blue);
+    color: white;
+    width: 450px;
+}
+.profilePostHeader{
+    padding: 1px 5px;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.profilePostHeader>p{
+    font-size: small;
+    margin: 5px 0px;
+}
+
+.profilePostHeader>p>a{
+    text-decoration: none;
+}
+
+.profilePostBody{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    font-family: var(--barlow-reg);
+    font-size: 30px;
+    font-weight: 700;
+    transition-duration: .2s;
+}
+
+.profilePostBody>a{
+    text-decoration: none;
+}
+
+.profilePostBody>p{
+    margin: 0px;
+    border-top: 1px solid whitesmoke;
+    padding: 3px 5px;
+    font-family: var(--roboto);
+    font-weight: 100;
+    font-size: 17px;
+}
+
+.profilePostBody>img{
+    padding: 5px 0px;
+    justify-self: center;
+    align-self: center;
+}
+
+.profilePostFooter{
+    background-color: var(--lightblue);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profilePostFooter>p{
+    font-size: small;
+    padding: 3px;
+    color: var(--blue);
+    margin: 3px 5px;
+}

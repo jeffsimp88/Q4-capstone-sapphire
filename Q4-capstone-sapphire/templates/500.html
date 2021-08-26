@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/rootstyle.css' %}">
+
+{% if request.user.is_authenticated %}
+
+{% if request.user.site_theme == 'Light' %}
+<link rel="stylesheet" href="{% static 'css/lightstyle.css' %}">
+{% elif request.user.site_theme == 'Dark' %}
+<link rel="stylesheet" href="{% static 'css/darkstyle.css' %}">
+{% endif %}
+
+
+{% else %}
+<link rel="stylesheet" href="{% static 'css/lightstyle.css' %}">
+
+{% endif %}
+
+<div class="Errorpage">
+    <div class="Errorbox">
+
+        <h1>5<img style="height: 98px;" src="{% static 'images/porthole.png' %}" alt=""><img style="height: 98px;"
+                src="{% static 'images/porthole.png' %}" alt=""></h1>
+        <h2>Sorry, server error.</h2>
+        <a class="Errorlink" href="/">
+            Please go back to our homepage.
+        </a>
+
+    </div>

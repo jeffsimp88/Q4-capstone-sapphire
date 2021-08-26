@@ -1,0 +1,299 @@
+.NetPage{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    margin: 10px;
+}
+
+.NetDetailsBox{
+    box-sizing: border-box;
+    margin: 10px;
+    background-color: var(--gray);
+    width: 50%;
+    /* padding: 10px; */
+    border-radius: 25px 0px 25px 0px;
+}
+
+.NetSubscriber{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.NetButton{
+    width: 100px;
+    background-color: rgb(36, 36, 36);
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 5px;
+    transition-duration: .2s;
+    text-align: center;
+}
+
+.NetButton.Subscribed{
+    color: whitesmoke;
+    transition-duration: .2s;
+}
+.NetButton.Subscribed:hover span{
+    display: none;
+}
+.NetButton.Subscribed:hover:before{
+    transition-duration: .3s;
+    content: "Join us!";
+}
+
+.NetButton.Subscribed:hover{
+    color: rgb(3, 139, 3);
+}
+.NetButton.UnSubscribed{
+    color: white;
+    transition-duration: .2s;
+}
+
+.NetButton.UnSubscribed:hover span{
+    display: none;
+}
+.NetButton.UnSubscribed:hover:before{
+    transition-duration: .3s;
+    content: "You sure?";
+}
+.NetButton.UnSubscribed:hover {
+    color: rgb(163, 0, 0);
+    
+}
+
+.NetRules{
+    padding: 10px;
+}
+
+.NetDescription{
+    background-color: rgb(184, 184, 184);
+    padding: 10px;
+}
+
+.NetModeratorsList{
+    padding: 10px;
+    background-color: rgb(184, 184, 184);
+    border-radius: 0px 0px 25px 0px;
+}
+
+#EditNetButtons{
+    text-decoration: none;
+    transition-duration: .2s;
+    padding: 3px;
+    margin: 3px;
+    border: 1px solid var(--blue);
+    color: var(--blue)
+}
+
+#EditNetButtons:hover{
+    background-color: var(--blue);
+    color: rgb(184, 184, 184);
+}
+
+.NetPostListBox{
+    box-sizing: border-box;
+    width: 80%;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--gray);
+}
+
+#PostButton{
+    box-sizing: border-box;
+    text-decoration: none;
+    background-color: var(--gray);
+    color: whitesmoke;
+    border: 1px solid var(--blue);
+    padding: 3px;
+    margin: 3px;
+    transition-duration: .2s;    
+}
+#PostButton:hover{
+    background-color: var(--blue);
+}
+
+.NetPostBox{
+    border-radius: 5px;
+    background-color: var(--blue);
+    color: whitesmoke;
+    margin: 10px;
+}
+
+.Net.Post{
+    border-radius: 5px;
+    background-color: var(--blue);
+    color: white;
+    margin: 2px;
+}
+
+.Net.PostHeader{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.PostHeaderDetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding-left: 5px;
+}
+
+
+.Net.PostLink{
+    text-decoration: none;
+    color: var(--yellow);
+    transition-duration: .2s;
+    text-align: left;
+}
+
+.Net.PostLink:hover{
+    color: whitesmoke;
+}
+.Net.PostLink>h3{
+    margin: 3px 5px 5px 10px;
+}
+.PostScore>a{
+    text-decoration: none;
+}
+
+.Net.PostBody{
+    display: flex;
+    padding: 4px;
+    text-align: left;
+}
+
+.PostBodyImg{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.Net.PostFooter{
+    background-color: var(--lightblue);
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 11px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.PostForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.PostFormDetails>details::marker,.PostFormDetails>summary::marker{
+    content: none;
+}
+
+.PostFormDetails>summary{
+    display: flex;
+    align-items: center;
+    margin: 3px;
+    background-color: var(--lightblue);
+    transition-duration: .2s;
+    padding: 5px;
+    border-radius: 4px;
+}
+.PostFormDetails>summary:hover{
+    color: whitesmoke;
+}
+.PostFormDetails>div{
+    background-color: #a6a6a6;
+    padding: 5px;
+}
+#PostFormUser{
+    margin: 3px 0px 3px 0px;
+}
+.PostFormDetails>input{
+    margin: 0px;
+}
+
+input:focus, textarea:focus{
+    outline: none;
+}
+
+.NetPostForm>input[type=text],.NetPostForm>textarea {
+    background-color: var(--lightblue);
+    font-family: var(--roboto);
+    font-size: 15px;
+    border: none;
+    margin: 3px;
+    padding: 3px;
+    width: 80%;
+    border-radius: 3px;
+    resize: none;
+}
+.NetPostForm>input::placeholder,.NetPostForm>textarea::placeholder{
+    color: rgba(245, 245, 245, 0.507);
+    font-family: var(--roboto)
+}
+
+.NetPostForm>input[type=file]{
+    background-color: #a6a6a6;
+    font-family: var(--barlow-reg);
+    font-weight: 600;
+    margin: 3px;
+    font-size: 13px;
+    color: var(--blue);
+    transition-duration: .2s;
+}
+.NetPostForm>input[type=file]:hover{
+    background-color: var(--blue);
+    color: #a6a6a6;
+}
+.NetPostForm>input[type=submit]{
+    background-color: #a6a6a6;
+    font-family: var(--barlow-reg);
+    font-weight: 600;
+    margin: 3px;
+    font-size: 19px;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    padding: 3px;
+    transition-duration: .2s;
+}
+.NetPostForm>input[type=submit]:hover{
+    background-color: var(--blue);
+    color: #a6a6a6;
+}
+.NetPostForm{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+.Net.CommentLink{
+    text-decoration: none;
+    color: whitesmoke;
+    transition-duration: .2s;
+}
+
+.Net.CommentLink:hover{
+    color: var(--yellow);
+}
+.PostScore{
+    display: flex;
+    font-size: 23px;
+    align-items: center;
+}
+.PostScore>a{
+    text-decoration: none;
+}
+#fishImg{
+    height: 35px;
+    margin: 5px;
+    transition-duration: .2s;
+}
+
+#fishImg:hover{
+    filter: hue-rotate(76deg);
+}
